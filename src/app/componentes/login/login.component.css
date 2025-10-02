@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-principal: #E964BD
+}
+
+body {
+  background-image: url(/public/img/fundo.png);
+  display: grid;
+  place-items: center; 
+  min-height: 100vh;  
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+}
+
+.pagina-login {
+    display: flex;
+    width: 1200px;
+    height: 800px;
+    box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.imagem-container {
+  width: 600px;
+  height: 100%;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel img.active {
+  display: block;
+  opacity: 1;
+  z-index: 1;
+}
+
+.login-container {
+  width: 600px;  /* LARGURA FIXA DO FORMULÁRIO */
+  height: 100%;  /* Ocupa 100% da altura do pai (800px) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: #fff;
+}
+
+.login-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  color: #000000;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 40px;
+  color: #000000;
+  text-align: center;
+  margin-block-end: 80px;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+.input-field {
+  width: 100%;
+  background-color: transparent;
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #000000;
+  padding: 16px;
+}
+
+.input-label {
+  position: absolute;
+  left: 12px;
+  top: -10px;
+  background-color: #fff;
+  padding: 0 4px;
+  font-size: 14px;
+  color: #000000;
+  transition: all 0.2s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #E964BD;
+}
+
+.input-field:focus + .input-label {
+  color: #E964BD;
+}
+
+.options-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000000;
+}
+
+.forgot-password {
+  color: #000000;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.botoes-container {
+  display: flex;
+  gap: 25px;
+  width: 100%;
+}
+
+.botao-cadastrar,
+.botao-login {
+  flex: 1;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: bold;
+  border: 1.5px solid #000000;
+}
+
+.botao-cadastrar {
+  background-color: #000000;
+  color: #fff;
+  border-color: #000000;
+}
+
+.botao-login {
+  background-color: #fff;
+  color: #000000;
+  border-color: #000000;
+}
+
+.botao-cadastrar:hover {
+  transform: translateY(-2px);
+  background-color: #E964BD;
+  border-color: #E964BD;
+}
+
+.botao-login:hover {
+  transform: translateY(-2px);
+  color: #E964BD;
+  border-color: #E964BD;
+}
