@@ -1,4 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+/* Adicione ou modifique estas regras no seu src/styles.css */
+html, body {
+  height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  
+  /* Seus estilos de background e centralização aqui */
+  background-image: url('/img/fundo.png');
+  background-size: cover; /* Garante que o fundo cubra a tela toda */
+  background-position: center;
+  display: grid;
+  place-items: center; 
+}

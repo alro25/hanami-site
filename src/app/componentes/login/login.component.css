@@ -9,7 +9,7 @@
 }
 
 body {
-  background-image: url(/public/img/fundo.png);
+  background-image: url(/img/insp.png);
   display: grid;
   place-items: center; 
   min-height: 100vh;  

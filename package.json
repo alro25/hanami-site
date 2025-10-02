@@ -35,5 +35,18 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
-  }
+  },
+  "description": "This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.17.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alro25/hanami-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alro25/hanami-site/issues"
+  },
+  "homepage": "https://github.com/alro25/hanami-site#readme"
 }

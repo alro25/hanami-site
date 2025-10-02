@@ -14,8 +14,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  nome = '';
-  senha = '';
+  usuario: string = '';
+  senha: string = '';
   dataAtual = new Date();
 
   constructor(private router: Router) {}
@@ -26,8 +26,8 @@ export class LoginComponent {
     event.stopPropagation();
   }
   login() {
-    if (this.nome !== 'admin' || this.senha !== '123456') {
-      alert('Nome ou senha Invalidos');
+    if (this.usuario !== 'admin' || this.senha !== '123456') {
+      alert('Usuário ou senha Invalidos');
     } else {
       this.router.navigate(['/home']);
     }

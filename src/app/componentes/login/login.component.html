@@ -1,10 +1,7 @@
 <div class="pagina-login">
   <section class="imagem-container">
     <div class="carousel">
-      <img src="/public/img/insp.png" class="active" alt="Imagem 1 de duas garotas sorrindo em um fundo cor de rosa">
-      <img src="/img/Cidade_Futurista.png" alt="Imagem 2 de uma cidade noturna iluminada">
-      <img src="/img/Cidade_Japonesa.png" alt="Imagem 3 de prédios com luzes roxas">
-      <img src="/img/Cidade_Moderna_Japonesa.png" alt="Imagem 4 de uma paisagem urbana futurista">
+      <img src="/src/assets/img/insp.png" class="active" alt="Imagem 1 de duas garotas sorrindo em um fundo cor de rosa">
     </div>
   </section>
 
@@ -12,20 +9,23 @@
     <section class="login-card">
       <h1>LOGIN</h1>
       <form class="login-form" (ngSubmit)="login()">
-          <mat-form-field class="input-container">
-            <mat-label>Usuário</mat-label>
-            <input type="text" [(ngModel)]="nome" name="nome" matInput />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Senha</mat-label>
-            <input type="password" [(ngModel)]="senha" name="senha" matInput />
-          </mat-form-field>
+    <div class="input-container">
+        <input type="email" id="usuário" class="input-field" placeholder=" " 
+               [(ngModel)]="usuario" name="usuario">
+        <label for="usuário" class="input-label">Usuário</label>
+    </div>
 
-          <div class="botoes-container">
-            <button mat-fab extended class="botao-cadastrar">Cadastrar</button>
-            <button mat-fab extended class="botao-login">Entrar</button>
-          </div>
-      </form>
+    <div class="input-container">
+        <input type="password" id="senha" class="input-field" placeholder=" "
+               [(ngModel)]="senha" name="senha">
+        <label for="senha" class="input-label">Senha</label>
+    </div>
+
+    <div class="botoes-container">
+        <button type="button" class="botao-cadastrar">Cadastrar</button>
+        <button type="submit" class="botao-login">Entrar</button>
+    </div>
+</form>
     </section>
   </main>
 </div>
