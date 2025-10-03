@@ -6,10 +6,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { NgOptimizedImage } from '@angular/common';
+
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule,MatFormFieldModule,MatInputModule, MatIconModule,MatButtonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule,MatFormFieldModule,MatInputModule, MatIconModule,MatButtonModule, FormsModule, NgOptimizedImage],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

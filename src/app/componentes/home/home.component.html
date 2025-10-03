@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="home.component.css">
-
 <div class="home-container">
 
   <header class="main-header">
@@ -21,6 +19,29 @@
       <a href="#">Olhos</a>
       <a href="#">Sobrancelha</a>
     </div>
+  <app-side-modal [isOpen]="uiService.isCartOpen()" (close)="uiService.closeAllModals()" position="right">
+    <h2>Seu Carrinho</h2>
+    <p>O carrinho está vazio.</p>
+  </app-side-modal>
+
+  <app-side-modal [isOpen]="uiService.isSearchOpen()" (close)="uiService.closeAllModals()" position="right">
+    <h2>Pesquisar Produtos</h2>
+    <input type="search" placeholder="O que você procura?" style="width: 100%; padding: 0.5rem;"/>
+  </app-side-modal>
+
+  <app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
+    <h2>Minha Conta</h2>
+    <a routerLink="/dashboard">Acessar Dashboard</a>
+    <br>
+    <a routerLink="/login">Sair</a>
+  </app-side-modal>
+
+
+  <div class="nav-icons">
+    <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()">...</a>
+    <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()">...</a>
+    <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()">...</a>
+  </div>
 
   </header>
 
