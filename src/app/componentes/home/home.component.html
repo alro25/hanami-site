@@ -5,44 +5,67 @@
       <div class="logo">
         <h1>HANAMI</h1>
       </div>
+      
+      <app-side-modal [isOpen]="uiService.isCartOpen()" (close)="uiService.closeAllModals()" position="right">
+        <h2>Seu Carrinho ({{ cartService.itemCount() }})</h2>
+
+        @if (cartService.cartItems().length > 0) {
+          <div class="cart-items">
+            @for (item of cartService.cartItems(); track item.product.id) {
+              <div class="cart-item">
+                <img [ngSrc]="item.product.imageUrl" width="60" height="60" [alt]="item.product.name">
+                <div class="item-details">
+                  <p>{{ item.product.name }}</p>
+                  <p>Qtd: {{ item.quantity }} - R$ {{ item.product.price.toFixed(2) }}</p>
+                </div>
+              </div>
+            }
+          </div>
+          <div class="cart-total">
+            <strong>Total: R$ {{ cartService.cartTotal().toFixed(2) }}</strong>
+            <button class="btn btn-dark" style="width: 100%;">Finalizar Compra</button>
+          </div>
+        } @else {
+          <p>Seu carrinho está vazio.</p>
+        }
+      </app-side-modal>
+      
+
+      <app-side-modal [isOpen]="uiService.isSearchOpen()" (close)="uiService.closeAllModals()" position="right">
+        <h2>Pesquisar Produtos</h2>
+        <input type="search" placeholder="O que você procura?" style="width: 100%; padding: 0.5rem;"/>
+      </app-side-modal>
+
+      <app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
+        <h2>Minha Conta</h2>
+        <a routerLink="/dashboard">Acessar Dashboard</a>
+        <br>
+        <a routerLink="/login">Sair</a>
+      </app-side-modal>
+
+
       <div class="nav-icons">
-        <a href="#" aria-label="Search"><span class="icon">🔍</span></a>
-        <a href="#" aria-label="User Account"><span class="icon">👤</span></a>
-        <a href="#" aria-label="Shopping Cart"><span class="icon">🛒</span></a>
+        <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()">...</a>
+        <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()">...</a>
+        <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()">...</a>
       </div>
     </div>
 
     <div class="nav-links">
-      <a href="#">Lançamentos</a>
-      <a href="#">Lábios</a>
-      <a href="#">Rosto</a>
-      <a href="#">Olhos</a>
-      <a href="#">Sobrancelha</a>
+      @for(link of getNavLinks(); track link) {
+        <div class="nav-item" (mouseenter)="activeMenu.set(link)" (mouseleave)="activeMenu.set(null)">
+          <a href="#">{{ link }}</a>
+          @if (activeMenu() === link) {
+            <div class="submenu">
+              @for (sublink of getSubmenu(link); track sublink) {
+                <a href="#">{{ sublink }}</a>
+              }
+            </div>
+          }
+        </div>
+      }
     </div>
-  <app-side-modal [isOpen]="uiService.isCartOpen()" (close)="uiService.closeAllModals()" position="right">
-    <h2>Seu Carrinho</h2>
-    <p>O carrinho está vazio.</p>
-  </app-side-modal>
-
-  <app-side-modal [isOpen]="uiService.isSearchOpen()" (close)="uiService.closeAllModals()" position="right">
-    <h2>Pesquisar Produtos</h2>
-    <input type="search" placeholder="O que você procura?" style="width: 100%; padding: 0.5rem;"/>
-  </app-side-modal>
-
-  <app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
-    <h2>Minha Conta</h2>
-    <a routerLink="/dashboard">Acessar Dashboard</a>
-    <br>
-    <a routerLink="/login">Sair</a>
-  </app-side-modal>
-
-
-  <div class="nav-icons">
-    <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()">...</a>
-    <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()">...</a>
-    <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()">...</a>
-  </div>
-
+  
   </header>
 
   <main>
@@ -63,27 +86,19 @@
     <section class="popular-products">
       <h2>Populares</h2>
       <div class="products-carousel">
-        <button class="carousel-arrow-small left">‹</button>
         <div class="product-grid">
-          <div class="product-card">
-            <div class="product-image-placeholder"><img src="https://pixabay.com/pt/photos/batom-maquiagem-cosm%C3%A9ticos-glamour-8587707/"></div>
-            <button class="btn btn-dark">COMPRAR</button>
-          </div>
-          <div class="product-card">
-            <div class="product-image-placeholder"></div>
-            <button class="btn btn-dark">COMPRAR</button>
-          </div>
-          <div class="product-card">
-            <div class="product-image-placeholder"></div>
-            <button class="btn btn-dark">COMPRAR</button>
-          </div>
-          <div class="product-card">
-            <div class="product-image-placeholder"></div>
-            <button class="btn btn-dark">COMPRAR</button>
-          </div>
+          @for (product of popularProducts; track product.id) {
+            <div class="product-card">
+              <div class="product-image-placeholder">
+                <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300" style="object-fit: cover;">
+              </div>
+              <h3>{{ product.name }}</h3>
+              <p>R$ {{ product.price.toFixed(2) }}</p>
+              <button class="btn btn-dark" (click)="onAddToCart(product)">COMPRAR</button>
+            </div>
+          }
         </div>
-        <button class="carousel-arrow-small right">›</button>
-      </div>
+        </div>
       <button class="btn btn-outline">VER MAIS</button>
     </section>
 
