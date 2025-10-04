@@ -126,26 +126,101 @@
 }
 
 /* --- Hero Carousel --- */
+/* --- Hero Carousel ATUALIZADO --- */
 .hero-carousel {
   position: relative;
-  background-color: var(--primary-color);
+  width: 100%;
+  /* Usamos aspect-ratio para um carrossel responsivo e sem saltos de layout */
+  aspect-ratio: 16 / 7; 
   min-height: 400px;
+  max-height: 70vh;
+  overflow: hidden;
+  background-color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.slides-container {
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  /* Garante que o conteúdo textual não fique visível quando inativo */
+  visibility: hidden; 
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 2;
+  visibility: visible;
+}
+
+.slide img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Camada escura para melhor legibilidade do texto */
+.slide::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.slide-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  max-width: 800px;
+}
+
+.slide-content h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.slide-content p {
+  font-size: 1.2rem;
+}
+
 .carousel-arrow {
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 4; /* Acima do conteúdo do slide */
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .carousel-arrow.left { left: 2rem; }
@@ -153,19 +228,27 @@
 
 .carousel-dots {
   position: absolute;
-  bottom: 1rem;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.8rem;
 }
 
-.carousel-dots span {
-  width: 10px;
-  height: 10px;
-  background-color: rgba(255, 255, 255, 0.6);
+.carousel-dots button {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
+  border: 2px solid white;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 0;
 }
 
-.carousel-dots span.active {
+.carousel-dots button:hover,
+.carousel-dots button.active {
   background-color: white;
 }
 

@@ -71,15 +71,30 @@
   <main>
 
     <section class="hero-carousel">
-      <button class="carousel-arrow left">‹</button>
-      <div class="carousel-content">
+      <div class="slides-container">
+        @for (slide of slides; track slide.imageUrl; let i = $index) {
+          <div class="slide" [class.active]="i === currentIndex()">
+            <img [ngSrc]="slide.imageUrl" [alt]="slide.alt" fill priority="{{ i === 0 ? 'true' : 'false' }}">
+            <div class="slide-content">
+              <h2>{{ slide.title }}</h2>
+              <p>{{ slide.subtitle }}</p>
+              <button class="btn btn-dark">VER NOVIDADES</button>
+            </div>
+          </div>
+        }
       </div>
-      <button class="carousel-arrow right">›</button>
+
+      <button class="carousel-arrow left" (click)="goToPrevious()" aria-label="Slide anterior">‹</button>
+      <button class="carousel-arrow right" (click)="goToNext()" aria-label="Próximo slide">›</button>
+
       <div class="carousel-dots">
-        <span></span>
-        <span class="active"></span>
-        <span></span>
-        <span></span>
+        @for (slide of slides; track slide.imageUrl; let i = $index) {
+          <button 
+            (click)="goToSlide(i)"
+            [class.active]="i === currentIndex()"
+            [attr.aria-label]="'Ir para o slide ' + (i + 1)">
+          </button>
+        }
       </div>
     </section>
 
