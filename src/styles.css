@@ -2,15 +2,3 @@
 html, body {
   height: 100%;
 }
-
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  
-  /* Seus estilos de background e centralização aqui */
-  background-image: url('/img/fundo.png');
-  background-size: cover; /* Garante que o fundo cubra a tela toda */
-  background-position: center;
-  display: grid;
-  place-items: center; 
-}

@@ -8,11 +8,16 @@
   --cor-principal: #E964BD
 }
 
-body {
-  background-image: url(/img/fundo.png);
+:host {
+  /* Faz com que o componente <app-login> ocupe a tela inteira */
   display: grid;
   place-items: center; 
+  width: 100%;
   min-height: 100vh;  
+  /* A imagem de fundo agora é aplicada ao próprio componente */
+  background-image: url('/img/fundo.png'); /* Caminho corrigido para a pasta assets */
+  background-size: cover;
+  background-position: center;
   font-family: 'Inter', sans-serif;
   padding: 20px;
 }
@@ -64,7 +69,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .login-card {
@@ -111,7 +118,7 @@ h1 {
   position: absolute;
   left: 12px;
   top: -10px;
-  background-color: #fff;
+  background-color: #fbf3f8;
   padding: 0 4px;
   font-size: 14px;
   color: #000000;

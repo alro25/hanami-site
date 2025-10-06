@@ -27,19 +27,19 @@ export class HomeComponent {
 
   slides: CarouselSlide[] = [
     {
-      imageUrl: 'src/img/carousel-1.jpg', // Lembre-se de colocar as imagens em src/assets/img
+      imageUrl: '/img/carousel-1.png', // Lembre-se de colocar as imagens em src/assets/img
       alt: 'Modelo mostrando um gloss brilhante',
       title: 'Brilho Incomparável',
       subtitle: 'Nossa nova linha de gloss com efeito espelhado.'
     },
     {
-      imageUrl: 'src/img/carousel-2.jpg',
+      imageUrl: '/img/carousel-2.png',
       alt: 'Close-up de uma paleta de sombras coloridas',
       title: 'Cores Vibrantes',
       subtitle: 'Explore as possibilidades com a paleta de sombras Papillon.'
     },
     {
-      imageUrl: 'src/img/carousel-3.jpg',
+      imageUrl: '/img/carousel-3.png',
       alt: 'Diversos batons em tons de vermelho e rosa',
       title: 'Acabamento Perfeito',
       subtitle: 'Batom matte que dura o dia todo, sem ressecar.'
@@ -98,10 +98,10 @@ export class HomeComponent {
 
   // Vamos simular alguns produtos
   popularProducts: Product[] = [
-    { id: 1, name: 'Batom Vermelho Intenso', price: 89.90, imageUrl: 'assets/img/batom.jpg' },
-    { id: 2, name: 'Base Matte HD', price: 129.90, imageUrl: 'assets/img/base.jpg' },
-    { id: 3, name: 'Paleta de Sombras Nude', price: 199.90, imageUrl: 'assets/img/paleta.jpg' },
-    { id: 4, name: 'Gloss Brilhante', price: 79.90, imageUrl: 'assets/img/gloss.jpg' },
+    { id: 1, name: 'Batom Vermelho Intenso', price: 89.90, imageUrl: '/img/batom.jpg'},
+    { id: 2, name: 'Base Matte HD', price: 129.90, imageUrl: '/img/base.jpg'},
+    { id: 3, name: 'Paleta de Sombras Nude', price: 199.90, imageUrl: '/img/paleta.jpg'},
+    { id: 4, name: 'Gloss Brilhante', price: 79.90, imageUrl: '/img/gloss.jpg' }
   ];
 
   onAddToCart(product: Product) {
