@@ -1,0 +1,156 @@
+:host {
+  display: block; /* Garante que o componente se comporte como um bloco */
+  width: 100%;
+  background-color: #f9f9f9; /* Um fundo suave para a página inteira */
+}
+
+.pagina-contato {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 80vh;
+    margin: 5vh auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.imagem-container {
+  flex: 1;
+  display: none; /* Esconde a imagem em telas menores por padrão */
+}
+
+.imagem-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mostra a imagem em telas maiores */
+@media (min-width: 92px) {
+  .imagem-container {
+    display: block;
+  }
+}
+
+.form-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.form-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 450px;
+  color: #000000;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #000000;
+  text-align: center;
+  margin-block-end: 1rem;
+}
+
+.subtitulo {
+  color: #555;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.input-field {
+  width: 100%;
+  background-color: transparent;
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #000000;
+  padding: 16px;
+  -webkit-appearance: none; /* Remove estilos padrão do iOS em selects */
+}
+
+textarea.input-field {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.input-label {
+  position: absolute;
+  left: 12px;
+  top: 16px; /* Alinhado com o padding do input */
+  background-color: #fff;
+  padding: 0 4px;
+  font-size: 1rem;
+  color: #888;
+  transition: all 0.2s ease;
+  pointer-events: none; /* Permite clicar através do label */
+}
+
+/* Animação do label quando o campo está focado ou preenchido */
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown) + .input-label {
+  top: -10px;
+  font-size: 14px;
+  color: #E964BD; /* Cor principal da Hanami */
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #E964BD;
+}
+
+.botoes-container {
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.botao-enviar {
+  flex: 1;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #000000;
+  color: #fff;
+  border: 1.5px solid #000000;
+}
+
+.botao-enviar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-color: #E964BD;
+  border-color: #E964BD;
+}
+
+.botao-enviar:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  text-align: left;
+}

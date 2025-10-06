@@ -1,11 +1,14 @@
-// home.component.ts
-import { Component, inject, signal } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common'; // NgOptimizedImage para as imagens dos produtos!
+// src/app/componentes/home/home.component.ts
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 import { SideModalComponent } from '../side-modal/side-modal.component';
-import { UiService } from '../../services/ui.service.js';
+import { UiService } from '../../services/ui.service';
 import { CartService } from '../../services/cart.service';
 import { Product } from '../models/product.model';
+import { ProductService } from '../../services/product.service';
 
 interface CarouselSlide {
   imageUrl: string;
@@ -17,29 +20,35 @@ interface CarouselSlide {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, RouterLink, SideModalComponent], // Adicionaremos mais coisas aqui
+  imports: [CommonModule, NgOptimizedImage, RouterLink, SideModalComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
   uiService = inject(UiService);
   cartService = inject(CartService);
+  productService = inject(ProductService);
+
+  popularProducts = toSignal(
+    this.productService.getProductsByTag('lancamento'), 
+    { initialValue: [] }
+  );
 
   slides: CarouselSlide[] = [
     {
-      imageUrl: '/img/carousel-1.png', // Lembre-se de colocar as imagens em src/assets/img
+      imageUrl: '/img/carousel-1.png', // Usando o caminho que você prefere
       alt: 'Modelo mostrando um gloss brilhante',
       title: 'Brilho Incomparável',
       subtitle: 'Nossa nova linha de gloss com efeito espelhado.'
     },
     {
-      imageUrl: '/img/carousel-2.png',
+      imageUrl: '/img/carousel-2.png', // Usando o caminho que você prefere
       alt: 'Close-up de uma paleta de sombras coloridas',
       title: 'Cores Vibrantes',
       subtitle: 'Explore as possibilidades com a paleta de sombras Papillon.'
     },
     {
-      imageUrl: '/img/carousel-3.png',
+      imageUrl: '/img/carousel-3.png', // Usando o caminho que você prefere
       alt: 'Diversos batons em tons de vermelho e rosa',
       title: 'Acabamento Perfeito',
       subtitle: 'Batom matte que dura o dia todo, sem ressecar.'
@@ -47,30 +56,27 @@ export class HomeComponent {
   ];
 
   currentIndex = signal(0);
-  private intervalId?: any; // Usamos 'any' para compatibilidade com Node.js e Browser
+  private intervalId?: any;
 
-  // 2. Ciclo de Vida: Inicialização e Limpeza
+  // ESTA PARTE É ESSENCIAL PARA O CARROSSEL SE MOVER
   ngOnInit(): void {
     this.startAutoplay();
   }
 
   ngOnDestroy(): void {
-    // É CRUCIAL limpar o intervalo para evitar vazamentos de memória!
     this.stopAutoplay();
   }
+  // FIM DA PARTE ESSENCIAL
 
-  // 3. Lógica de Navegação
   goToPrevious(): void {
     const isFirstSlide = this.currentIndex() === 0;
-    const newIndex = isFirstSlide ? this.slides.length - 1 : this.currentIndex() - 1;
-    this.currentIndex.set(newIndex);
+    this.currentIndex.set(isFirstSlide ? this.slides.length - 1 : this.currentIndex() - 1);
     this.resetAutoplay();
   }
 
   goToNext(): void {
     const isLastSlide = this.currentIndex() === this.slides.length - 1;
-    const newIndex = isLastSlide ? 0 : this.currentIndex() + 1;
-    this.currentIndex.set(newIndex);
+    this.currentIndex.set(isLastSlide ? 0 : this.currentIndex() + 1);
     this.resetAutoplay();
   }
   
@@ -79,12 +85,8 @@ export class HomeComponent {
     this.resetAutoplay();
   }
 
-  // 4. Lógica de Autoplay
   private startAutoplay(): void {
-    // 5 segundos é um tempo excelente, recomendado para que o usuário consiga ler o conteúdo.
-    this.intervalId = setInterval(() => {
-      this.goToNext();
-    }, 5000);
+    this.intervalId = setInterval(() => this.goToNext(), 5000);
   }
 
   private stopAutoplay(): void {
@@ -96,22 +98,13 @@ export class HomeComponent {
     this.startAutoplay();
   }
 
-  // Vamos simular alguns produtos
-  popularProducts: Product[] = [
-    { id: 1, name: 'Batom Vermelho Intenso', price: 89.90, imageUrl: '/img/batom.jpg'},
-    { id: 2, name: 'Base Matte HD', price: 129.90, imageUrl: '/img/base.jpg'},
-    { id: 3, name: 'Paleta de Sombras Nude', price: 199.90, imageUrl: '/img/paleta.jpg'},
-    { id: 4, name: 'Gloss Brilhante', price: 79.90, imageUrl: '/img/gloss.jpg' }
-  ];
-
   onAddToCart(product: Product) {
     this.cartService.addToCart(product);
-    this.uiService.isCartOpen.set(true); // Abre o carrinho ao adicionar
+    this.uiService.isCartOpen.set(true);
   }
 
   activeMenu = signal<string | null>(null);
 
-  // Estrutura do menu
   navMenu = {
     'Lançamentos': ['Novidades', 'Kits', 'Edições Limitadas'],
     'Lábios': ['Batom', 'Gloss', 'Lápis Labial'],

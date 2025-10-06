@@ -1,0 +1,81 @@
+<div class="pagina-contato">
+  <section class="imagem-container">
+    <img ngSrc="/img/insp2.jpg" width="600" height="800" alt="Mulher aplicando maquiagem em frente a um espelho com flores">
+  </section>
+
+  <main class="form-container">
+    <section class="form-card">
+      <h1>CONTATE-NOS</h1>
+      <p class="subtitulo">Sua opinião é muito importante para a Hanami!</p>
+
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+        
+        <div class="input-container">
+          <input type="text" id="nome" class="input-field" placeholder=" " formControlName="nome">
+          <label for="nome" class="input-label">Nome*</label>
+          @if (nome?.invalid && (nome?.dirty || nome?.touched || formSubmetido)) {
+            <div class="error-message">
+              @if (nome?.errors?.['required']) {
+                O nome é obrigatório.
+              }
+            </div>
+          }
+        </div>
+
+        <div class="input-container">
+          <input type="email" id="email" class="input-field" placeholder=" " formControlName="email">
+          <label for="email" class="input-label">E-mail*</label>
+           @if (email?.invalid && (email?.dirty || email?.touched || formSubmetido)) {
+            <div class="error-message">
+              @if (email?.errors?.['required']) {
+                O e-mail é obrigatório.
+              }
+              @if (email?.errors?.['email']) {
+                Formato de e-mail inválido.
+              }
+            </div>
+          }
+        </div>
+
+        <div class="input-container">
+          <input type="tel" id="telefone" class="input-field" placeholder=" " formControlName="telefone">
+          <label for="telefone" class="input-label">Telefone*</label>
+           @if (telefone?.invalid && (telefone?.dirty || telefone?.touched || formSubmetido)) {
+            <div class="error-message">
+              O telefone é obrigatório.
+            </div>
+          }
+        </div>
+
+        <div class="input-container">
+          <select id="tipo" class="input-field" formControlName="tipo">
+            <option>Elogio</option>
+            <option>Reclamação</option>
+            <option>Sugestão</option>
+            <option>Solicitação</option>
+          </select>
+          <label for="tipo" class="input-label">Tipo de Contato*</label>
+        </div>
+
+        <div class="input-container">
+          <textarea id="mensagem" class="input-field" placeholder=" " formControlName="mensagem" rows="4"></textarea>
+          <label for="mensagem" class="input-label">Sua mensagem*</label>
+           @if (mensagem?.invalid && (mensagem?.dirty || mensagem?.touched || formSubmetido)) {
+            <div class="error-message">
+              @if (mensagem?.errors?.['required']) {
+                A mensagem é obrigatória.
+              }
+              @if (mensagem?.errors?.['minlength']) {
+                A mensagem precisa ter pelo menos 10 caracteres.
+              }
+            </div>
+          }
+        </div>
+
+        <div class="botoes-container">
+          <button type="submit" class="botao-enviar" [disabled]="contactForm.invalid && formSubmetido">Enviar</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</div>

@@ -1,0 +1,380 @@
+[
+  {
+    "id": 101,
+    "name": "Kit Essencial Hanami",
+    "category": "Kits",
+    "price": 299.90,
+    "imageUrl": "/img/products/kit-essencial.jpg",
+    "description": "O kit perfeito para o dia a dia, com base, batom e máscara.",
+    "tags": ["lancamento", "kit"]
+  },
+  {
+    "id": 102,
+    "name": "Kit Olhar de Gueixa",
+    "category": "Kits",
+    "price": 249.90,
+    "imageUrl": "/img/products/kit-olhar.jpg",
+    "description": "Delineador, máscara de volume e lápis de sobrancelha para um olhar marcante.",
+    "tags": ["kit"]
+  },
+  {
+    "id": 103,
+    "name": "Kit Lábios de Seda",
+    "category": "Kits",
+    "price": 189.90,
+    "imageUrl": "/img/products/kit-labios.jpg",
+    "description": "Uma combinação de lápis labial, batom cremoso e gloss finalizador.",
+    "tags": ["kit"]
+  },
+  {
+    "id": 201,
+    "name": "Batom Líquido Matte 'Sakura'",
+    "category": "Batom",
+    "price": 89.90,
+    "imageUrl": "/img/products/batom-sakura.jpg",
+    "description": "Um tom de rosa inspirado na flor de cerejeira, com acabamento aveludado.",
+    "tags": ["lancamento", "edicao-limitada"]
+  },
+  {
+    "id": 202,
+    "name": "Batom Hidratante 'Camélia'",
+    "category": "Batom",
+    "price": 79.90,
+    "imageUrl": "/img/products/batom-camelia.jpg",
+    "description": "Cor e hidratação com extrato de camélia. Acabamento acetinado.",
+    "tags": []
+  },
+  {
+    "id": 203,
+    "name": "Batom em Bala 'Lótus'",
+    "category": "Batom",
+    "price": 75.90,
+    "imageUrl": "/img/products/batom-lotus.jpg",
+    "description": "Um nude clássico e elegante para todas as ocasiões.",
+    "tags": []
+  },
+  {
+    "id": 301,
+    "name": "Gloss 'Orvalho de Kyoto'",
+    "category": "Gloss",
+    "price": 79.90,
+    "imageUrl": "/img/products/gloss-kyoto.jpg",
+    "description": "Efeito espelhado com partículas de brilho dourado.",
+    "tags": ["lancamento"]
+  },
+  {
+    "id": 302,
+    "name": "Gloss Volumizador 'Monte Fuji'",
+    "category": "Gloss",
+    "price": 85.90,
+    "imageUrl": "/img/products/gloss-fuji.jpg",
+    "description": "Sensação de frescor e lábios visivelmente mais cheios.",
+    "tags": []
+  },
+  {
+    "id": 303,
+    "name": "Gloss Tint 'Amanhecer'",
+    "category": "Gloss",
+    "price": 72.90,
+    "imageUrl": "/img/products/gloss-amanhecer.jpg",
+    "description": "Cor suave que mancha os lábios para um efeito natural e duradouro.",
+    "tags": []
+  },
+  {
+    "id": 401,
+    "name": "Lápis Labial 'Contorno Imperial'",
+    "category": "Lapis Labial",
+    "price": 49.90,
+    "imageUrl": "/img/products/lapis-imperial.jpg",
+    "description": "Define e preenche os lábios com precisão. Fórmula cremosa.",
+    "tags": []
+  },
+  {
+    "id": 402,
+    "name": "Lápis Labial 'Nude Zen'",
+    "category": "Lapis Labial",
+    "price": 49.90,
+    "imageUrl": "/img/products/lapis-zen.jpg",
+    "description": "O tom de nude perfeito para combinar com qualquer batom.",
+    "tags": []
+  },
+  {
+    "id": 403,
+    "name": "Lápis Labial 'Vinho Geisha'",
+    "category": "Lapis Labial",
+    "price": 49.90,
+    "imageUrl": "/img/products/lapis-geisha.jpg",
+    "description": "Um tom de vinho profundo para um contorno dramático.",
+    "tags": []
+  },
+  {
+    "id": 501,
+    "name": "Base Fluida 'Pele de Porcelana'",
+    "category": "Base",
+    "price": 129.90,
+    "imageUrl": "/img/products/base-porcelana.jpg",
+    "description": "Cobertura média e acabamento natural. Disponível em 24 tons.",
+    "tags": ["lancamento"]
+  },
+  {
+    "id": 502,
+    "name": "Base Matte 'Veludo'",
+    "category": "Base",
+    "price": 139.90,
+    "imageUrl": "/img/products/base-veludo.jpg",
+    "description": "Longa duração e controle de oleosidade para uma pele impecável.",
+    "tags": []
+  },
+  {
+    "id": 503,
+    "name": "Base Hidratante 'Glow'",
+    "category": "Base",
+    "price": 125.90,
+    "imageUrl": "/img/products/base-glow.jpg",
+    "description": "Pele radiante e hidratada com cobertura leve.",
+    "tags": []
+  },
+  {
+    "id": 601,
+    "name": "Corretivo Líquido 'Cobertura Total'",
+    "category": "Corretivo",
+    "price": 69.90,
+    "imageUrl": "/img/products/corretivo-total.jpg",
+    "description": "Alta cobertura que não acumula nas linhas finas.",
+    "tags": []
+  },
+  {
+    "id": 602,
+    "name": "Corretivo Iluminador 'Luz da Manhã'",
+    "category": "Corretivo",
+    "price": 75.90,
+    "imageUrl": "/img/products/corretivo-luz.jpg",
+    "description": "Disfarça olheiras e ilumina a área dos olhos.",
+    "tags": ["lancamento"]
+  },
+  {
+    "id": 603,
+    "name": "Corretivo Colorido 'Equilíbrio'",
+    "category": "Corretivo",
+    "price": 65.90,
+    "imageUrl": "/img/products/corretivo-equilibrio.jpg",
+    "description": "Disponível em tons de verde, amarelo e lilás para neutralizar imperfeições.",
+    "tags": []
+  },
+  {
+    "id": 701,
+    "name": "Pó Compacto Translúcido 'Névoa'",
+    "category": "Po",
+    "price": 99.90,
+    "imageUrl": "/img/products/po-nevoa.jpg",
+    "description": "Sela a maquiagem e controla o brilho sem adicionar cor.",
+    "tags": []
+  },
+  {
+    "id": 702,
+    "name": "Pó Solto Finalizador 'Seda'",
+    "category": "Po",
+    "price": 109.90,
+    "imageUrl": "/img/products/po-seda.jpg",
+    "description": "Textura ultrafina para um acabamento profissional.",
+    "tags": ["lancamento"]
+  },
+  {
+    "id": 703,
+    "name": "Pó Bronzeador 'Sol de Verão'",
+    "category": "Po",
+    "price": 119.90,
+    "imageUrl": "/img/products/po-sol.jpg",
+    "description": "Um toque de cor e brilho para um visual bronzeado.",
+    "tags": []
+  },
+  {
+    "id": 801,
+    "name": "Blush em Creme 'Flor de Pêssego'",
+    "category": "Blush",
+    "price": 85.90,
+    "imageUrl": "/img/products/blush-pessego.jpg",
+    "description": "Fácil de espalhar para um ar de saúde natural.",
+    "tags": []
+  },
+  {
+    "id": 802,
+    "name": "Blush em Pó 'Rosa Hanami'",
+    "category": "Blush",
+    "price": 79.90,
+    "imageUrl": "/img/products/blush-hanami.jpg",
+    "description": "O rosa perfeito que combina com todos os tons de pele.",
+    "tags": []
+  },
+  {
+    "id": 803,
+    "name": "Blush Líquido 'Gotas de Rubor'",
+    "category": "Blush",
+    "price": 89.90,
+    "imageUrl": "/img/products/blush-gotas.jpg",
+    "description": "Pigmentação intensa e longa duração com apenas uma gota.",
+    "tags": ["lancamento"]
+  },
+  {
+    "id": 901,
+    "name": "Paleta de Sombra 'Jardim Secreto'",
+    "category": "Sombra",
+    "price": 199.90,
+    "imageUrl": "/img/products/sombra-jardim.jpg",
+    "description": "12 tons terrosos e cintilantes para looks versáteis.",
+    "tags": ["edicao-limitada"]
+  },
+  {
+    "id": 902,
+    "name": "Sombra Líquida 'Brilho Estelar'",
+    "category": "Sombra",
+    "price": 79.90,
+    "imageUrl": "/img/products/sombra-brilho.jpg",
+    "description": "Glitter intenso que não transfere. Perfeito para festas.",
+    "tags": []
+  },
+  {
+    "id": 903,
+    "name": "Sombra em Bastão 'Praticidade'",
+    "category": "Sombra",
+    "price": 69.90,
+    "imageUrl": "/img/products/sombra-bastao.jpg",
+    "description": "Cor e primer em um só passo. Não precisa de pincel.",
+    "tags": ["lancamento"]
+  },
+  {
+    "id": 1001,
+    "name": "Máscara de Cílios 'Leque de Boneca'",
+    "category": "Mascara",
+    "price": 95.90,
+    "imageUrl": "/img/products/mascara-leque.jpg",
+    "description": "Volume e definição para um efeito de cílios postiços.",
+    "tags": []
+  },
+  {
+    "id": 1002,
+    "name": "Máscara de Cílios 'Alongamento Infinito'",
+    "category": "Mascara",
+    "price": 92.90,
+    "imageUrl": "/img/products/mascara-infinito.jpg",
+    "description": "Fibras extensoras que deixam seus cílios visivelmente mais longos.",
+    "tags": []
+  },
+  {
+    "id": 1003,
+    "name": "Máscara de Cílios 'À Prova D'Água'",
+    "category": "Mascara",
+    "price": 99.90,
+    "imageUrl": "/img/products/mascara-prova-dagua.jpg",
+    "description": "Sua máscara favorita, agora resistente a tudo.",
+    "tags": []
+  },
+  {
+    "id": 1101,
+    "name": "Delineador Caneta 'Traço Samurai'",
+    "category": "Delineador",
+    "price": 88.90,
+    "imageUrl": "/img/products/delineador-samurai.jpg",
+    "description": "Ponta ultrafina para um delineado gatinho preciso e sem esforço.",
+    "tags": ["lancamento"]
+  },
+  {
+    "id": 1102,
+    "name": "Delineador em Gel 'Nanquim'",
+    "category": "Delineador",
+    "price": 92.90,
+    "imageUrl": "/img/products/delineador-nanquim.jpg",
+    "description": "Preto intenso e à prova d'água. Acompanha pincel de aplicação.",
+    "tags": []
+  },
+  {
+    "id": 1103,
+    "name": "Delineador Líquido 'Branco Origami'",
+    "category": "Delineador",
+    "price": 85.90,
+    "imageUrl": "/img/products/delineador-origami.jpg",
+    "description": "Para looks gráficos e criativos. Cor branca super pigmentada.",
+    "tags": ["edicao-limitada"]
+  },
+  {
+    "id": 1201,
+    "name": "Lápis de Sobrancelha 'Precisão Fio a Fio'",
+    "category": "Lapis",
+    "price": 65.90,
+    "imageUrl": "/img/products/lapis-fio-a-fio.jpg",
+    "description": "Ponta retrátil e escovinha para um acabamento natural.",
+    "tags": []
+  },
+  {
+    "id": 1202,
+    "name": "Lápis de Sobrancelha Iluminador",
+    "category": "Lapis",
+    "price": 59.90,
+    "imageUrl": "/img/products/lapis-iluminador.jpg",
+    "description": "Realça o arco da sobrancelha, abrindo o olhar.",
+    "tags": []
+  },
+  {
+    "id": 1203,
+    "name": "Lápis Universal para Sobrancelhas",
+    "category": "Lapis",
+    "price": 62.90,
+    "imageUrl": "/img/products/lapis-universal.jpg",
+    "description": "Cor universal que se adapta a diversos tons de pelo.",
+    "tags": []
+  },
+  {
+    "id": 1301,
+    "name": "Gel de Sobrancelha 'Sempre no Lugar'",
+    "category": "Gel",
+    "price": 72.90,
+    "imageUrl": "/img/products/gel-sempre-lugar.jpg",
+    "description": "Penteia e fixa os fios por horas. Disponível em incolor e com cor.",
+    "tags": ["lancamento"]
+  },
+  {
+    "id": 1302,
+    "name": "Gel com Fibras 'Volume Extra'",
+    "category": "Gel",
+    "price": 78.90,
+    "imageUrl": "/img/products/gel-volume-extra.jpg",
+    "description": "Preenche falhas e dá a impressão de sobrancelhas mais cheias.",
+    "tags": []
+  },
+  {
+    "id": 1303,
+    "name": "Gel Laminador 'Efeito Brow Lamination'",
+    "category": "Gel",
+    "price": 75.90,
+    "imageUrl": "/img/products/gel-laminador.jpg",
+    "description": "Para o efeito de sobrancelhas penteadas para cima que é tendência.",
+    "tags": []
+  },
+  {
+    "id": 1401,
+    "name": "Pasta para Sobrancelha 'Desenho Perfeito'",
+    "category": "Pasta",
+    "price": 82.90,
+    "imageUrl": "/img/products/pasta-desenho.jpg",
+    "description": "À prova d'água, preenche e define com alta pigmentação.",
+    "tags": []
+  },
+  {
+    "id": 1402,
+    "name": "Pasta Corretiva para Sobrancelha",
+    "category": "Pasta",
+    "price": 85.90,
+    "imageUrl": "/img/products/pasta-corretiva.jpg",
+    "description": "Cobre falhas de forma natural e duradoura.",
+    "tags": []
+  },
+  {
+    "id": 1403,
+    "name": "Pasta de Sobrancelha com Cera",
+    "category": "Pasta",
+    "price": 79.90,
+    "imageUrl": "/img/products/pasta-cera.jpg",
+    "description": "Modela e fixa os fios, ideal para um visual mais selvagem.",
+    "tags": []
+  }
+]
