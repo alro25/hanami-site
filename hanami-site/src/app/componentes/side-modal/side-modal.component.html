@@ -1,0 +1,9 @@
+<div class="modal-overlay" [class.open]="isOpen" (click)="onClose()"></div>
+<aside class="side-modal" [class.open]="isOpen" [class.position-left]="position === 'left'">
+  <header>
+    <button class="close-btn" (click)="onClose()">×</button>
+  </header>
+  <main>
+    <ng-content></ng-content>
+  </main>
+</aside>

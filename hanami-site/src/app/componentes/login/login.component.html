@@ -1,0 +1,31 @@
+<div class="pagina-login">
+  <section class="imagem-container">
+    <div class="carousel">
+      <img ngSrc="img/insp.png" width="600" height="800" class="active" alt="Imagem 1 de duas garotas sorrindo em um fundo cor de rosa" />
+    </div>
+  </section>
+
+  <main class="login-container">
+    <section class="login-card">
+      <h1>LOGIN</h1>
+      <form class="login-form" (ngSubmit)="login()">
+    <div class="input-container">
+        <input type="email" id="usuário" class="input-field" placeholder=" " 
+               [(ngModel)]="usuario" name="usuario">
+        <label for="usuário" class="input-label">Usuário</label>
+    </div>
+
+    <div class="input-container">
+        <input type="password" id="senha" class="input-field" placeholder=" "
+               [(ngModel)]="senha" name="senha">
+        <label for="senha" class="input-label">Senha</label>
+    </div>
+
+    <div class="botoes-container">
+        <button type="button" class="botao-cadastrar">Cadastrar</button>
+        <button type="submit" class="botao-login">Entrar</button>
+    </div>
+</form>
+    </section>
+  </main>
+</div>

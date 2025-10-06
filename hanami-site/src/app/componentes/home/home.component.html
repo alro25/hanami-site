@@ -1,0 +1,167 @@
+<div class="home-container">
+
+  <header class="main-header">
+    <div class="header-top">
+      <div class="logo">
+        <h1>HANAMI</h1>
+      </div>
+      
+      <app-side-modal [isOpen]="uiService.isCartOpen()" (close)="uiService.closeAllModals()" position="right">
+        <h2>Seu Carrinho ({{ cartService.itemCount() }})</h2>
+
+        @if (cartService.cartItems().length > 0) {
+          <div class="cart-items">
+            @for (item of cartService.cartItems(); track item.product.id) {
+              <div class="cart-item">
+                <img [ngSrc]="item.product.imageUrl" width="60" height="60" [alt]="item.product.name">
+                <div class="item-details">
+                  <p>{{ item.product.name }}</p>
+                  <p>Qtd: {{ item.quantity }} - R$ {{ item.product.price.toFixed(2) }}</p>
+                </div>
+              </div>
+            }
+          </div>
+          <div class="cart-total">
+            <strong>Total: R$ {{ cartService.cartTotal().toFixed(2) }}</strong>
+            <button class="btn btn-dark" style="width: 100%;">Finalizar Compra</button>
+          </div>
+        } @else {
+          <p>Seu carrinho está vazio.</p>
+        }
+      </app-side-modal>
+      
+
+      <app-side-modal [isOpen]="uiService.isSearchOpen()" (close)="uiService.closeAllModals()" position="right">
+        <h2>Pesquisar Produtos</h2>
+        <input type="search" placeholder="O que você procura?" style="width: 100%; padding: 0.5rem;"/>
+      </app-side-modal>
+
+      <app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
+        <h2>Minha Conta</h2>
+        <a routerLink="/dashboard">Acessar Dashboard</a>
+        <br>
+        <a routerLink="/login">Sair</a>
+      </app-side-modal>
+
+
+      <div class="nav-icons">
+        <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()">...</a>
+        <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()">...</a>
+        <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()">...</a>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      @for(link of getNavLinks(); track link) {
+        <div class="nav-item" (mouseenter)="activeMenu.set(link)" (mouseleave)="activeMenu.set(null)">
+          <a href="#">{{ link }}</a>
+          @if (activeMenu() === link) {
+            <div class="submenu">
+              @for (sublink of getSubmenu(link); track sublink) {
+                <a href="#">{{ sublink }}</a>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  
+  </header>
+
+  <main>
+
+    <section class="hero-carousel">
+      <div class="slides-container">
+        @for (slide of slides; track slide.imageUrl; let i = $index) {
+          <div class="slide" [class.active]="i === currentIndex()">
+            <img [ngSrc]="slide.imageUrl" [alt]="slide.alt" fill priority="{{ i === 0 ? 'true' : 'false' }}">
+            <div class="slide-content">
+              <h2>{{ slide.title }}</h2>
+              <p>{{ slide.subtitle }}</p>
+              <button class="btn btn-dark">VER NOVIDADES</button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <button class="carousel-arrow left" (click)="goToPrevious()" aria-label="Slide anterior">‹</button>
+      <button class="carousel-arrow right" (click)="goToNext()" aria-label="Próximo slide">›</button>
+
+      <div class="carousel-dots">
+        @for (slide of slides; track slide.imageUrl; let i = $index) {
+          <button 
+            (click)="goToSlide(i)"
+            [class.active]="i === currentIndex()"
+            [attr.aria-label]="'Ir para o slide ' + (i + 1)">
+          </button>
+        }
+      </div>
+    </section>
+
+    <section class="popular-products">
+      <h2>Populares</h2>
+      <div class="products-carousel">
+        <div class="product-grid">
+          @for (product of popularProducts; track product.id) {
+            <div class="product-card">
+              <div class="product-image-placeholder">
+                <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300" style="object-fit: cover;">
+              </div>
+              <h3>{{ product.name }}</h3>
+              <p>R$ {{ product.price.toFixed(2) }}</p>
+              <button class="btn btn-dark" (click)="onAddToCart(product)">COMPRAR</button>
+            </div>
+          }
+        </div>
+        </div>
+      <button class="btn btn-outline">VER MAIS</button>
+    </section>
+
+    <section class="promo-section gloss-promo">
+      <div class="promo-text">
+        <h2>CONHEÇA O GLOSS PASSIONFRUIT</h2>
+        <p>MEET GLOSS BOMB IN 'MANGO CHILL'.<br>Make this shimmering orange shade of the summer yours.</p>
+        <button class="btn btn-dark">VER MAIS</button>
+      </div>
+      <div class="promo-image">
+        <img src="https://i.imgur.com/kY3J3j5.png" alt="Gloss Passionfruit product">
+      </div>
+    </section>
+
+    <section class="promo-section lipstick-promo">
+      <div class="promo-text">
+        <h2>CONHEÇA A LINHA PAPILLON LIPSTICK</h2>
+        <p>MEET GLOSS BOMB IN 'MANGO CHILL'.<br>Make this shimmering orange shade of the summer yours.</p>
+        <button class="btn btn-dark">VER MAIS</button>
+      </div>
+      <div class="promo-image">
+        <img src="https://i.imgur.com/V2zV9pI.png" alt="Papillon Lipstick products">
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-column">
+      <h4>Sobre nós</h4>
+      <a href="#">Quem somos</a>
+      <a href="#">Carreiras</a>
+      <a href="#">Política de Privacidade</a>
+    </div>
+    <div class="footer-column">
+      <h4>Fale conosco</h4>
+      <p> (99)99999-9999</p>
+      <p> contato&#64;hanami.com</p>
+      <p> Contate-nos</p>
+    </div>
+    <div class="footer-column">
+      <h4>Redes Sociais</h4>
+      <div class="social-icons">
+        <a href="#" aria-label="WhatsApp"><span>💬</span></a>
+        <a href="#" aria-label="Facebook"><span>👍</span></a>
+        <a href="#" aria-label="Instagram"><span>📸</span></a>
+      </div>
+    </div>
+  </footer>
+
+</div>

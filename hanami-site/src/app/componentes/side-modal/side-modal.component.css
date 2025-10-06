@@ -1,0 +1,68 @@
+:host {
+  --modal-width: 400px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 998;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.side-modal {
+  position: fixed;
+  top: 0;
+  right: calc(-1 * var(--modal-width)); /* Começa fora da tela à direita */
+  width: var(--modal-width);
+  height: 100vh;
+  background-color: white;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-modal.position-left {
+  right: auto;
+  left: calc(-1 * var(--modal-width)); /* Se for à esquerda */
+}
+
+.side-modal.open {
+  transform: translateX(-100%);
+}
+
+.side-modal.position-left.open {
+  transform: translateX(100%);
+}
+
+.side-modal header {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #eee;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.side-modal main {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex-grow: 1;
+}
