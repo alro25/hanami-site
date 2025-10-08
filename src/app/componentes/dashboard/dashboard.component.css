@@ -82,7 +82,7 @@
 }
 
 .chart-main .chart-container {
-  height: calc(500px + 1.5rem); /* Altura dos dois charts laterais + gap */
+  height: calc(500px + 1.5rem);
 }
 
 .recent-orders table {
@@ -112,7 +112,12 @@
 .status.pendente { background-color: #fff3cd; color: #856404; }
 .status.cancelado { background-color: #f8d7da; color: #721c24; }
 
-/* Responsividade */
+.loading-text {
+  padding: 2rem;
+  text-align: center;
+  color: #888;
+}
+
 @media (max-width: 992px) {
   .charts-section {
     grid-template-columns: 1fr;

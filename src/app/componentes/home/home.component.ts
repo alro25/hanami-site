@@ -63,19 +63,21 @@ export class HomeComponent {
 
   // Métodos de navegação (se existirem)
   getNavLinks(): string[] {
-    return ['Maquiagem', 'Cuidados', 'Promoções', 'Lançamentos'];
+    return ['Todos os produtos','Lançamentos', 'Lábios', 'Olhos', 'Sobrancelha', 'Mundo HANAMI', 'Contato'];
   }
 
   getSubmenu(link: string): string[] {
     switch (link) {
-      case 'Maquiagem':
-        return ['Olhos', 'Lábios', 'Pele', 'Pincéis'];
-      case 'Cuidados':
-        return ['Facial', 'Corporal', 'Capilar'];
-      case 'Promoções':
-        return ['Ofertas do Dia', 'Kits Promocionais'];
       case 'Lançamentos':
-        return ['Novidades', 'Coleções'];
+        return ['Novidades', 'Kits', 'Edições Limitadas'];
+      case 'Rosto':
+        return ['Base', 'Corretivo', 'Pó', 'Blush'];
+      case 'Lábios':
+        return ['Batom', 'Gloss', 'Lápis Labial'];
+      case 'Olhos':
+        return ['Sombra', 'Máscara', 'Delineador'];
+      case 'Sobrancelha':
+        return ['Lápis', 'Gel', 'Pasta'];
       default:
         return [];
     }

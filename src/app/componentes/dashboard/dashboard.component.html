@@ -1,57 +1,98 @@
-<div class="dashboard-summary">
-  <div class="summary-card">
-    <span>Total de Vendas</span>
-    <strong>{{ summary().totalVendas | currency:'BRL' }}</strong>
-  </div>
-  <div class="summary-card">
-    <span>Pedidos Total</span>
-    <strong>{{ summary().pedidos }}</strong>
-  </div>
-  <div class="summary-card">
-    <span>Ticket Médio</span>
-    <strong>{{ summary().ticketMedio | currency:'BRL' }}</strong>
-  </div>
-</div>
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Dashboard Hanami</h1>
+    <div class="date-filter">
+      <button class="filter-btn">Últimos 30 dias ▼</button>
+    </div>
+  </header>
 
-<div class="dashboard-charts">
-  <div class="chart-card">
-    <canvas #vendasMensaisCanvas></canvas>
-  </div>
-  <div class="chart-card">
-    <canvas #popularCategoriesCanvas></canvas>
-  </div>
-  <div class="chart-card">
-    <canvas #productSalesCanvas></canvas>
-  </div>
-</div>
+  @if (summary(); as data) {
+    <section class="summary-cards">
+      <div class="card">
+        <div class="card-header">Total de Vendas</div>
+        <div class="card-body">
+          <span class="value">{{ data.totalVendas | currency:'BRL' }}</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Novos Clientes</div>
+        <div class="card-body">
+          <span class="value">{{ data.novosClientes }}</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Pedidos</div>
+        <div class="card-body">
+          <span class="value">{{ data.pedidos }}</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Ticket Médio</div>
+        <div class="card-body">
+          <span class="value">{{ data.ticketMedio | currency:'BRL' }}</span>
+        </div>
+      </div>
+    </section>
+  } @else {
+    <p class="loading-text">Carregando resumo...</p>
+  }
 
-<div class="dashboard-recent-orders">
-  <h3>Pedidos Recentes</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>ID do Pedido</th>
-        <th>Cliente</th>
-        <th>Data</th>
-        <th>Valor</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (order of recentOrders(); track order.id) {
-        <tr>
-          <td>{{ order.id }}</td>
-          <td>{{ order.cliente }}</td>
-          <td>{{ order.data }}</td>
-          <td>{{ order.valor | currency:'BRL' }}</td>
-          <td>{{ order.status }}</td>
-        </tr>
-      }
-      @empty {
-        <tr>
-          <td colspan="5">Nenhum pedido recente.</td>
-        </tr>
-      }
-    </tbody>
-  </table>
+  <section class="charts-section">
+    <div class="chart-main card">
+      <h3 class="chart-title">Vendas Mensais</h3>
+      <div class="chart-container">
+        <canvas #vendasMensaisChart></canvas>
+      </div>
+    </div>
+    <div class="charts-side">
+      <div class="chart-secondary card">
+        <h3 class="chart-title">Top Produtos</h3>
+        <div class="chart-container">
+          <canvas #topProdutosChart></canvas>
+        </div>
+      </div>
+      <div class="chart-secondary card">
+        <h3 class="chart-title">Categorias Populares</h3>
+        <div class="chart-container">
+          <canvas #categoriasPopularesChart></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="recent-orders card">
+    <h3 class="chart-title">Pedidos Recentes</h3>
+    @if (recentOrders(); as orders) {
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Pedido ID</th>
+              <th>Cliente</th>
+              <th>Data</th>
+              <th>Valor</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (order of orders; track order.id) {
+              <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.cliente }}</td>
+                <td>{{ order.data }}</td>
+                <td>{{ order.valor | currency:'BRL' }}</td>
+                <td>
+                  <span class="status" [ngClass]="order.status.toLowerCase()">{{ order.status }}</span>
+                </td>
+              </tr>
+            } @empty {
+              <tr><td colspan="5">Nenhum pedido recente.</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="loading-text">Carregando pedidos...</p>
+    }
+  </section>
 </div>
