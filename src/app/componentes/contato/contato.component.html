@@ -72,6 +72,27 @@
           }
         </div>
 
+        <div class="lgpd-container">
+          <p class="lgpd-text">
+            Os dados serão mantidos em nossa base de dados, só enquanto for desejado por você. A 
+            qualquer momento, será possível editar ou remover tais dados.
+          </p>
+          
+          <div class="checkbox-group">
+            <input type="checkbox" id="termosCheckbox" formControlName="termos">
+            <label for="termosCheckbox">Sim. Li e concordo com os <a href="/politica-de-privacidade" target="_blank"> Termos e Condições</a>*</label>
+            @if (termos?.invalid && (termos?.touched || formSubmetido)) {
+              <div class="error-message">
+                Você precisa aceitar os termos para continuar.
+              </div>
+            }
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="newsletterCheckbox" formControlName="newsletter">
+            <label for="newsletterCheckbox">Sim. Também quero receber descontos e novidades da Hanami.</label>
+          </div>
+        </div>
         <div class="botoes-container">
           <button type="submit" class="botao-enviar" [disabled]="contactForm.invalid && formSubmetido">Enviar</button>
         </div>

@@ -1,3 +1,57 @@
-<p>
-  dashboard works!
-</p>
+<div class="dashboard-summary">
+  <div class="summary-card">
+    <span>Total de Vendas</span>
+    <strong>{{ summary().totalVendas | currency:'BRL' }}</strong>
+  </div>
+  <div class="summary-card">
+    <span>Pedidos Total</span>
+    <strong>{{ summary().pedidos }}</strong>
+  </div>
+  <div class="summary-card">
+    <span>Ticket Médio</span>
+    <strong>{{ summary().ticketMedio | currency:'BRL' }}</strong>
+  </div>
+</div>
+
+<div class="dashboard-charts">
+  <div class="chart-card">
+    <canvas #vendasMensaisCanvas></canvas>
+  </div>
+  <div class="chart-card">
+    <canvas #popularCategoriesCanvas></canvas>
+  </div>
+  <div class="chart-card">
+    <canvas #productSalesCanvas></canvas>
+  </div>
+</div>
+
+<div class="dashboard-recent-orders">
+  <h3>Pedidos Recentes</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID do Pedido</th>
+        <th>Cliente</th>
+        <th>Data</th>
+        <th>Valor</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (order of recentOrders(); track order.id) {
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.cliente }}</td>
+          <td>{{ order.data }}</td>
+          <td>{{ order.valor | currency:'BRL' }}</td>
+          <td>{{ order.status }}</td>
+        </tr>
+      }
+      @empty {
+        <tr>
+          <td colspan="5">Nenhum pedido recente.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

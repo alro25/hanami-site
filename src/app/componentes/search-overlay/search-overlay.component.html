@@ -1,0 +1,7 @@
+<div class="search-overlay-container" [class.open]="isOpen">
+  <div class="search-input-wrapper">
+    <span class="search-icon">🔍</span>
+    <input type="search" placeholder="O que você procura, deusa?" autofocus>
+  </div>
+  <button class="close-btn" (click)="close.emit()" aria-label="Fechar busca">×</button>
+</div>

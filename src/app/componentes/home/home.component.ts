@@ -1,123 +1,86 @@
-// src/app/componentes/home/home.component.ts
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+// Em src/app/componentes/home/home.component.ts
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Product } from '../models/product.model';
+import { CartService } from '../../services/cart.service';
+import { UiService } from '../../services/ui.service';
+import { ProductService } from '../../services/product.service'; // Certifique-se que está importado
 
 import { SideModalComponent } from '../side-modal/side-modal.component';
-import { UiService } from '../../services/ui.service';
-import { CartService } from '../../services/cart.service';
-import { Product } from '../models/product.model';
-import { ProductService } from '../../services/product.service';
+import { SearchOverlayComponent } from '../search-overlay/search-overlay.component';
 
-interface CarouselSlide {
-  imageUrl: string;
-  alt: string;
-  title: string;
-  subtitle: string;
-}
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, RouterLink, SideModalComponent],
+  imports: [CommonModule, NgOptimizedImage, SideModalComponent],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  uiService = inject(UiService);
+export class HomeComponent {
   cartService = inject(CartService);
-  productService = inject(ProductService);
-
-  popularProducts = toSignal(
-    this.productService.getProductsByTag('lancamento'), 
-    { initialValue: [] }
-  );
-
-  slides: CarouselSlide[] = [
-    {
-      imageUrl: '/img/carousel-1.png', // Usando o caminho que você prefere
-      alt: 'Modelo mostrando um gloss brilhante',
-      title: 'Brilho Incomparável',
-      subtitle: 'Nossa nova linha de gloss com efeito espelhado.'
-    },
-    {
-      imageUrl: '/img/carousel-2.png', // Usando o caminho que você prefere
-      alt: 'Close-up de uma paleta de sombras coloridas',
-      title: 'Cores Vibrantes',
-      subtitle: 'Explore as possibilidades com a paleta de sombras Papillon.'
-    },
-    {
-      imageUrl: '/img/carousel-3.png', // Usando o caminho que você prefere
-      alt: 'Diversos batons em tons de vermelho e rosa',
-      title: 'Acabamento Perfeito',
-      subtitle: 'Batom matte que dura o dia todo, sem ressecar.'
-    }
-  ];
+  uiService = inject(UiService);
+  private productService = inject(ProductService); // Injeção do ProductService
 
   currentIndex = signal(0);
-  private intervalId?: any;
+  slides = [
+    { imageUrl: '/img/carousel-1.png', alt: 'Mulher com maquiagem vibrante', title: 'BELEZA QUE INSPIRE', subtitle: 'Descubra sua melhor versão.' },
+    { imageUrl: '/img/carousel-2.png', alt: 'Produtos de maquiagem em destaque', title: 'CORES QUE TRANSFORMAM', subtitle: 'Experimente a magia Hanami.' },
+    { imageUrl: '/img/carousel-3.png', alt: 'Mulher jovem com maquiagem', title: 'SEU BRILHO ÚNICO', subtitle: 'Realce sua beleza natural.' },
+  ];
 
-  // ESTA PARTE É ESSENCIAL PARA O CARROSSEL SE MOVER
-  ngOnInit(): void {
-    this.startAutoplay();
-  }
-
-  ngOnDestroy(): void {
-    this.stopAutoplay();
-  }
-  // FIM DA PARTE ESSENCIAL
-
-  goToPrevious(): void {
-    const isFirstSlide = this.currentIndex() === 0;
-    this.currentIndex.set(isFirstSlide ? this.slides.length - 1 : this.currentIndex() - 1);
-    this.resetAutoplay();
-  }
-
-  goToNext(): void {
-    const isLastSlide = this.currentIndex() === this.slides.length - 1;
-    this.currentIndex.set(isLastSlide ? 0 : this.currentIndex() + 1);
-    this.resetAutoplay();
-  }
+  // popularProducts agora será um computed que filtra o Signal do ProductService
+  popularProducts = this.productService.productsInStock;
   
-  goToSlide(slideIndex: number): void {
-    this.currentIndex.set(slideIndex);
-    this.resetAutoplay();
+
+  goToSlide(index: number) {
+    this.currentIndex.set(index);
   }
 
-  private startAutoplay(): void {
-    this.intervalId = setInterval(() => this.goToNext(), 5000);
+  goToPrevious() {
+    this.currentIndex.update(current => 
+      current === 0 ? this.slides.length - 1 : current - 1
+    );
   }
 
-  private stopAutoplay(): void {
-    clearInterval(this.intervalId);
+  goToNext() {
+    this.currentIndex.update(current => 
+      current === this.slides.length - 1 ? 0 : current + 1
+    );
   }
 
-  private resetAutoplay(): void {
-    this.stopAutoplay();
-    this.startAutoplay();
-  }
+  // ... (o restante do seu código permanece igual) ...
 
   onAddToCart(product: Product) {
     this.cartService.addToCart(product);
-    this.uiService.isCartOpen.set(true);
   }
 
-  activeMenu = signal<string | null>(null);
+  // Se você tinha getProductsByTag, precisará substituí-lo
+  // getProductsByTag(tag: string) {
+  //   // Exemplo: Filtrar produtos do stock com base em alguma propriedade 'tag' ou 'category'
+  //   return this.productService.productsInStock().filter(p => p.category.includes(tag));
+  // }
 
-  navMenu = {
-    'Lançamentos': ['Novidades', 'Kits', 'Edições Limitadas'],
-    'Lábios': ['Batom', 'Gloss', 'Lápis Labial'],
-    'Rosto': ['Base', 'Corretivo', 'Pó', 'Blush'],
-    'Olhos': ['Sombra', 'Máscara', 'Delineador'],
-    'Sobrancelha': ['Lápis', 'Gel', 'Pasta']
-  };
-
-  getNavLinks() {
-    return Object.keys(this.navMenu);
+  // Métodos de navegação (se existirem)
+  getNavLinks(): string[] {
+    return ['Maquiagem', 'Cuidados', 'Promoções', 'Lançamentos'];
   }
 
   getSubmenu(link: string): string[] {
-    return this.navMenu[link as keyof typeof this.navMenu] || [];
+    switch (link) {
+      case 'Maquiagem':
+        return ['Olhos', 'Lábios', 'Pele', 'Pincéis'];
+      case 'Cuidados':
+        return ['Facial', 'Corporal', 'Capilar'];
+      case 'Promoções':
+        return ['Ofertas do Dia', 'Kits Promocionais'];
+      case 'Lançamentos':
+        return ['Novidades', 'Coleções'];
+      default:
+        return [];
+    }
   }
+  activeMenu = signal<string | null>(null);
+   // <-- Direto do serviço
+
 }

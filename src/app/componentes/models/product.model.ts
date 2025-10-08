@@ -6,4 +6,5 @@ export interface Product {
   description: string;
   category: string;
   tags: string[];
+  stock: number;
 }

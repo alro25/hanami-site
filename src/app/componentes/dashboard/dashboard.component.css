@@ -1,0 +1,123 @@
+:host {
+  display: block;
+  background-color: #f4f7f6;
+  padding: 2rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.filter-btn {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summary-cards .card-header {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.summary-cards .value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #E964BD; /* Hanami Pink */
+}
+
+.charts-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.charts-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.chart-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.chart-container {
+  position: relative;
+  height: 250px;
+}
+
+.chart-main .chart-container {
+  height: calc(500px + 1.5rem); /* Altura dos dois charts laterais + gap */
+}
+
+.recent-orders table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recent-orders th, .recent-orders td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.recent-orders th {
+  font-weight: 500;
+  color: #666;
+}
+
+.status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.status.entregue { background-color: #d4edda; color: #155724; }
+.status.pendente { background-color: #fff3cd; color: #856404; }
+.status.cancelado { background-color: #f8d7da; color: #721c24; }
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+  .chart-main .chart-container {
+    height: 300px;
+  }
+}

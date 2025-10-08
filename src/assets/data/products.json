@@ -6,7 +6,8 @@
     "price": 299.90,
     "imageUrl": "/img/products/kit-essencial.jpg",
     "description": "O kit perfeito para o dia a dia, com base, batom e máscara.",
-    "tags": ["lancamento", "kit"]
+    "tags": ["lancamento", "kit"],
+    "stock": 20
   },
   {
     "id": 102,
@@ -15,7 +16,8 @@
     "price": 249.90,
     "imageUrl": "/img/products/kit-olhar.jpg",
     "description": "Delineador, máscara de volume e lápis de sobrancelha para um olhar marcante.",
-    "tags": ["kit"]
+    "tags": ["kit"],
+    "stock": 20
   },
   {
     "id": 103,
@@ -24,7 +26,8 @@
     "price": 189.90,
     "imageUrl": "/img/products/kit-labios.jpg",
     "description": "Uma combinação de lápis labial, batom cremoso e gloss finalizador.",
-    "tags": ["kit"]
+    "tags": ["kit"],
+    "stock": 20
   },
   {
     "id": 201,
@@ -33,7 +36,8 @@
     "price": 89.90,
     "imageUrl": "/img/products/batom-sakura.jpg",
     "description": "Um tom de rosa inspirado na flor de cerejeira, com acabamento aveludado.",
-    "tags": ["lancamento", "edicao-limitada"]
+    "tags": ["lancamento", "edicao-limitada"],
+    "stock": 25
   },
   {
     "id": 202,
@@ -42,7 +46,8 @@
     "price": 79.90,
     "imageUrl": "/img/products/batom-camelia.jpg",
     "description": "Cor e hidratação com extrato de camélia. Acabamento acetinado.",
-    "tags": []
+    "tags": [],
+    "stock": 25
   },
   {
     "id": 203,
@@ -51,7 +56,8 @@
     "price": 75.90,
     "imageUrl": "/img/products/batom-lotus.jpg",
     "description": "Um nude clássico e elegante para todas as ocasiões.",
-    "tags": []
+    "tags": [],
+    "stock": 25
   },
   {
     "id": 301,
@@ -60,7 +66,8 @@
     "price": 79.90,
     "imageUrl": "/img/products/gloss-kyoto.jpg",
     "description": "Efeito espelhado com partículas de brilho dourado.",
-    "tags": ["lancamento"]
+    "tags": ["lancamento"],
+    "stock": 30
   },
   {
     "id": 302,
@@ -69,7 +76,8 @@
     "price": 85.90,
     "imageUrl": "/img/products/gloss-fuji.jpg",
     "description": "Sensação de frescor e lábios visivelmente mais cheios.",
-    "tags": []
+    "tags": [],
+    "stock": 30
   },
   {
     "id": 303,
@@ -78,7 +86,8 @@
     "price": 72.90,
     "imageUrl": "/img/products/gloss-amanhecer.jpg",
     "description": "Cor suave que mancha os lábios para um efeito natural e duradouro.",
-    "tags": []
+    "tags": [],
+    "stock": 30
   },
   {
     "id": 401,
@@ -87,7 +96,8 @@
     "price": 49.90,
     "imageUrl": "/img/products/lapis-imperial.jpg",
     "description": "Define e preenche os lábios com precisão. Fórmula cremosa.",
-    "tags": []
+    "tags": [],
+    "stock": 35
   },
   {
     "id": 402,
@@ -96,7 +106,8 @@
     "price": 49.90,
     "imageUrl": "/img/products/lapis-zen.jpg",
     "description": "O tom de nude perfeito para combinar com qualquer batom.",
-    "tags": []
+    "tags": [],
+    "stock": 35
   },
   {
     "id": 403,
@@ -105,7 +116,8 @@
     "price": 49.90,
     "imageUrl": "/img/products/lapis-geisha.jpg",
     "description": "Um tom de vinho profundo para um contorno dramático.",
-    "tags": []
+    "tags": [],
+    "stock": 35
   },
   {
     "id": 501,
@@ -114,7 +126,8 @@
     "price": 129.90,
     "imageUrl": "/img/products/base-porcelana.jpg",
     "description": "Cobertura média e acabamento natural. Disponível em 24 tons.",
-    "tags": ["lancamento"]
+    "tags": ["lancamento"],
+    "stock": 40
   },
   {
     "id": 502,
@@ -123,7 +136,8 @@
     "price": 139.90,
     "imageUrl": "/img/products/base-veludo.jpg",
     "description": "Longa duração e controle de oleosidade para uma pele impecável.",
-    "tags": []
+    "tags": [],
+    "stock": 40
   },
   {
     "id": 503,
@@ -132,7 +146,8 @@
     "price": 125.90,
     "imageUrl": "/img/products/base-glow.jpg",
     "description": "Pele radiante e hidratada com cobertura leve.",
-    "tags": []
+    "tags": [],
+    "stock": 40
   },
   {
     "id": 601,
@@ -141,7 +156,8 @@
     "price": 69.90,
     "imageUrl": "/img/products/corretivo-total.jpg",
     "description": "Alta cobertura que não acumula nas linhas finas.",
-    "tags": []
+    "tags": [],
+    "stock": 45
   },
   {
     "id": 602,
@@ -150,7 +166,8 @@
     "price": 75.90,
     "imageUrl": "/img/products/corretivo-luz.jpg",
     "description": "Disfarça olheiras e ilumina a área dos olhos.",
-    "tags": ["lancamento"]
+    "tags": ["lancamento"],
+    "stock": 45
   },
   {
     "id": 603,
@@ -159,7 +176,8 @@
     "price": 65.90,
     "imageUrl": "/img/products/corretivo-equilibrio.jpg",
     "description": "Disponível em tons de verde, amarelo e lilás para neutralizar imperfeições.",
-    "tags": []
+    "tags": [],
+    "stock": 45
   },
   {
     "id": 701,
@@ -168,7 +186,8 @@
     "price": 99.90,
     "imageUrl": "/img/products/po-nevoa.jpg",
     "description": "Sela a maquiagem e controla o brilho sem adicionar cor.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 702,
@@ -177,7 +196,8 @@
     "price": 109.90,
     "imageUrl": "/img/products/po-seda.jpg",
     "description": "Textura ultrafina para um acabamento profissional.",
-    "tags": ["lancamento"]
+    "tags": ["lancamento"],
+    "stock": 50
   },
   {
     "id": 703,
@@ -186,7 +206,8 @@
     "price": 119.90,
     "imageUrl": "/img/products/po-sol.jpg",
     "description": "Um toque de cor e brilho para um visual bronzeado.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 801,
@@ -195,7 +216,8 @@
     "price": 85.90,
     "imageUrl": "/img/products/blush-pessego.jpg",
     "description": "Fácil de espalhar para um ar de saúde natural.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 802,
@@ -204,7 +226,8 @@
     "price": 79.90,
     "imageUrl": "/img/products/blush-hanami.jpg",
     "description": "O rosa perfeito que combina com todos os tons de pele.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 803,
@@ -213,7 +236,8 @@
     "price": 89.90,
     "imageUrl": "/img/products/blush-gotas.jpg",
     "description": "Pigmentação intensa e longa duração com apenas uma gota.",
-    "tags": ["lancamento"]
+    "tags": ["lancamento"],
+    "stock": 50
   },
   {
     "id": 901,
@@ -222,7 +246,8 @@
     "price": 199.90,
     "imageUrl": "/img/products/sombra-jardim.jpg",
     "description": "12 tons terrosos e cintilantes para looks versáteis.",
-    "tags": ["edicao-limitada"]
+    "tags": ["edicao-limitada"],
+    "stock": 50
   },
   {
     "id": 902,
@@ -231,7 +256,8 @@
     "price": 79.90,
     "imageUrl": "/img/products/sombra-brilho.jpg",
     "description": "Glitter intenso que não transfere. Perfeito para festas.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 903,
@@ -240,7 +266,8 @@
     "price": 69.90,
     "imageUrl": "/img/products/sombra-bastao.jpg",
     "description": "Cor e primer em um só passo. Não precisa de pincel.",
-    "tags": ["lancamento"]
+    "tags": ["lancamento"],
+    "stock": 50
   },
   {
     "id": 1001,
@@ -249,7 +276,8 @@
     "price": 95.90,
     "imageUrl": "/img/products/mascara-leque.jpg",
     "description": "Volume e definição para um efeito de cílios postiços.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1002,
@@ -258,7 +286,8 @@
     "price": 92.90,
     "imageUrl": "/img/products/mascara-infinito.jpg",
     "description": "Fibras extensoras que deixam seus cílios visivelmente mais longos.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1003,
@@ -267,7 +296,8 @@
     "price": 99.90,
     "imageUrl": "/img/products/mascara-prova-dagua.jpg",
     "description": "Sua máscara favorita, agora resistente a tudo.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1101,
@@ -276,7 +306,8 @@
     "price": 88.90,
     "imageUrl": "/img/products/delineador-samurai.jpg",
     "description": "Ponta ultrafina para um delineado gatinho preciso e sem esforço.",
-    "tags": ["lancamento"]
+    "tags": ["lancamento"],
+    "stock": 50
   },
   {
     "id": 1102,
@@ -285,7 +316,8 @@
     "price": 92.90,
     "imageUrl": "/img/products/delineador-nanquim.jpg",
     "description": "Preto intenso e à prova d'água. Acompanha pincel de aplicação.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1103,
@@ -294,7 +326,8 @@
     "price": 85.90,
     "imageUrl": "/img/products/delineador-origami.jpg",
     "description": "Para looks gráficos e criativos. Cor branca super pigmentada.",
-    "tags": ["edicao-limitada"]
+    "tags": ["edicao-limitada"],
+    "stock": 50
   },
   {
     "id": 1201,
@@ -303,7 +336,8 @@
     "price": 65.90,
     "imageUrl": "/img/products/lapis-fio-a-fio.jpg",
     "description": "Ponta retrátil e escovinha para um acabamento natural.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1202,
@@ -312,7 +346,8 @@
     "price": 59.90,
     "imageUrl": "/img/products/lapis-iluminador.jpg",
     "description": "Realça o arco da sobrancelha, abrindo o olhar.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1203,
@@ -321,7 +356,8 @@
     "price": 62.90,
     "imageUrl": "/img/products/lapis-universal.jpg",
     "description": "Cor universal que se adapta a diversos tons de pelo.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1301,
@@ -330,7 +366,8 @@
     "price": 72.90,
     "imageUrl": "/img/products/gel-sempre-lugar.jpg",
     "description": "Penteia e fixa os fios por horas. Disponível em incolor e com cor.",
-    "tags": ["lancamento"]
+    "tags": ["lancamento"],
+    "stock": 50
   },
   {
     "id": 1302,
@@ -339,7 +376,8 @@
     "price": 78.90,
     "imageUrl": "/img/products/gel-volume-extra.jpg",
     "description": "Preenche falhas e dá a impressão de sobrancelhas mais cheias.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1303,
@@ -348,7 +386,8 @@
     "price": 75.90,
     "imageUrl": "/img/products/gel-laminador.jpg",
     "description": "Para o efeito de sobrancelhas penteadas para cima que é tendência.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1401,
@@ -357,7 +396,8 @@
     "price": 82.90,
     "imageUrl": "/img/products/pasta-desenho.jpg",
     "description": "À prova d'água, preenche e define com alta pigmentação.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1402,
@@ -366,7 +406,8 @@
     "price": 85.90,
     "imageUrl": "/img/products/pasta-corretiva.jpg",
     "description": "Cobre falhas de forma natural e duradoura.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   },
   {
     "id": 1403,
@@ -375,6 +416,7 @@
     "price": 79.90,
     "imageUrl": "/img/products/pasta-cera.jpg",
     "description": "Modela e fixa os fios, ideal para um visual mais selvagem.",
-    "tags": []
+    "tags": [],
+    "stock": 50
   }
 ]

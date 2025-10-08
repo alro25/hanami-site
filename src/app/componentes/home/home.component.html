@@ -1,53 +1,70 @@
 <div class="home-container">
+    <app-side-modal [isOpen]="uiService.isCartOpen()" (close)="uiService.closeAllModals()" position="right">
+      <div class="cart-header">
+        <h2>Seu Carrinho</h2>
+        <span>({{ cartService.itemCount() }} itens)</span>
+      </div>
 
+      @if (cartService.cartItems().length > 0) {
+        <div class="cart-items">
+          @for (item of cartService.cartItems(); track item.product.id) {
+            <div class="cart-item">
+              <img [ngSrc]="item.product.imageUrl" width="80" height="80" [alt]="item.product.name">
+              <div class="item-info">
+                <p class="item-name">{{ item.product.name }}</p>
+                <div class="item-controls">
+                  <div class="quantity-selector">
+                    <button (click)="cartService.updateQuantity(item.product.id, -1)" aria-label="Remover uma unidade">-</button>
+                    <span>{{ item.quantity }}</span>
+                    <button (click)="cartService.updateQuantity(item.product.id, 1)" aria-label="Adicionar uma unidade">+</button>
+                  </div>
+                  <button class="remove-btn" (click)="cartService.removeFromCart(item.product.id)">Remover</button>
+                </div>
+              </div>
+              <div class="item-price">
+                <p>R$ {{ (item.product.price * item.quantity).toFixed(2) }}</p>
+              </div>
+            </div>
+          }
+        </div>
+        <div class="cart-footer">
+          <div class="subtotal">
+            <span>Subtotal</span>
+            <strong>R$ {{ cartService.cartTotal().toFixed(2) }}</strong>
+          </div>
+          <button class="btn btn-dark checkout-btn" (click)="cartService.checkout()">Finalizar Compra</button>
+        </div>
+      } @else {
+        <div class="cart-empty">
+          <p>Seu carrinho está vazio.</p>
+          <button class="btn btn-outline" (click)="uiService.closeAllModals()">Continuar Comprando</button>
+        </div>
+      }
+    </app-side-modal>
+    
+    <app-side-modal [isOpen]="uiService.isSearchOpen()" (close)="uiService.closeAllModals()" position="right">
+      <h2>Pesquisar Produtos</h2>
+      <input type="search" placeholder="O que você procura?" style="width: 100%; padding: 0.5rem;"/>
+    </app-side-modal>
+
+    <app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
+      <h2>Minha Conta</h2>
+      <a routerLink="/dashboard" (click)="uiService.closeAllModals()">Acessar Dashboard</a>
+      <br>
+      <a routerLink="/login" (click)="uiService.closeAllModals()">Sair</a>
+    </app-side-modal>
+
+    
   <header class="main-header">
     <div class="header-top">
       <div class="logo">
         <h1>HANAMI</h1>
       </div>
       
-      <app-side-modal [isOpen]="uiService.isCartOpen()" (close)="uiService.closeAllModals()" position="right">
-        <h2>Seu Carrinho ({{ cartService.itemCount() }})</h2>
-
-        @if (cartService.cartItems().length > 0) {
-          <div class="cart-items">
-            @for (item of cartService.cartItems(); track item.product.id) {
-              <div class="cart-item">
-                <img [ngSrc]="item.product.imageUrl" width="60" height="60" [alt]="item.product.name">
-                <div class="item-details">
-                  <p>{{ item.product.name }}</p>
-                  <p>Qtd: {{ item.quantity }} - R$ {{ item.product.price.toFixed(2) }}</p>
-                </div>
-              </div>
-            }
-          </div>
-          <div class="cart-total">
-            <strong>Total: R$ {{ cartService.cartTotal().toFixed(2) }}</strong>
-            <button class="btn btn-dark" style="width: 100%;">Finalizar Compra</button>
-          </div>
-        } @else {
-          <p>Seu carrinho está vazio.</p>
-        }
-      </app-side-modal>
-      
-
-      <app-side-modal [isOpen]="uiService.isSearchOpen()" (close)="uiService.closeAllModals()" position="right">
-        <h2>Pesquisar Produtos</h2>
-        <input type="search" placeholder="O que você procura?" style="width: 100%; padding: 0.5rem;"/>
-      </app-side-modal>
-
-      <app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
-        <h2>Minha Conta</h2>
-        <a routerLink="/dashboard">Acessar Dashboard</a>
-        <br>
-        <a routerLink="/login">Sair</a>
-      </app-side-modal>
-
-
       <div class="nav-icons">
-        <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()">...</a>
-        <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()">...</a>
-        <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()">...</a>
+        <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()"><span class="icon">🔍</span></a>
+        <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()"><span class="icon">👤</span></a>
+        <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()"><span class="icon">🛒</span></a>
       </div>
     </div>
 
@@ -65,7 +82,6 @@
         </div>
       }
     </div>
-  
   </header>
 
   <main>
@@ -124,18 +140,18 @@
         <button class="btn btn-dark">VER MAIS</button>
       </div>
       <div class="promo-image">
-        <img src="/img/passion-fruit.png" alt="Gloss Passionfruit product">
+        <img src="/img/passion-fruit.png" width="600" height="600" alt="Gloss Passionfruit product">
       </div>
     </section>
 
-    <section class="promo-section lipstick-promo">
+    <section class="promo-section lipstick-promo image-first">
       <div class="promo-text">
         <h2>CONHEÇA A LINHA PAPILLON LIPSTICK</h2>
-        <p>MEET GLOSS BOMB IN 'MANGO CHILL'.<br>Make this shimmering orange shade of the summer yours.</p>
+        <p>Cores intensas e acabamento aveludado para lábios que contam histórias.<br> A longa duração que você ama, com o conforto que você merece.</p>
         <button class="btn btn-dark">VER MAIS</button>
       </div>
       <div class="promo-image">
-        <img src="https://i.imgur.com/V2zV9pI.png" alt="Papillon Lipstick products">
+        <img src="https://i.imgur.com/V2zV9pI.png" width="600" height="600" alt="Papillon Lipstick products">
       </div>
     </section>
 
@@ -152,7 +168,7 @@
       <h4>Fale conosco</h4>
       <p> (99)99999-9999</p>
       <p> contato&#64;hanami.com</p>
-      <a routerLink="/contato" class="contact-link">Contate-nos</a>
+      <a routerLink="/contato" target="_blank">Contate-nos</a>
     </div>
     <div class="footer-column">
       <h4>Redes Sociais</h4>

@@ -12,44 +12,48 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 export class ContatoComponent {
   private fb = inject(FormBuilder);
 
-  // Criamos o nosso formulário reativo
   contactForm = this.fb.group({
     nome: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     telefone: ['', Validators.required],
-    tipo: ['Elogio', Validators.required], // Valor padrão
-    mensagem: ['', [Validators.required, Validators.minLength(10)]]
+    tipo: ['Elogio', Validators.required],
+    mensagem: ['', [Validators.required, Validators.minLength(10)]],
+    // --- CAMPOS DA LGPD ADICIONADOS AQUI ---
+    termos: [false, Validators.requiredTrue], // 'false' é o valor inicial, 'requiredTrue' exige que seja marcado
+    newsletter: [false] // Opcional
   });
 
   formSubmetido = false;
 
-  // Função chamada no submit do formulário
   onSubmit() {
     this.formSubmetido = true;
 
-    // Verifica se o formulário é válido antes de prosseguir
     if (this.contactForm.invalid) {
-      alert('Por favor, preencha todos os campos corretamente.');
+      // Opcional: focar no primeiro campo inválido para melhor acessibilidade
+      const primeiroCampoInvalido = document.querySelector('input.ng-invalid, select.ng-invalid, textarea.ng-invalid');
+      if (primeiroCampoInvalido) {
+        (primeiroCampoInvalido as HTMLElement).focus();
+      }
       return;
     }
 
-    // Lógica para "enviar" os dados (aqui, apenas mostramos no console e um alerta)
-    console.log('Dados do formulário:', this.contactForm.value);
+    console.log('Dados do formulário (LGPD Compliant):', this.contactForm.value);
 
     const nomeUsuario = this.contactForm.value.nome;
     alert(`Obrigado, ${nomeUsuario}! Sua mensagem foi enviada com sucesso.`);
     
-    // Limpa o formulário e reseta o estado
     this.contactForm.reset();
     this.formSubmetido = false;
-    // Restaura o valor padrão do select
-    this.contactForm.patchValue({ tipo: 'Elogio' });
+    // Restaura valores padrão após o reset
+    this.contactForm.patchValue({ tipo: 'Elogio', termos: false, newsletter: false });
   }
 
-  // Getters para facilitar o acesso aos controles no template
+  // Getters para facilitar o acesso no template
   get nome() { return this.contactForm.get('nome'); }
   get email() { return this.contactForm.get('email'); }
   get telefone() { return this.contactForm.get('telefone'); }
   get tipo() { return this.contactForm.get('tipo'); }
   get mensagem() { return this.contactForm.get('mensagem'); }
+  // --- GETTER PARA O CHECKBOX DE TERMOS ---
+  get termos() { return this.contactForm.get('termos'); }
 }

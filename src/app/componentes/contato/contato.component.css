@@ -154,3 +154,40 @@ textarea.input-field {
   margin-top: 4px;
   text-align: left;
 }
+/* --- Estilos LGPD --- */
+.lgpd-container {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.lgpd-text {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 0.5rem;
+  /* Estilo moderno para o checkbox */
+  width: 1.15em;
+  height: 1.15em;
+  accent-color: var(--cor-principal, #E964BD); /* Usando a cor da Hanami */
+}
+
+.checkbox-group label {
+  line-height: 1.5;
+}
+
+.checkbox-group a {
+  color: var(--cor-principal, #E964BD);
+  text-decoration: underline;
+  font-weight: bold;
+}
