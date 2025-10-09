@@ -5,9 +5,10 @@ import { Product } from '../models/product.model';
 import { CartService } from '../../services/cart.service';
 import { UiService } from '../../services/ui.service';
 import { ProductService } from '../../services/product.service'; // Certifique-se que está importado
-
+import { AuthService } from '../../services/auth.service';
 import { SideModalComponent } from '../side-modal/side-modal.component';
 import { SearchOverlayComponent } from '../search-overlay/search-overlay.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,6 +22,18 @@ export class HomeComponent {
   cartService = inject(CartService);
   uiService = inject(UiService);
   private productService = inject(ProductService); // Injeção do ProductService
+  // Add AuthService and Router
+  authService = inject(AuthService);
+  router = inject(Router);
+
+  // ... your existing code ...
+
+  // Add logout method
+  logout() {
+    this.authService.logout();
+    this.uiService.closeAllModals();
+    this.router.navigate(['/']);
+  }
 
   currentIndex = signal(0);
   slides = [
@@ -28,6 +41,11 @@ export class HomeComponent {
     { imageUrl: '/img/carousel-2.png', alt: 'Produtos de maquiagem em destaque', title: 'CORES QUE TRANSFORMAM', subtitle: 'Experimente a magia Hanami.' },
     { imageUrl: '/img/carousel-3.png', alt: 'Mulher jovem com maquiagem', title: 'SEU BRILHO ÚNICO', subtitle: 'Realce sua beleza natural.' },
   ];
+  goToDashboard(event: Event) {
+  event.preventDefault();
+  this.uiService.closeAllModals();
+  this.router.navigate(['/dashboard']);
+}
 
   // popularProducts agora será um computed que filtra o Signal do ProductService
   popularProducts = this.productService.productsInStock;

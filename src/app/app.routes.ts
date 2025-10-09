@@ -5,7 +5,7 @@ import { DashboardComponent } from './componentes/dashboard/dashboard.component'
 import { ContatoComponent } from './componentes/contato/contato.component';
 
 export const routes: Routes = [
-    {path: "", pathMatch: 'full', redirectTo: 'login'},
+    {path: "", pathMatch: 'full', redirectTo: 'home'},
     {path:'login', component: LoginComponent},
     {path:'home', component: HomeComponent},
     {path:'dashboard', component: DashboardComponent},

@@ -49,9 +49,25 @@
 
     <app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
       <h2>Minha Conta</h2>
-      <a routerLink="/dashboard" (click)="uiService.closeAllModals()">Acessar Dashboard</a>
-      <br>
-      <a routerLink="/login" (click)="uiService.closeAllModals()">Sair</a>
+      
+      <!-- Check if user is authenticated -->
+      @if (authService.isAuthenticated()) {
+        <a href="#" (click)="goToDashboard($event)" class="modal-link">
+          Acessar Dashboard
+        </a>
+        <br>
+        <button class="btn btn-outline logout-btn" (click)="logout()">
+          Sair
+        </button>
+      } @else {
+        <a routerLink="/login" (click)="uiService.closeAllModals()" class="modal-link">
+          Fazer Login
+        </a>
+        <br>
+        <a href="#" class="modal-link" (click)="$event.preventDefault(); uiService.closeAllModals()">
+          Criar Conta
+        </a>
+      }
     </app-side-modal>
 
     
