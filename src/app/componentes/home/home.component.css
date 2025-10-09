@@ -398,62 +398,101 @@
   cursor: pointer;
 }
 
-/* Em src/app/componentes/home/home.component.css */
+.promo-background {
+  width: 100%;
+  height: 1200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+}
 
-/* --- Promo Sections (Estilo Login) --- */
+/* Specific background images for each section */
+.gloss-background {
+  background-image: url('/img/fundo2'); /* Your gloss background */
+}
+
+.lipstick-background {
+  background-image: url('/img/fundo2'); /* Your lipstick background */
+}
+
 .promo-section {
   display: flex;
-  width: 100%;
-  align-items: stretch; /* Garante que os filhos tenham a mesma altura */
-  background-color: #fff; /* Fundo branco padrão */
-  overflow: hidden; /* Garante que nada saia dos cantos arredondados */
-  margin: 4rem 0;
+  width: 1200px;
+  height: 800px;
+  margin: 30px auto;
+  box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
-/* Aplica o fundo rosa claro apenas na seção do gloss */
-.gloss-promo {
-  background-color: #fbf3f8; /* Rosa bem clarinho da paleta da Hanami */
-}
 
-.promo-text,
-.promo-image {
-  flex: 1; /* Faz cada lado ocupar 50% */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .promo-text {
+  width: 600px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
   flex-direction: column;
-  text-align: left;
-  padding: 5%;
+  text-align: center;
 }
 
-.promo-text h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.promo-text p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  max-width: 500px;
+.promo-image {
+  width: 600px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .promo-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* A imagem preenche o espaço sem distorcer */
+  object-fit: cover;
 }
 
-/*
-  Esta é a "mágica" para inverter a ordem.
-  'row-reverse' inverte a ordem visual dos elementos flex.
-*/
-.promo-section.image-first {
+/* For image-first section */
+.image-first {
   flex-direction: row-reverse;
+}
+
+.promo-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.promo-text p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #000000;
+  line-height: 1.6;
+}
+
+.btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-dark {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn-dark:hover {
+  background-color: #333333;
 }
 
 
