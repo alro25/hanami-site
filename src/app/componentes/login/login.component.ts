@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { NgOptimizedImage } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class LoginComponent {
   senha: string = '';
   dataAtual = new Date();
 
-  constructor(private router: Router) {}
+  private authService = inject(AuthService); // Add AuthService
+  private router = inject(Router);
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {

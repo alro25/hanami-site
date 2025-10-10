@@ -1,7 +1,7 @@
 import { Injectable, computed, signal, inject } from '@angular/core';
 import { Product } from '../componentes/models/product.model';
-import { ProductService } from './product.service'; // Importar ProductService
-import { Order, OrderService } from './order.service'; // Importar Order e OrderService
+import { ProductService } from './product.service';
+import { Order, OrderService } from './order.service';
 
 export interface CartItem {
   product: Product;
@@ -111,5 +111,22 @@ export class CartService {
     this.cartItems.set([]);
 
     alert(`Compra finalizada com sucesso! Pedido ${newOrder.id}. Total: R$ ${orderTotal.toFixed(2)}.`);
+  }
+  clearCart() {
+    this.cartItems.set([]);
+  }
+
+  getCartItems(): CartItem[] {
+    return this.cartItems();
+  }
+
+  isEmpty(): boolean {
+    return this.cartItems().length === 0;
+  }
+
+  // Optional: Get item quantity for a specific product
+  getItemQuantity(productId: number): number {
+    const item = this.cartItems().find(item => item.product.id === productId);
+    return item ? item.quantity : 0;
   }
 }

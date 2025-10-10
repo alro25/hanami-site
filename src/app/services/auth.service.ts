@@ -1,31 +1,45 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Rename the signal to avoid conflict
-  private _isAuthenticated = signal<boolean>(false);
+  // Use a signal for authentication state
+  private _isAuthenticated = signal<boolean>(this.checkInitialAuth());
+  
+  // Computed signal that will trigger template updates
+  isAuthenticated = computed(() => this._isAuthenticated());
 
-  // Method to get the authentication state
-  isAuthenticated() {
-    return this._isAuthenticated.asReadonly();
-  }
-
-  login() {
-    this._isAuthenticated.set(true);
+  login(username: string, password: string): boolean {
+    console.log('Login attempt:', username); // Debug log
+    
+    if (username === 'admin' && password === '123456') {
+      this._isAuthenticated.set(true);
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('username', username);
+      console.log('Login successful'); // Debug log
+      return true;
+    }
+    console.log('Login failed'); // Debug log
+    return false;
   }
 
   logout() {
+    console.log('Logging out'); // Debug log
     this._isAuthenticated.set(false);
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('username');
   }
 
-  // Optional: For demo purposes, you can set initial state
-  checkInitialAuth() {
-    // Check if user was previously authenticated (e.g., from localStorage)
+  private checkInitialAuth(): boolean {
     const savedAuth = localStorage.getItem('isAuthenticated');
-    if (savedAuth === 'true') {
-      this._isAuthenticated.set(true);
-    }
+    const isAuthenticated = savedAuth === 'true';
+    console.log('Initial auth check:', isAuthenticated); // Debug log
+    return isAuthenticated;
   }
+
+  getUsername(): string {
+    return localStorage.getItem('username') || 'Usuário';
+  }
+  isAuth = computed(() => this._isAuthenticated());
 }

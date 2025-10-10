@@ -26,15 +26,6 @@ export class HomeComponent {
   authService = inject(AuthService);
   router = inject(Router);
 
-  // ... your existing code ...
-
-  // Add logout method
-  logout() {
-    this.authService.logout();
-    this.uiService.closeAllModals();
-    this.router.navigate(['/']);
-  }
-
   currentIndex = signal(0);
   slides = [
     { imageUrl: '/img/carousel-1.png', alt: 'Mulher com maquiagem vibrante', title: 'BELEZA QUE INSPIRE', subtitle: 'Descubra sua melhor versão.' },
@@ -42,9 +33,26 @@ export class HomeComponent {
     { imageUrl: '/img/carousel-3.png', alt: 'Mulher jovem com maquiagem', title: 'SEU BRILHO ÚNICO', subtitle: 'Realce sua beleza natural.' },
   ];
   goToDashboard(event: Event) {
-  event.preventDefault();
-  this.uiService.closeAllModals();
-  this.router.navigate(['/dashboard']);
+    event.preventDefault();
+    this.uiService.closeAllModals();
+    this.router.navigate(['/dashboard']);
+  }
+
+  goToLogin(event: Event) {
+    event.preventDefault();
+    this.uiService.closeAllModals();
+    this.router.navigate(['/login']);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.uiService.closeAllModals();
+    // Optional: Clear cart on logout
+    this.cartService.clearCart();
+  }
+  
+  getLocalStorageAuth(): string {
+  return localStorage.getItem('isAuthenticated') || 'false';
 }
 
   // popularProducts agora será um computed que filtra o Signal do ProductService
