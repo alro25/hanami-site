@@ -207,6 +207,26 @@
   position: relative;
 }
 
+.cart-icon {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #E964BD;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
 .submenu {
   position: absolute;
   top: 100%;
@@ -412,14 +432,18 @@
 
 /* Specific background images for each section */
 .gloss-background {
+  position: relative;
   background-image: url('/img/fundo2'); /* Your gloss background */
 }
 
 .lipstick-background {
   background-image: url('/img/fundo2'); /* Your lipstick background */
+  position: relative;
 }
 
 .promo-section {
+  position: absolute;
+  z-index: 10;
   display: flex;
   width: 1200px;
   height: 800px;

@@ -82,9 +82,24 @@
       </div>
       
       <div class="nav-icons">
-        <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()"><span class="icon">🔍</span></a>
-        <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()"><span class="icon">👤</span></a>
-        <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()"><span class="icon">🛒</span></a>
+        <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()">
+          <span class="icon">
+            <img ngSrc="/img/busca-icon.png" alt="Buscar" width="24" height="24">
+          </span>
+        </a>
+        <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()">
+          <span class="icon">
+            <img ngSrc="/img/usuario-icon.png" alt="Minha Conta" width="24" height="24">
+          </span>
+        </a>
+        <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()" class="cart-icon">
+          <span class="icon">
+            <img ngSrc="/img/sacola-icon.png" alt="Carrinho" width="24" height="24">
+            @if (cartService.itemCount() > 0) {
+              <span class="cart-badge">{{ cartService.itemCount() }}</span>
+            }
+          </span>
+        </a>
       </div>
     </div>
 
