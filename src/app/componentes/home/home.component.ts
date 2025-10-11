@@ -8,13 +8,14 @@ import { ProductService } from '../../services/product.service'; // Certifique-s
 import { AuthService } from '../../services/auth.service';
 import { SideModalComponent } from '../side-modal/side-modal.component';
 import { SearchOverlayComponent } from '../search-overlay/search-overlay.component';
+import { ProfileModalContentComponent } from '../profile-modal-content/profile-modal-content.component';
 import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, SideModalComponent],
+  imports: [CommonModule, NgOptimizedImage, SideModalComponent, ProfileModalContentComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -28,7 +29,7 @@ export class HomeComponent {
 
   currentIndex = signal(0);
   slides = [
-    { imageUrl: '/img/carousel-1.png', alt: 'Mulher com maquiagem vibrante', title: 'BELEZA QUE INSPIRE', subtitle: 'Descubra sua melhor versão.' },
+    { imageUrl: '/img/carousel-1.png', alt: 'Mulher com maquiagem vibrante', title: 'BELEZA QUE INSPIRA', subtitle: 'Descubra sua melhor versão.' },
     { imageUrl: '/img/carousel-2.png', alt: 'Produtos de maquiagem em destaque', title: 'CORES QUE TRANSFORMAM', subtitle: 'Experimente a magia Hanami.' },
     { imageUrl: '/img/carousel-3.png', alt: 'Mulher jovem com maquiagem', title: 'SEU BRILHO ÚNICO', subtitle: 'Realce sua beleza natural.' },
   ];
@@ -89,7 +90,7 @@ export class HomeComponent {
 
   // Métodos de navegação (se existirem)
   getNavLinks(): string[] {
-    return ['Todos os produtos','Lançamentos', 'Lábios', 'Olhos', 'Sobrancelha', 'Mundo HANAMI', 'Contato'];
+    return ['Todos os produtos','Lançamentos', 'Rosto','Lábios', 'Olhos', 'Sobrancelha', 'Mundo HANAMI', 'Contato'];
   }
 
   getSubmenu(link: string): string[] {

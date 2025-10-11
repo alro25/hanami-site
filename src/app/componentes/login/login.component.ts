@@ -31,10 +31,16 @@ export class LoginComponent {
     event.stopPropagation();
   }
   login() {
-    if (this.usuario !== 'admin' || this.senha !== '123456') {
-      alert('Usuário ou senha Invalidos');
+    // Use the AuthService.login() method instead of hardcoded check
+    if (this.authService.login(this.usuario, this.senha)) {
+      this.router.navigate(['/']);
     } else {
-      this.router.navigate(['/home']);
+      alert('Usuário ou senha inválidos');
     }
+  }
+
+  // Add this method for guest access
+  continueAsGuest() {
+    this.router.navigate(['/']);
   }
 }

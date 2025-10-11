@@ -1,0 +1,54 @@
+.debug-info {
+  background: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.welcome-message {
+  margin-bottom: 15px;
+  color: #666;
+  text-align: center;
+}
+
+.modal-link {
+  display: block;
+  padding: 10px 15px;
+  color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.modal-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 0.8rem 2.5rem;
+  border: 1px solid #222;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline {
+  color: #222;
+  background-color: white;
+}
+
+.btn-outline:hover {
+  background-color: #222;
+  color: white;
+}

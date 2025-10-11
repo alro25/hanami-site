@@ -1,0 +1,32 @@
+<h2>Minha Conta</h2>
+
+@if (authService.isAuthenticated()) {
+  <!-- User is LOGGED IN -->
+  <p class="welcome-message">
+    Olá, <strong>{{ authService.getUsername() }}</strong>!
+  </p>
+  <a href="#" (click)="goToDashboard($event)" class="modal-link">
+    📊 Acessar Dashboard
+  </a>
+  <br>
+  <a href="#" class="modal-link" (click)="$event.preventDefault(); uiService.closeAllModals()">
+    👤 Meus Dados
+  </a>
+  <br>
+  <a href="#" class="modal-link" (click)="$event.preventDefault(); uiService.closeAllModals()">
+    📦 Meus Pedidos
+  </a>
+  <br>
+  <button class="btn btn-outline logout-btn" (click)="logout()">
+    🚪 Sair
+  </button>
+} @else {
+  <!-- User is NOT logged in -->
+  <a href="#" (click)="goToLogin($event)" class="modal-link">
+    🔑 Fazer Login
+  </a>
+  <br>
+  <a href="#" class="modal-link" (click)="$event.preventDefault(); uiService.closeAllModals()">
+    📝 Criar Conta
+  </a>
+}

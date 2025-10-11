@@ -9,23 +9,33 @@
     <section class="login-card">
       <h1>LOGIN</h1>
       <form class="login-form" (ngSubmit)="login()">
-    <div class="input-container">
-        <input type="email" id="usuário" class="input-field" placeholder=" " 
-               [(ngModel)]="usuario" name="usuario">
-        <label for="usuário" class="input-label">Usuário</label>
-    </div>
+          <div class="input-container">
+              <input type="email" id="usuário" class="input-field" placeholder=" " 
+                    [(ngModel)]="usuario" name="usuario">
+              <label for="usuário" class="input-label">Usuário</label>
+          </div>
 
-    <div class="input-container">
-        <input type="password" id="senha" class="input-field" placeholder=" "
-               [(ngModel)]="senha" name="senha">
-        <label for="senha" class="input-label">Senha</label>
-    </div>
+          <div class="input-container">
+              <input type="password" id="senha" class="input-field" placeholder=" "
+                    [(ngModel)]="senha" name="senha">
+              <label for="senha" class="input-label">Senha</label>
+          </div>
 
-    <div class="botoes-container">
-        <button type="button" class="botao-cadastrar">Cadastrar</button>
-        <button type="submit" class="botao-login">Entrar</button>
-    </div>
-</form>
+          <div class="botoes-container">
+              <button type="button" class="botao-cadastrar">Cadastrar</button>
+              <button type="submit" class="botao-login">Entrar</button>
+          </div>
+      </form>
+
+      <div class="guest-section">
+        <div class="separator">
+          <span>ou</span>
+        </div>
+        <button type="button" class="botao-convidado" (click)="continueAsGuest()">
+          Continuar como visitante
+        </button>
+      </div>
+      
     </section>
   </main>
 </div>

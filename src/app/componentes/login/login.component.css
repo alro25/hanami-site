@@ -158,8 +158,55 @@ h1 {
 .forgot-password:hover {
   text-decoration: underline;
 }
+/* Continue as guest section styles */
+.guest-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  color: #666;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.separator span {
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.botao-convidado {
+  width: 100%;
+  background-color: transparent;
+  color: #666;
+  border: 1.5px solid #ddd;
+  border-radius: 5px;
+  padding: 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.botao-convidado:hover {
+  background-color: #f8f8f8;
+  border-color: #E964BD;
+  color: #E964BD;
+  transform: translateY(-2px);
+}
 
 .botoes-container {
+  margin-bottom: 0;
   display: flex;
   gap: 25px;
   width: 100%;

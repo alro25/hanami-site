@@ -433,11 +433,11 @@
 /* Specific background images for each section */
 .gloss-background {
   position: relative;
-  background-image: url('/img/fundo2'); /* Your gloss background */
+  background-image: url('../../../../public/img/fundo2.png'); /* Your gloss background */
 }
 
 .lipstick-background {
-  background-image: url('/img/fundo2'); /* Your lipstick background */
+  background-image: url('../../../../public/img/fundo3.png'); /* Your lipstick background */
   position: relative;
 }
 
