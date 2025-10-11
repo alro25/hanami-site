@@ -48,7 +48,7 @@
     </app-side-modal>
 
     <app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
-      <app-profile-modal-content>></app-profile-modal-content>
+      <app-profile-modal-content></app-profile-modal-content>
     </app-side-modal>
 
     
@@ -80,11 +80,11 @@
       </div>
     </div>
 
-    <div class="nav-links">
+    <nav class="nav-links">
       @for(link of getNavLinks(); track link) {
         <div class="nav-item" (mouseenter)="activeMenu.set(link)" (mouseleave)="activeMenu.set(null)">
           <a href="#">{{ link }}</a>
-          @if (activeMenu() === link) {
+          @if (activeMenu() === link && getSubmenu(link).length > 0) {
             <div class="submenu">
               @for (sublink of getSubmenu(link); track sublink) {
                 <a href="#">{{ sublink }}</a>
@@ -93,12 +93,12 @@
           }
         </div>
       }
-    </div>
+    </nav>
   </header>
 
   <main>
 
-   <section class="hero-carousel">
+    <section class="hero-carousel">
       <div class="slides-container">
         @for (slide of slides; track slide.imageUrl; let i = $index) {
           <div class="slide" [class.active]="i === currentIndex()">
@@ -112,9 +112,11 @@
         }
       </div>
 
+      <!-- Hero Carousel Arrows -->
       <button class="carousel-arrow left" (click)="goToPrevious()" aria-label="Slide anterior">‹</button>
       <button class="carousel-arrow right" (click)="goToNext()" aria-label="Próximo slide">›</button>
 
+      <!-- Hero Carousel Dots -->
       <div class="carousel-dots">
         @for (slide of slides; track slide.imageUrl; let i = $index) {
           <button 
@@ -126,23 +128,59 @@
       </div>
     </section>
 
-    <section class="popular-products">
+   <section class="popular-products">
       <h2>Populares</h2>
       <div class="products-carousel">
-        <div class="product-grid">
+        <!-- Left Arrow -->
+        <button 
+          class="carousel-arrow-products left" 
+          (click)="scrollProducts(-1)"
+          [class.hidden]="!showProductArrows()"
+          aria-label="Produtos anteriores">
+          ‹
+        </button>
+
+        <!-- Products Grid -->
+        <div class="product-grid" #productsContainer>
           @for (product of popularProducts(); track product.id) {
             <div class="product-card">
-              <div class="product-image-placeholder">
-                <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300" style="object-fit: cover;">
+              <div class="product-image-container">
+                <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300">
+                <button class="buy-button" (click)="onAddToCart(product)">COMPRAR</button>
               </div>
-              <h3>{{ product.name }}</h3>
-              <p>R$ {{ product.price.toFixed(2) }}</p>
-              <button class="btn btn-dark" (click)="onAddToCart(product)">COMPRAR</button>
+              <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p>R$ {{ product.price.toFixed(2) }}</p>
+              </div>
             </div>
           }
         </div>
+
+        <!-- Right Arrow -->
+        <button 
+          class="carousel-arrow-products right" 
+          (click)="scrollProducts(1)"
+          [class.hidden]="!showProductArrows()"
+          aria-label="Próximos produtos">
+          ›
+        </button>
+      </div>
+
+      <!-- Carousel Dots -->
+      @if (showProductDots()) {
+        <div class="carousel-dots-products">
+          @for (dot of getProductDots(); track dot; let i = $index) {
+            <button 
+              class="carousel-dot" 
+              [class.active]="i === currentProductPage()"
+              (click)="goToProductPage(i)"
+              [attr.aria-label]="'Ir para página ' + (i + 1)">
+            </button>
+          }
         </div>
-      <button class="btn btn-outline">VER MAIS</button>
+      }
+
+      <button class="btn btn-outline" style="margin-top: 2rem;">VER MAIS</button>
     </section>
 
     <!-- First promo with background -->

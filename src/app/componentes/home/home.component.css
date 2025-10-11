@@ -1,52 +1,55 @@
-/* Import a font from Google Fonts (add this to your main styles.css or index.html) */
+/* ===== IMPORTAÇÃO DE FONTE E VARIÁVEIS CSS ===== */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 
-/* CSS variables for easy theme management */
 :host {
-  --primary-color: #F8C8DC; /* Light Pink */
-  --secondary-color: #222;   /* Dark Gray/Black */
+  --primary-color: #F8C8DC;
+  --secondary-color: #222;
   --text-color-principal: #000000;
   --text-color: #333;
   --background-color: none;
   --font-family: 'Montserrat', sans-serif;
 }
 
-/* General component styling */
+/* ===== ESTILOS GERAIS ===== */
 .home-container {
   font-family: var(--font-family);
   color: var(--text-color);
   background-color: var(--background-color);
   text-align: center;
+  margin-top: 120px;
 }
 
-/* --- Header & Navigation --- */
-/* --- Header & Navigation ATUALIZADO --- */
+/* ===== HEADER E NAVEGAÇÃO ===== */
 .main-header {
-  /* O header agora organiza seus filhos em coluna */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   padding: 1rem 5%;
 }
 
-/* --- Header & Navigation ATUALIZADO E CORRIGIDO --- */
-
-/* Estilo para a linha de cima (logo e ícones) */
 .header-top {
   display: flex;
-  justify-content: flex-end; /* Alterado: Alinha os ícones à direita */
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
-  position: relative; /* Adicionado: Essencial para o posicionamento do logo */
-  min-height: 50px; /* Garante uma altura mínima para o posicionamento vertical */
+  position: relative;
+  min-height: 50px;
   border-bottom: 1px solid #eee;
 }
 
-/* Nova regra para o logo, garantindo a centralização */
 .logo {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 21;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .logo h1 {
@@ -57,8 +60,141 @@
   color: var(--text-color-principal);
 }
 
-/* --- Estilos Atualizados do Carrinho --- */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
 
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #E964BD;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #E964BD;
+  transition: width 0.3s ease;
+}
+
+.nav-item {
+  position: relative;
+}
+
+/* ===== ÍCONES ===== */
+.nav-icons {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.nav-icons .icon {
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #E964BD;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 200px;
+  z-index: 1001; /* Submenu acima do header */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.submenu a {
+  color: #333;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.85rem;
+  padding: 0.3rem 0;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.submenu a::after {
+  display: none;
+}
+
+.submenu a:hover {
+  color: #E964BD;
+  transform: translateX(5px);
+}
+
+/* Header com busca ativa */
+.main-header.search-active .logo {
+  position: absolute;
+  left: 5%;
+  transform: translate(0, -50%);
+}
+
+.main-header.search-active .nav-icons,
+.main-header.search-active .nav-links {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== CARRINHO ===== */
 .cart-header {
   display: flex;
   align-items: baseline;
@@ -66,10 +202,12 @@
   padding-bottom: 1rem;
   border-bottom: 1px solid #eee;
 }
+
 .cart-header h2 {
   margin: 0;
   font-size: 1.5rem;
 }
+
 .cart-header span {
   color: #666;
 }
@@ -79,7 +217,7 @@
   flex-direction: column;
   gap: 1.5rem;
   margin-top: 1.5rem;
-  flex-grow: 1; /* Faz esta área crescer e empurrar o footer para baixo */
+  flex-grow: 1;
 }
 
 .cart-item {
@@ -141,8 +279,9 @@
   cursor: pointer;
   padding: 0;
 }
+
 .remove-btn:hover {
-  color: #E964BD; /* Cor da Hanami */
+  color: #E964BD;
 }
 
 .item-price {
@@ -178,81 +317,11 @@
   color: #666;
 }
 
-.nav-links {
-  display: flex;
-  justify-content: center; /* Centraliza os links */
-  gap: 2rem;
-  align-items: center;
-  width: 100%;
-  padding-top: 0.5rem; /* Adiciona um espaçamento acima dos links */
-  margin-top: 0.5rem; /* Separa visualmente do logo */
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: var(--text-color);
-  font-weight: 500;
-}
-
-.nav-icons {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.nav-icons .icon {
-  font-size: 1.2rem;
-}
-.nav-item {
-  position: relative;
-}
-
-.cart-icon {
-  position: relative;
-}
-
-.cart-badge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background-color: #E964BD;
-  color: white;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  font-size: 0.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.submenu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: white;
-  border: 1px solid #eee;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 150px;
-  z-index: 10;
-}
-
-.submenu a {
-  white-space: nowrap;
-}
-
-
-/* --- Hero Carousel ATUALIZADO --- */
+/* ===== CARROSSEL HERO ===== */
 .hero-carousel {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 7; 
+  aspect-ratio: 16 / 7;
   min-height: 400px;
   max-height: 70vh;
   overflow: hidden;
@@ -265,6 +334,7 @@
 .slides-container {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .slide {
@@ -273,13 +343,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0; /* Por padrão, todos os slides são invisíveis */
+  opacity: 0;
   transition: opacity 1s ease-in-out;
-  visibility: hidden; 
+  visibility: hidden;
 }
 
 .slide.active {
-  opacity: 1; /* Apenas o slide com a classe .active fica visível */
+  opacity: 1;
   z-index: 2;
   visibility: visible;
 }
@@ -290,7 +360,6 @@
   height: 100%;
 }
 
-/* Camada escura para melhor legibilidade do texto */
 .slide::after {
   content: '';
   position: absolute;
@@ -323,11 +392,12 @@
   font-size: 1.2rem;
 }
 
+/* Controles do carrossel hero */
 .carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 4; /* Acima do conteúdo do slide */
+  z-index: 4;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
   border: none;
@@ -372,9 +442,10 @@
   background-color: white;
 }
 
-/* --- Popular Products --- */
+/* ===== CARROSSEL DE PRODUTOS ===== */
 .popular-products {
   padding: 4rem 2%;
+  position: relative;
 }
 
 .popular-products h2 {
@@ -386,38 +457,172 @@
 }
 
 .products-carousel {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .product-grid {
   display: flex;
   gap: 1.5rem;
-  justify-content: center;
-  flex-grow: 1;
-  overflow-x: auto; /* For scrolling on small screens if needed */
+  transition: transform 0.3s ease;
+  padding: 0 2%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
+.product-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cards de produtos retangulares */
 .product-card {
-  border: 1px solid #ddd;
-  min-width: 250px;
+  flex: 0 0 calc(20% - 1.2rem);
+  min-width: 220px;
+  position: relative;
+  border: none;
+  background: transparent;
+  transition: transform 0.3s ease;
 }
 
-.product-image-placeholder {
-  height: 300px;
-  background-color: #f0f0f0;
+.product-card:hover {
+  transform: translateY(-5px);
 }
 
-.carousel-arrow-small {
-  background: none;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
+.product-image-container {
+  position: relative;
+  width: 100%;
+  height: 580px;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  margin-bottom: 1rem;
+}
+
+.product-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image-container img {
+  transform: scale(1.05);
+}
+
+/* Botão de compra */
+.buy-button {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  min-width: 140px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Montserrat', sans-serif;
 }
 
+.product-card:hover .buy-button {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.buy-button:hover {
+  background-color: #E964BD;
+}
+
+.product-info {
+  text-align: center;
+  padding: 0 0.5rem;
+}
+
+.product-info h3 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin: 0 0 0.3rem 0;
+  color: #333;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.product-info p {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Controles do carrossel de produtos */
+.carousel-arrow-products {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-arrow-products:hover {
+  background-color: #000;
+  color: white;
+  border-color: #000;
+}
+
+.carousel-arrow-products.left { left: 10px; }
+.carousel-arrow-products.right { right: 10px; }
+.carousel-arrow-products.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.carousel-dots-products {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-dot.active {
+  background-color: #000;
+}
+
+/* ===== SEÇÕES PROMOCIONAIS ===== */
 .promo-background {
   width: 100%;
   height: 1200px;
@@ -430,14 +635,13 @@
   margin: 30px 0;
 }
 
-/* Specific background images for each section */
 .gloss-background {
   position: relative;
-  background-image: url('../../../../public/img/fundo2.png'); /* Your gloss background */
+  background-image: url('../../../../public/img/fundo2.png');
 }
 
 .lipstick-background {
-  background-image: url('../../../../public/img/fundo3.png'); /* Your lipstick background */
+  background-image: url('../../../../public/img/fundo3.png');
   position: relative;
 }
 
@@ -455,8 +659,6 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(4px);
 }
-
-
 
 .promo-text {
   width: 600px;
@@ -482,7 +684,6 @@
   object-fit: cover;
 }
 
-/* For image-first section */
 .image-first {
   flex-direction: row-reverse;
 }
@@ -500,74 +701,7 @@
   line-height: 1.6;
 }
 
-.btn {
-  padding: 12px 30px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.btn-dark {
-  background-color: #000000;
-  color: #ffffff;
-}
-
-.btn-dark:hover {
-  background-color: #333333;
-}
-
-
-/* --- Responsividade para Telas Menores --- */
-@media (max-width: 768px) {
-  .promo-section {
-    flex-direction: column; /* Empilha os itens verticalmente */
-  }
-
-  /*
-    No mobile, a seção invertida também deve empilhar, mas
-    queremos a imagem primeiro. Invertemos a coluna.
-  */
-  .promo-section.image-first {
-    flex-direction: column-reverse;
-  }
-  
-  .promo-text {
-    text-align: center;
-    padding: 3rem 5%;
-  }
-}
-
-
-/* --- Ajustes para telas menores (Responsividade) --- */
-@media (max-width: 768px) {
-  .promo-section {
-    grid-template-columns: 1fr; /* Muda para uma única coluna */
-    padding: 3rem 5%;
-    text-align: center;
-  }
-
-  .promo-text {
-    text-align: center;
-  }
-  
-  /* Garante que na seção invertida, a imagem apareça ANTES do texto no mobile,
-    mantendo uma alternância visual agradável.
-  */
-  .promo-section.image-first .promo-image {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .promo-section.image-first .promo-text {
-    grid-column: 1;
-    grid-row: 2;
-  }
-}
-
-/* --- Buttons --- */
+/* ===== BOTÕES ===== */
 .btn {
   padding: 0.8rem 2.5rem;
   border: 1px solid var(--secondary-color);
@@ -584,6 +718,7 @@
   background-color: var(--secondary-color);
   color: white;
 }
+
 .btn-dark:hover {
   background-color: #555;
   border-color: #555;
@@ -592,12 +727,13 @@
 .btn-outline {
   color: var(--secondary-color);
 }
+
 .btn-outline:hover {
   background-color: var(--secondary-color);
   color: white;
 }
 
-/* --- Footer --- */
+/* ===== FOOTER ===== */
 .main-footer {
   background-color: var(--secondary-color);
   color: white;
@@ -634,74 +770,7 @@
   font-size: 1.5rem;
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none; /* Simple hiding for mobile, a hamburger menu would be better */
-  }
-
-  .navbar {
-    justify-content: space-between;
-  }
-  
-  .logo {
-      flex-grow: 1;
-      text-align: center;
-  }
-
-  .promo-section {
-    grid-template-columns: 1fr;
-    padding: 3rem 5%;
-    text-align: center;
-  }
-  
-  /* Reverse order for lipstick section on mobile to alternate visuals */
-  .lipstick-promo .promo-image {
-    order: -1;
-  }
-
-  .promo-text {
-    text-align: center;
-  }
-
-  .main-footer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .footer-column {
-      align-items: center;
-      text-align:center;
-  }
-}
-
-header-top .logo,
-.header-top .nav-icons,
-.nav-links {
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-/* O logo precisa de um z-index para ficar por cima da barra de busca */
-.logo {
-  z-index: 21;
-}
-
-/* QUANDO A BUSCA ESTIVER ATIVA... */
-
-/* 1. Mova o logo para a esquerda */
-.main-header.search-active .logo {
-  position: absolute; /* Necessário para mover livremente */
-  left: 5%; /* Alinha com a margem da página */
-  transform: translate(0, -50%); /* Apenas o ajuste vertical */
-}
-
-/* 2. Esconda os ícones e os links de navegação */
-.main-header.search-active .nav-icons,
-.main-header.search-active .nav-links {
-  opacity: 0;
-  pointer-events: none; /* Impede que sejam clicados enquanto invisíveis */
-}
+/* ===== MODAL E LINKS ===== */
 .modal-link {
   display: block;
   padding: 10px 15px;
@@ -719,4 +788,126 @@ header-top .logo,
 .logout-btn {
   width: 100%;
   margin-top: 10px;
+}
+app-side-modal {
+  z-index: 1100 !important; /* Modais acima do header e submenu */
+}
+
+/* Se o componente SideModal tiver um container, ajuste também */
+.side-modal-container {
+  z-index: 1100 !important;
+}
+
+/* ===== OVERLAY DOS MODAIS ===== */
+/* Se houver um overlay, ele deve ficar entre o header e o modal */
+.modal-overlay {
+  z-index: 1050 !important; /* Acima do header, abaixo do modal */
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1200px) {
+  .product-card {
+    flex: 0 0 calc(25% - 1.2rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .logo {
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .product-card {
+    flex: 0 0 calc(33.333% - 1.2rem);
+  }
+  
+  .product-image-container {
+    height: 240px;
+  }
+  
+  .carousel-arrow-products {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .promo-section {
+    flex-direction: column;
+  }
+
+  .promo-section.image-first {
+    flex-direction: column-reverse;
+  }
+  
+  .promo-text {
+    text-align: center;
+    padding: 3rem 5%;
+  }
+
+  .main-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-column {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    flex: 0 0 calc(50% - 1.2rem);
+  }
+  
+  .product-image-container {
+    height: 200px;
+  }
+  
+  .carousel-arrow-products {
+    display: none;
+  }
+  
+  .buy-button {
+    min-width: 120px;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    position: relative;
+    margin-top: 0;
+    z-index: 1000;
+  }
+  
+  .home-container {
+    margin-top: 0;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .logo {
+    position: static;
+    transform: none;
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .header-top {
+    justify-content: space-between;
+  }
+}
+
+/* Ajuste para o hero carousel não ficar cortado */
+.hero-carousel {
+  margin-top: 0;
 }

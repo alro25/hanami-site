@@ -1,5 +1,6 @@
 :host {
   --modal-width: 400px;
+  z-index: 1100;
 }
 
 .modal-overlay {
@@ -12,7 +13,7 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 998;
+  z-index: 1099; /* AUMENTADO: acima do header (1000) */
 }
 
 .modal-overlay.open {
@@ -31,7 +32,7 @@
   -webkit-backdrop-filter: blur(4px);
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease-in-out;
-  z-index: 999;
+  z-index: 1100; /* AUMENTADO: acima do overlay */
   display: flex;
   flex-direction: column;
 }
