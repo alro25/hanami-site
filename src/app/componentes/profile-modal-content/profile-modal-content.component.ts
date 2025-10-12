@@ -30,6 +30,12 @@ export class ProfileModalContentComponent {
     this.router.navigate(['/login']);
   }
 
+  goToRegister(event: Event) {
+    event.preventDefault();
+    this.uiService.closeAllModals();
+    this.router.navigate(['/register']);
+  }
+
   logout() {
     this.authService.logout();
     this.uiService.closeAllModals();

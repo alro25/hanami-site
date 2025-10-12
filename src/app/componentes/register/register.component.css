@@ -58,7 +58,7 @@
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background-color: rgb(255, 255, 255, 0.65);
+  background-color: rgb(255, 255, 255, 0.80);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(4px);
 }
@@ -145,7 +145,7 @@
   position: absolute;
   left: 12px;
   top: 16px;
-  background-color: #fff;
+  background-color: #f9f8fa;
   padding: 0 4px;
   font-size: 1rem;
   color: #888;

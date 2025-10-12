@@ -1,100 +1,6 @@
 <div class="home-container">
-  <app-side-modal [isOpen]="uiService.isCartOpen()" (close)="uiService.closeAllModals()" position="right">
-    <div class="cart-header">
-      <h2>Seu Carrinho</h2>
-      <span>({{ cartService.itemCount() }} itens)</span>
-    </div>
 
-    @if (cartService.cartItems().length > 0) {
-      <div class="cart-items">
-        @for (item of cartService.cartItems(); track item.product.id) {
-          <div class="cart-item">
-            <img [ngSrc]="item.product.imageUrl" width="80" height="80" [alt]="item.product.name">
-            <div class="item-info">
-              <p class="item-name">{{ item.product.name }}</p>
-              <div class="item-controls">
-                <div class="quantity-selector">
-                  <button (click)="cartService.updateQuantity(item.product.id, -1)" aria-label="Remover uma unidade">-</button>
-                  <span>{{ item.quantity }}</span>
-                  <button (click)="cartService.updateQuantity(item.product.id, 1)" aria-label="Adicionar uma unidade">+</button>
-                </div>
-                <button class="remove-btn" (click)="cartService.removeFromCart(item.product.id)">Remover</button>
-              </div>
-            </div>
-            <div class="item-price">
-              <p>R$ {{ (item.product.price * item.quantity).toFixed(2) }}</p>
-            </div>
-          </div>
-        }
-      </div>
-      <div class="cart-footer">
-        <div class="subtotal">
-          <span>Subtotal</span>
-          <strong>R$ {{ cartService.cartTotal().toFixed(2) }}</strong>
-        </div>
-        <button class="btn btn-dark checkout-btn" (click)="cartService.checkout()">Finalizar Compra</button>
-      </div>
-    } @else {
-      <div class="cart-empty">
-        <p>Seu carrinho está vazio.</p>
-        <button class="btn btn-outline" (click)="uiService.closeAllModals()">Continuar Comprando</button>
-      </div>
-    }
-  </app-side-modal>
-  
-  <app-side-modal [isOpen]="uiService.isSearchOpen()" (close)="uiService.closeAllModals()" position="right">
-    <h2>Pesquisar Produtos</h2>
-    <input type="search" placeholder="O que você procura?" style="width: 100%; padding: 0.5rem;"/>
-  </app-side-modal>
-
-  <app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
-    <app-profile-modal-content></app-profile-modal-content>
-  </app-side-modal>
-
-  
-  <header class="main-header">
-    <div class="header-top">
-      <div class="logo">
-        <h1>HANAMI</h1>
-      </div>
-      
-      <div class="nav-icons">
-        <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()">
-          <span class="icon">
-            <img ngSrc="/img/busca-icon.png" alt="Buscar" width="24" height="24">
-          </span>
-        </a>
-        <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()">
-          <span class="icon">
-            <img ngSrc="/img/usuario-icon.png" alt="Minha Conta" width="24" height="24">
-          </span>
-        </a>
-        <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()" class="cart-icon">
-          <span class="icon">
-            <img ngSrc="/img/sacola-icon.png" alt="Carrinho" width="24" height="24">
-            @if (cartService.itemCount() > 0) {
-              <span class="cart-badge">{{ cartService.itemCount() }}</span>
-            }
-          </span>
-        </a>
-      </div>
-    </div>
-
-    <nav class="nav-links">
-      @for(link of getNavLinks(); track link) {
-        <div class="nav-item" (mouseenter)="activeMenu.set(link)" (mouseleave)="activeMenu.set(null)">
-          <a href="#">{{ link }}</a>
-          @if (activeMenu() === link && getSubmenu(link).length > 0) {
-            <div class="submenu">
-              @for (sublink of getSubmenu(link); track sublink) {
-                <a href="#">{{ sublink }}</a>
-              }
-            </div>
-          }
-        </div>
-      }
-    </nav>
-  </header>
+  <app-header></app-header>
 
   <main>
 
@@ -208,33 +114,6 @@
 
   </main>
 
-  <footer class="main-footer">
-    <div class="footer-column">
-      <h4>Sobre nós</h4>
-      <a href="#">Quem somos</a>
-      <a href="#">Carreiras</a>
-      <a href="#">Política de Privacidade</a>
-    </div>
-    <div class="footer-column">
-      <h4>Fale conosco</h4>
-      <p> (99)99999-9999</p>
-      <p> contato&#64;hanami.com</p>
-      <a routerLink="/contato" target="_blank">Contate-nos</a>
-    </div>
-    <div class="footer-column">
-      <h4>Redes Sociais</h4>
-      <div class="social-icons">
-        <a href="#" aria-label="Instagram">
-          <img ngSrc="/img/instagram-icon.png" alt="Ícone do Instagram" width="28" height="28">
-        </a>
-        <a href="#" aria-label="youtube">
-          <img ngSrc="/img/youtube-icon.png" alt="Ícone do Youtube" width="28" height="28">
-        </a>
-        <a href="#" aria-label="">
-          <img ngSrc="/img/facebook-icon.png" alt="Ícone do Facebook" width="28" height="28">
-        </a>
-      </div>
-    </div>
-  </footer>
+  <app-footer></app-footer>
 
 </div>

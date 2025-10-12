@@ -1,11 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-contato',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgOptimizedImage],
+  imports: [CommonModule, ReactiveFormsModule, NgOptimizedImage, HeaderComponent, FooterComponent],
   templateUrl: './contato.component.html',
   styleUrl: './contato.component.css'
 })

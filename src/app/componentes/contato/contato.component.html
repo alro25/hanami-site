@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="pagina-contato">
   <section class="imagem-container">
     <img ngSrc="/img/insp2.jpg" width="600" height="800" alt="Mulher aplicando maquiagem em frente a um espelho com flores">
@@ -10,6 +12,7 @@
 
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
         
+        <!-- ... resto do formulário permanece igual ... -->
         <div class="input-container">
           <input type="text" id="nome" class="input-field" placeholder=" " formControlName="nome">
           <label for="nome" class="input-label">Nome*</label>
@@ -100,3 +103,5 @@
     </section>
   </main>
 </div>
+
+<app-footer></app-footer>

@@ -1,7 +1,7 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ContatoComponent } from './contato.component';
 
@@ -9,12 +9,13 @@ describe('ContatoComponent', () => {
   let component: ContatoComponent;
   let fixture: ComponentFixture<ContatoComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule],
       declarations: [ ContatoComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ContatoComponent);

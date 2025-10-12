@@ -1,15 +1,15 @@
 :host {
-  display: block; /* Garante que o componente se comporte como um bloco */
+  display: block;
   width: 100%;
-  background-color: #f9f9f9; /* Um fundo suave para a página inteira */
+  background-color: #f9f9f9;
 }
 
 .pagina-contato {
     display: flex;
     width: 100%;
     max-width: 1200px;
-    min-height: 80vh;
-    margin: 5vh auto;
+    min-height: calc(100vh - 200px);;
+    margin: 120px auto 0 auto; /* Ajustado para considerar o header fixo */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     overflow: hidden;
@@ -28,7 +28,7 @@
 }
 
 /* Mostra a imagem em telas maiores */
-@media (min-width: 92px) {
+@media (min-width: 992px) {
   .imagem-container {
     display: block;
   }
@@ -84,7 +84,7 @@ h1 {
   font-size: 1rem;
   color: #000000;
   padding: 16px;
-  -webkit-appearance: none; /* Remove estilos padrão do iOS em selects */
+  -webkit-appearance: none;
 }
 
 textarea.input-field {

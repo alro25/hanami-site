@@ -15,5 +15,6 @@ export const routes: Routes = [
     {path:'contato', component: ContatoComponent},
     {path:'side-modal', component: SideModalComponent},
     {path:'prifile-modal-content', component: ProfileModalContentComponent},
-    {path:'register', component: RegisterComponent}
+    {path:'register', component: RegisterComponent},
+    { path: '**', redirectTo: '' }
 ];

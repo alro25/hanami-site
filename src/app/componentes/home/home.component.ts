@@ -5,19 +5,14 @@ import { CartService } from '../../services/cart.service';
 import { UiService } from '../../services/ui.service';
 import { ProductService } from '../../services/product.service';
 import { AuthService } from '../../services/auth.service';
-import { SideModalComponent } from '../side-modal/side-modal.component';
-import { ProfileModalContentComponent } from '../profile-modal-content/profile-modal-content.component';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../header/header.component'; 
+import { FooterComponent } from '../footer/footer.component'; 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    CommonModule, 
-    NgOptimizedImage, 
-    SideModalComponent, 
-    ProfileModalContentComponent
-  ],
+  imports: [CommonModule, NgOptimizedImage, HeaderComponent, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -43,8 +38,8 @@ export class HomeComponent implements AfterViewInit {
     { imageUrl: '/img/carousel-3.jpg', alt: 'Mulher jovem com maquiagem' },
   ];
 
-  // Navigation
-  activeMenu = signal<string | null>(null);
+  // Remove navigation-related signals and methods since they'll be in HeaderComponent
+  // Remove: activeMenu, getNavLinks(), getSubmenu()
 
   // Products
   popularProducts = this.productService.productsInStock;
@@ -144,53 +139,6 @@ export class HomeComponent implements AfterViewInit {
     this.cartService.addToCart(product);
   }
 
-  // Navigation methods - MÉTODO ADICIONADO AQUI
-  getNavLinks(): string[] {
-    return ['Todos os produtos', 'Lançamentos', 'Rosto', 'Lábios', 'Olhos', 'Sobrancelha', 'Sobre nós', 'Contato'];
-  }
-
-  getSubmenu(link: string): string[] {
-    // Categorias sem submenu retornam array vazio
-    if (['Todos os produtos', 'Sobre nós', 'Contato'].includes(link)) {
-      return [];
-    }
-    
-    switch (link) {
-      case 'Lançamentos':
-        return ['Novidades', 'Kits', 'Edições Limitadas'];
-      case 'Rosto':
-        return ['Base', 'Corretivo', 'Pó', 'Blush', 'Iluminador'];
-      case 'Lábios':
-        return ['Batom', 'Gloss', 'Lápis Labial', 'Bálsamo'];
-      case 'Olhos':
-        return ['Sombra', 'Máscara', 'Delineador', 'Lápis de Olho'];
-      case 'Sobrancelha':
-        return ['Lápis', 'Gel', 'Pasta', 'Sérum'];
-      default:
-        return [];
-    }
-  }
-
-  // Auth methods
-  goToDashboard(event: Event) {
-    event.preventDefault();
-    this.uiService.closeAllModals();
-    this.router.navigate(['/dashboard']);
-  }
-
-  goToLogin(event: Event) {
-    event.preventDefault();
-    this.uiService.closeAllModals();
-    this.router.navigate(['/login']);
-  }
-
-  logout() {
-    this.authService.logout();
-    this.uiService.closeAllModals();
-    this.cartService.clearCart();
-  }
-  
-  getLocalStorageAuth(): string {
-    return localStorage.getItem('isAuthenticated') || 'false';
-  }
+  // Remove auth methods that are now in HeaderComponent
+  // Remove: goToDashboard(), goToLogin(), logout(), getLocalStorageAuth()
 }
