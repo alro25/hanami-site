@@ -38,9 +38,9 @@ export class HomeComponent implements AfterViewInit {
   // Hero carousel
   currentIndex = signal(0);
   slides = [
-    { imageUrl: '/img/carousel-1.png', alt: 'Mulher com maquiagem vibrante', title: 'BELEZA QUE INSPIRA', subtitle: 'Descubra sua melhor versão.' },
-    { imageUrl: '/img/carousel-2.png', alt: 'Produtos de maquiagem em destaque', title: 'CORES QUE TRANSFORMAM', subtitle: 'Experimente a magia Hanami.' },
-    { imageUrl: '/img/carousel-3.png', alt: 'Mulher jovem com maquiagem', title: 'SEU BRILHO ÚNICO', subtitle: 'Realce sua beleza natural.' },
+    { imageUrl: '/img/carousel-1.jpg', alt: 'Mulher com maquiagem vibrante' },
+    { imageUrl: '/img/carousel-2.jpg', alt: 'Produtos de maquiagem em destaque' },
+    { imageUrl: '/img/carousel-3.jpg', alt: 'Mulher jovem com maquiagem' },
   ];
 
   // Navigation

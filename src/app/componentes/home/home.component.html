@@ -103,11 +103,6 @@
         @for (slide of slides; track slide.imageUrl; let i = $index) {
           <div class="slide" [class.active]="i === currentIndex()">
             <img [ngSrc]="slide.imageUrl" [alt]="slide.alt" fill priority="{{ i === 0 ? 'true' : 'false' }}">
-            <div class="slide-content">
-              <h2>{{ slide.title }}</h2>
-              <p>{{ slide.subtitle }}</p>
-              <button class="btn btn-dark">VER NOVIDADES</button>
-            </div>
           </div>
         }
       </div>
