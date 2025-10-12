@@ -9,18 +9,14 @@ import { CartService } from '../../services/cart.service';
   selector: 'app-profile-modal-content',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './profile-modal-content.component.html', // Reference external HTML
-  styleUrls: ['./profile-modal-content.component.css'] // Reference external CSS
+  templateUrl: './profile-modal-content.component.html',
+  styleUrls: ['./profile-modal-content.component.css']
 })
 export class ProfileModalContentComponent {
   uiService = inject(UiService);
   authService = inject(AuthService);
   cartService = inject(CartService);
   router = inject(Router);
-
-  getLocalStorageAuth(): string {
-    return localStorage.getItem('isAuthenticated') || 'false';
-  }
 
   goToDashboard(event: Event) {
     event.preventDefault();
@@ -37,5 +33,6 @@ export class ProfileModalContentComponent {
   logout() {
     this.authService.logout();
     this.uiService.closeAllModals();
+    this.cartService.clearCart();
   }
 }

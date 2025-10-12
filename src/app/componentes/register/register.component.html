@@ -1,0 +1,76 @@
+<div class="pagina-auth">
+  <section class="imagem-container">
+    <div class="carousel">
+      <img src="/img/insp3.jpg" width="600" height="800" alt="Imagem de registro - mulher aplicando maquiagem" />
+    </div>
+  </section>
+
+  <main class="auth-container">
+    <section class="auth-card">
+      <!-- Header com tabs -->
+      <div class="auth-header">
+        <button class="tab-button" data-tab="login" (click)="navegarParaLogin()">
+          LOGIN
+        </button>
+        <button class="tab-button active" data-tab="register">
+          CADASTRO
+        </button>
+        <div class="tab-indicator register-active"></div>
+      </div>
+
+      <!-- Formulário de Registro -->
+      <form class="auth-form active" [formGroup]="registerForm" (ngSubmit)="register()" #registerNgForm="ngForm">
+        <div class="input-container">
+          <input type="email" id="register-email" class="input-field" placeholder=" " 
+                formControlName="email" required email>
+          <label for="register-email" class="input-label">E-mail</label>
+          @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+            <div class="error-message">E-mail inválido</div>
+          }
+        </div>
+
+        <div class="input-container">
+          <input [type]="hideRegister() ? 'password' : 'text'" id="register-senha" class="input-field" placeholder=" "
+                formControlName="password" required minlength="6">
+          <label for="register-senha" class="input-label">Senha</label>
+          <button type="button" class="toggle-password" (click)="toggleRegisterPassword($event)">
+            <span class="material-icons">{{ hideRegister() ? 'visibility_off' : 'visibility' }}</span>
+          </button>
+          @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+            <div class="error-message">Mínimo 6 caracteres</div>
+          }
+        </div>
+
+        <div class="input-container">
+          <input [type]="hideConfirm() ? 'password' : 'text'" id="confirm-senha" class="input-field" placeholder=" "
+                formControlName="confirmPassword" required>
+          <label for="confirm-senha" class="input-label">Digite a senha novamente</label>
+          <button type="button" class="toggle-password" (click)="toggleConfirmPassword($event)">
+            <span class="material-icons">{{ hideConfirm() ? 'visibility_off' : 'visibility' }}</span>
+          </button>
+          @if (registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) {
+            <div class="error-message">As senhas não coincidem</div>
+          }
+        </div>
+
+        <button type="submit" class="botao-principal" [disabled]="registerForm.invalid">
+          Cadastrar
+        </button>
+
+        <div class="auth-footer">
+          <p>Já possui conta? <a href="#" (click)="navegarParaLogin(); $event.preventDefault()">Clique aqui para entrar!</a></p>
+        </div>
+      </form>
+
+      <!-- Seção de Visitante -->
+      <div class="guest-section">
+        <div class="separator">
+          <span>ou</span>
+        </div>
+        <button type="button" class="botao-convidado" (click)="continueAsGuest()">
+          Continuar como visitante
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
