@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UiService } from '../../services/ui.service';
 import { AuthService } from '../../services/auth.service';
-import { CartService } from '../../services/cart.service';
+import { BagService } from '../../services/bag.service';
 
 @Component({
   selector: 'app-profile-modal-content',
@@ -15,7 +15,7 @@ import { CartService } from '../../services/cart.service';
 export class ProfileModalContentComponent {
   uiService = inject(UiService);
   authService = inject(AuthService);
-  cartService = inject(CartService);
+  bagservice = inject(BagService);
   router = inject(Router);
 
   goToDashboard(event: Event) {
@@ -39,6 +39,6 @@ export class ProfileModalContentComponent {
   logout() {
     this.authService.logout();
     this.uiService.closeAllModals();
-    this.cartService.clearCart();
+    this.bagservice.clearBag();
   }
 }

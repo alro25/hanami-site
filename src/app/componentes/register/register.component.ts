@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   isLoading = false;
   hideRegister = signal(true);
   hideConfirm = signal(true);
+  formSubmetido = false;
 
   registerForm: FormGroup;
 
@@ -37,7 +38,8 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
+      termos: [false, [Validators.requiredTrue]]
     }, { validators: this.passwordMatchValidator });
   }
 
@@ -74,10 +76,14 @@ export class RegisterComponent implements OnInit {
   }
 
   navegarParaLogin() {
-    this.router.navigate(['/login']);
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 150);
   }
 
   register() {
+    this.formSubmetido = true;
+    
     if (this.registerForm.invalid) {
       this.markAllAsTouched();
       return;
@@ -86,7 +92,6 @@ export class RegisterComponent implements OnInit {
     this.isLoading = true;
     const { email, password } = this.registerForm.value;
 
-    // Agora o TypeScript reconhece o tipo corretamente
     this.authService.register(email!, password!)
       .subscribe({
         next: (success: boolean) => {
@@ -113,6 +118,16 @@ export class RegisterComponent implements OnInit {
   }
 
   continueAsGuest() {
-    this.router.navigate(['/']);
+  console.log('Navegando para home...');
+  this.router.navigate(['/']).then(success => {
+    console.log('Navegação bem-sucedida:', success);
+  }).catch(error => {
+    console.error('Erro na navegação:', error);
+  });
+}
+
+  // Getter para facilitar o acesso ao controle de termos
+  get termos() {
+    return this.registerForm.get('termos');
   }
 }

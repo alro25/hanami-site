@@ -15,11 +15,11 @@
           <img ngSrc="/img/usuario-icon.png" alt="Minha Conta" width="24" height="24">
         </span>
       </a>
-      <a href="#" aria-label="Shopping Cart" (click)="$event.preventDefault(); uiService.toggleCart()" class="cart-icon">
+      <a href="#" aria-label="Shopping Bag" (click)="$event.preventDefault(); uiService.toggleBag()" class="bag-icon">
         <span class="icon">
           <img ngSrc="/img/sacola-icon.png" alt="Carrinho" width="24" height="24">
-          @if (cartService.itemCount() > 0) {
-            <span class="cart-badge">{{ cartService.itemCount() }}</span>
+          @if (bagService.itemCount() > 0) {
+            <span class="bag-badge">{{ bagService.itemCount() }}</span>
           }
         </span>
       </a>
@@ -29,10 +29,12 @@
   <nav class="nav-links">
     @for(link of getNavLinks(); track link) {
       <div class="nav-item" (mouseenter)="activeMenu.set(link)" (mouseleave)="activeMenu.set(null)">
-        @if (link === 'Contato') {
-          <a routerLink="/contato">{{ link }}</a>
+        @if (link === 'Todos os produtos') {
+            <a routerLink="/products">{{ link }}</a>
+        } @else if (link === 'Contato') {
+            <a routerLink="/contato">{{ link }}</a>
         } @else {
-          <a href="#">{{ link }}</a>
+        <a href="#">{{ link }}</a>
         }
         @if (activeMenu() === link && getSubmenu(link).length > 0) {
           <div class="submenu">
@@ -47,26 +49,26 @@
 </header>
 
 <!-- Modals -->
-<app-side-modal [isOpen]="uiService.isCartOpen()" (close)="uiService.closeAllModals()" position="right">
-  <div class="cart-header">
-    <h2>Seu Carrinho</h2>
-    <span>({{ cartService.itemCount() }} itens)</span>
+<app-side-modal [isOpen]="uiService.isBagOpen()" (close)="uiService.closeAllModals()" position="right">
+  <div class="bag-header">
+    <h2>Sua sacola</h2>
+    <span>({{ bagService.itemCount() }} itens)</span>
   </div>
 
-  @if (cartService.cartItems().length > 0) {
-    <div class="cart-items">
-      @for (item of cartService.cartItems(); track item.product.id) {
-        <div class="cart-item">
+  @if (bagService.bagItems().length > 0) {
+    <div class="bag-items">
+      @for (item of bagService.bagItems(); track item.product.id) {
+        <div class="bag-item">
           <img [ngSrc]="item.product.imageUrl" width="80" height="80" [alt]="item.product.name">
           <div class="item-info">
             <p class="item-name">{{ item.product.name }}</p>
             <div class="item-controls">
               <div class="quantity-selector">
-                <button (click)="cartService.updateQuantity(item.product.id, -1)" aria-label="Remover uma unidade">-</button>
+                <button (click)="bagService.updateQuantity(item.product.id, -1)" aria-label="Remover uma unidade">-</button>
                 <span>{{ item.quantity }}</span>
-                <button (click)="cartService.updateQuantity(item.product.id, 1)" aria-label="Adicionar uma unidade">+</button>
+                <button (click)="bagService.updateQuantity(item.product.id, 1)" aria-label="Adicionar uma unidade">+</button>
               </div>
-              <button class="remove-btn" (click)="cartService.removeFromCart(item.product.id)">Remover</button>
+              <button class="remove-btn" (click)="bagService.removeFromBag(item.product.id)">Remover</button>
             </div>
           </div>
           <div class="item-price">
@@ -75,16 +77,16 @@
         </div>
       }
     </div>
-    <div class="cart-footer">
+    <div class="bag-footer">
       <div class="subtotal">
         <span>Subtotal</span>
-        <strong>R$ {{ cartService.cartTotal().toFixed(2) }}</strong>
+        <strong>R$ {{ bagService.bagTotal().toFixed(2) }}</strong>
       </div>
-      <button class="btn btn-dark checkout-btn" (click)="cartService.checkout()">Finalizar Compra</button>
+      <button class="btn btn-dark checkout-btn" (click)="bagService.checkout()">Finalizar Compra</button>
     </div>
   } @else {
-    <div class="cart-empty">
-      <p>Seu carrinho está vazio.</p>
+    <div class="bag-empty">
+      <p>Sua sacola está vazia.</p>
       <button class="btn btn-outline" (click)="uiService.closeAllModals()">Continuar Comprando</button>
     </div>
   }

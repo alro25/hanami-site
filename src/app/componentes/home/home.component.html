@@ -2,6 +2,18 @@
 
   <app-header></app-header>
 
+  <!-- Checkout Success Alert -->
+  @if (showCheckoutAlert()) {
+    <div class="checkout-alert">
+      <div class="alert-content">
+        <h3>Obrigado pela sua compra! 🎉</h3>
+        <p>Seu pedido foi processado com sucesso.</p>
+        <p><strong>Código do pedido: {{ orderCode() }}</strong></p>
+        <button class="alert-close-btn" (click)="closeCheckoutAlert()">✕</button>
+      </div>
+    </div>
+  }
+
   <main>
 
     <section class="hero-carousel">
@@ -47,7 +59,7 @@
             <div class="product-card">
               <div class="product-image-container">
                 <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300">
-                <button class="buy-button" (click)="onAddToCart(product)">COMPRAR</button>
+                <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
               </div>
               <div class="product-info">
                 <h3>{{ product.name }}</h3>

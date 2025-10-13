@@ -7,10 +7,10 @@
 
   <main class="auth-container">
     <section class="auth-card">
-      <!-- Header com tabs -->
+      <!-- Header com tabs - ESTILIZADO -->
       <div class="auth-header">
         <button class="tab-button" data-tab="login" (click)="navegarParaLogin()">
-          LOGIN
+          ENTRAR
         </button>
         <button class="tab-button active" data-tab="register">
           CADASTRO
@@ -53,6 +53,17 @@
           }
         </div>
 
+        <!-- Terms and Conditions Checkbox -->
+        <div class="checkbox-group">
+          <input type="checkbox" id="termosCheckbox" formControlName="termos">
+          <label for="termosCheckbox">Li e concordo com os <a href="/politica-de-privacidade" target="_blank">Termos e Condições</a>*</label>
+          @if (registerForm.get('termos')?.invalid && (registerForm.get('termos')?.touched || registerNgForm.submitted)) {
+            <div class="error-message">
+              Você precisa aceitar os termos para continuar.
+            </div>
+          }
+        </div>
+
         <button type="submit" class="botao-principal" [disabled]="registerForm.invalid">
           Cadastrar
         </button>
@@ -62,7 +73,7 @@
         </div>
       </form>
 
-      <!-- Seção de Visitante -->
+      <!-- Seção Visitante -->
       <div class="guest-section">
         <div class="separator">
           <span>ou</span>

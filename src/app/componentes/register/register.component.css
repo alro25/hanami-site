@@ -172,6 +172,17 @@
   z-index: 2;
 }
 
+.checkbox-group a {
+  color: var(--cor-principal); /* Isso já deve ser rosa */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.checkbox-group a:hover {
+  text-decoration: underline;
+  color: #d455a8; /* Um tom mais escuro de rosa no hover */
+}
+
 /* Botões - CORRIGIDO o problema do hover */
 .botao-principal {
   width: 100%;

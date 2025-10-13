@@ -1,7 +1,7 @@
-import { Component, inject, signal, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, inject, signal, ViewChild, ElementRef, AfterViewInit, output } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Product } from '../models/product.model';
-import { CartService } from '../../services/cart.service';
+import { BagService } from '../../services/bag.service';
 import { UiService } from '../../services/ui.service';
 import { ProductService } from '../../services/product.service';
 import { AuthService } from '../../services/auth.service';
@@ -17,7 +17,7 @@ import { FooterComponent } from '../footer/footer.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements AfterViewInit {
-  cartService = inject(CartService);
+  bagService = inject(BagService);
   uiService = inject(UiService);
   private productService = inject(ProductService);
   authService = inject(AuthService);
@@ -30,16 +30,18 @@ export class HomeComponent implements AfterViewInit {
   productsPerPage = 5;
   productCardWidth = 220; // Approximate width including gap
 
+  // Checkout alert
+  checkout = output<void>();
+  showCheckoutAlert = signal(false);
+  orderCode = signal('');
+
   // Hero carousel
   currentIndex = signal(0);
   slides = [
-    { imageUrl: '/img/carousel-1.jpg', alt: 'Mulher com maquiagem vibrante' },
-    { imageUrl: '/img/carousel-2.jpg', alt: 'Produtos de maquiagem em destaque' },
-    { imageUrl: '/img/carousel-3.jpg', alt: 'Mulher jovem com maquiagem' },
+    { imageUrl: '/img/carousel-1.jpg', alt: 'Mulher com maquiagem brilhante sorrindo' },
+    { imageUrl: '/img/carousel-2.jpg', alt: 'Desconto de 50%' },
+    { imageUrl: '/img/carousel-3.jpg', alt: 'Campanha de Outubro Rosa' },
   ];
-
-  // Remove navigation-related signals and methods since they'll be in HeaderComponent
-  // Remove: activeMenu, getNavLinks(), getSubmenu()
 
   // Products
   popularProducts = this.productService.productsInStock;
@@ -134,11 +136,40 @@ export class HomeComponent implements AfterViewInit {
     );
   }
 
-  // Cart methods
-  onAddToCart(product: Product) {
-    this.cartService.addToCart(product);
+  // Bag methods
+  onAddToBag(product: Product) {
+    this.bagService.addToBag(product);
   }
 
-  // Remove auth methods that are now in HeaderComponent
-  // Remove: goToDashboard(), goToLogin(), logout(), getLocalStorageAuth()
+  // Checkout method with alert
+  onCheckout() {
+    if (this.bagService.bagItems().length === 0) {
+      return;
+    }
+
+    this.bagService.checkout().subscribe({
+      next: (orderCode: string) => {
+        this.orderCode.set(orderCode);
+        this.showCheckoutAlert.set(true);
+        
+        // Auto-hide alert after 5 seconds
+        setTimeout(() => {
+          this.showCheckoutAlert.set(false);
+        }, 5000);
+      },
+      error: (error) => {
+        console.error('Checkout error:', error);
+      }
+    });
+  }
+
+  // Close alert manually
+   closeCheckoutAlert() {
+    this.showCheckoutAlert.set(false);
+  }
+
+  // Handle checkout event from header
+  handleHeaderCheckout() {
+    this.onCheckout();
+  }
 }

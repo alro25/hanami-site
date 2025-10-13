@@ -6,6 +6,9 @@ import { ContatoComponent } from './componentes/contato/contato.component';
 import { SideModalComponent } from './componentes/side-modal/side-modal.component';
 import { ProfileModalContentComponent } from './componentes/profile-modal-content/profile-modal-content.component';
 import { RegisterComponent } from './componentes/register/register.component';
+import { HeaderComponent } from './componentes/header/header.component';
+import { FooterComponent } from './componentes/footer/footer.component';
+import { ProductsComponent } from './componentes/products/products.component';
 
 export const routes: Routes = [
     {path: "", pathMatch: 'full', redirectTo: 'home'},
@@ -16,5 +19,8 @@ export const routes: Routes = [
     {path:'side-modal', component: SideModalComponent},
     {path:'prifile-modal-content', component: ProfileModalContentComponent},
     {path:'register', component: RegisterComponent},
+    {path:'header', component: HeaderComponent},
+    {path:'footer', component: FooterComponent},
+    {path:'products', component: ProductsComponent},
     { path: '**', redirectTo: '' }
 ];

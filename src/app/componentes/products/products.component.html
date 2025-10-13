@@ -1,0 +1,122 @@
+<div class="products-container">
+  <app-header></app-header>
+
+  <div class="products-content">
+    <!-- Header da página -->
+    <div class="products-header">
+      <h1>Todos os Produtos</h1>
+    </div>
+
+    <!-- Layout principal com filtros à esquerda -->
+    <div class="products-main-layout">
+      <!-- Filtros na lateral esquerda -->
+      <aside class="filters-section">
+        <div class="filters-header">
+          <h3>Filtrar</h3>
+          <button class="clear-filters" (click)="clearFilters()">Limpar</button>
+        </div>
+
+        <!-- Filtro de Tags (Lançamentos, Novidades, etc.) -->
+        <div class="category-section">
+          <h4>Tags</h4>
+          <div class="category-options">
+            @for (tag of ['Lançamentos', 'Novidades', 'Kits', 'Edições Limitadas']; track tag) {
+              <div class="category-option">
+                <input 
+                  type="checkbox" 
+                  [id]="'tag-' + tag"
+                  [checked]="isTagSelected(tag)"
+                  (change)="onTagChange(tag, $event)">
+                <label [for]="'tag-' + tag">{{ tag }}</label>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Filtro de Categorias -->
+        @for (category of categories(); track category.name) {
+          @if (category.name !== 'Lançamentos') {
+            <div class="category-section">
+              <div class="category-option">
+                <input 
+                  type="checkbox" 
+                  [id]="'cat-' + category.name"
+                  [checked]="isCategorySelected(category.name)"
+                  (change)="onCategoryChange(category.name, $event)">
+                <label [for]="'cat-' + category.name">{{ category.name }}</label>
+              </div>
+
+              <!-- Subcategorias -->
+              @if (isCategorySelected(category.name) && category.subcategories.length > 0) {
+                <div class="subcategory-options">
+                  @for (subcategory of category.subcategories; track subcategory) {
+                    <div class="subcategory-option">
+                      <input 
+                        type="checkbox" 
+                        [id]="'sub-' + subcategory"
+                        [checked]="isSubcategorySelected(subcategory)"
+                        (change)="onSubcategoryChange(subcategory, $event)">
+                      <label [for]="'sub-' + subcategory">{{ subcategory }}</label>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+        }
+      </aside>
+
+      <!-- Conteúdo principal -->
+      <main class="products-main-content">
+        <!-- Header do conteúdo -->
+        <div class="products-content-header">
+          <div class="results-count">
+            {{ filteredProducts().length }} produto{{ filteredProducts().length !== 1 ? 's' : '' }}
+          </div>
+          
+          <div class="sorting-section">
+            <label for="sort-select">Ordenar:</label>
+            <select 
+              id="sort-select" 
+              class="sort-select"
+              [value]="sortOption()"
+              (change)="onSortChange($any($event.target).value)">
+              <option value="name-asc">Nome (A-Z)</option>
+              <option value="name-desc">Nome (Z-A)</option>
+              <option value="price-asc">Preço (Menor para Maior)</option>
+              <option value="price-desc">Preço (Maior para Menor)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Grade de produtos -->
+        @if (filteredProducts().length > 0) {
+          <div class="products-grid">
+            @for (product of filteredProducts(); track product.id) {
+              <article class="product-card">
+                <div class="product-image-container">
+                  <img [src]="product.imageUrl" [alt]="product.name">
+                  <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
+                </div>
+                <div class="product-info">
+                  <h3>{{ product.name }}</h3>
+                  <p>R$ {{ product.price.toFixed(2) }}</p>
+                </div>
+              </article>
+            }
+          </div>
+        } @else {
+          <div class="no-products">
+            <p>Nenhum produto encontrado com os filtros selecionados.</p>
+            <button class="clear-filters" (click)="clearFilters()">Limpar todos os filtros</button>
+          </div>
+        }
+      </main>
+    </div>
+
+    <!-- Botão voltar -->
+    <button class="back-button" (click)="navigateToHome()">Continuar Comprando</button>
+  </div>
+
+  <app-footer></app-footer>
+</div>

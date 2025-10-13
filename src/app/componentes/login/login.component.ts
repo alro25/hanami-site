@@ -36,9 +36,10 @@ export class LoginComponent {
   }
 
   navegarParaRegister() {
-    this.router.navigate(['/register']);
+    setTimeout(() => {
+      this.router.navigate(['/register']);
+    }, 150);
   }
-
   login() {
     if (!this.usuario || !this.senha) return;
 

@@ -4,419 +4,314 @@
     "name": "Kit Essencial Hanami",
     "category": "Kits",
     "price": 299.90,
-    "imageUrl": "/img/products/kit-essencial.jpg",
+    "imageUrl": "/img/products/kit-essencial.png",
     "description": "O kit perfeito para o dia a dia, com base, batom e máscara.",
-    "tags": ["lancamento", "kit"],
-    "stock": 20
+    "tags": ["Kits", "Lançamentos"]
   },
   {
     "id": 102,
     "name": "Kit marcante",
     "category": "Kits",
     "price": 249.90,
-    "imageUrl": "/img/products/kit-marcante.jpg",
+    "imageUrl": "/img/products/kit-marcante.png",
     "description": "Blush, sombra e iluminador para um rosto marcante.",
-    "tags": ["kit"],
-    "stock": 20
+    "tags": ["Kits", "Novidades"]
   },
   {
     "id": 103,
     "name": "Kit Lábios de Seda",
     "category": "Kits",
     "price": 189.90,
-    "imageUrl": "/img/products/kit-labios.jpg",
+    "imageUrl": "/img/products/kit-labios.png",
     "description": "Uma combinação de batom cremoso, matte e líquido .",
-    "tags": ["kit"],
-    "stock": 20
+    "tags": ["Kits", "Edições Limitadas"]
   },
   {
     "id": 201,
     "name": "Batom Líquido Matte Sakura",
     "category": "Batom",
     "price": 89.90,
-    "imageUrl": "/img/products/batom-sakura.jpg",
+    "imageUrl": "/img/products/batom-sakura.png",
     "description": "Um tom de rosa inspirado na flor de cerejeira, com acabamento aveludado.",
-    "tags": ["lancamento", "edicao-limitada"],
-    "stock": 25
+    "tags": ["Lábios", "Lançamentos", "Edições Limitadas"]
   },
   {
     "id": 202,
     "name": "Batom Hidratante Camélia",
     "category": "Batom",
     "price": 79.90,
-    "imageUrl": "/img/products/batom-camelia.jpg",
+    "imageUrl": "/img/products/batom-camelia.png",
     "description": "Cor e hidratação com extrato de camélia. Acabamento acetinado.",
-    "tags": [],
-    "stock": 25
+    "tags": ["Lábios"]
   },
   {
     "id": 203,
     "name": "Batom em Bala Lótus",
     "category": "Batom",
     "price": 75.90,
-    "imageUrl": "/img/products/batom-lotus.jpg",
+    "imageUrl": "/img/products/batom-lotus.png",
     "description": "Um nude clássico e elegante para todas as ocasiões.",
-    "tags": [],
-    "stock": 25
+    "tags": ["Lábios"]
   },
   {
     "id": 301,
     "name": "Gloss Orvalho de Kyoto",
     "category": "Gloss",
     "price": 79.90,
-    "imageUrl": "/img/products/gloss-kyoto.jpg",
+    "imageUrl": "/img/products/gloss-kyoto.png",
     "description": "Efeito espelhado com partículas de brilho dourado.",
-    "tags": ["lancamento"],
-    "stock": 30
+    "tags": ["Lábios", "Lançamentos", "Novidades"]
   },
   {
     "id": 302,
     "name": "Gloss Volumizador Monte Fuji",
     "category": "Gloss",
     "price": 85.90,
-    "imageUrl": "/img/products/gloss-fuji.jpg",
+    "imageUrl": "/img/products/gloss-fuji.png",
     "description": "Sensação de frescor e lábios visivelmente mais cheios.",
-    "tags": [],
-    "stock": 30
+    "tags": ["Lábios"]
   },
   {
     "id": 303,
     "name": "Gloss Tint Amanhecer",
     "category": "Gloss",
     "price": 72.90,
-    "imageUrl": "/img/products/gloss-amanhecer.jpg",
+    "imageUrl": "/img/products/gloss-amanhecer.png",
     "description": "Cor suave que mancha os lábios para um efeito natural e duradouro.",
-    "tags": [],
-    "stock": 30
+    "tags": ["Lábios"]
   },
   {
     "id": 401,
     "name": "Lápis Labial Contorno Imperial",
     "category": "Lapis Labial",
     "price": 49.90,
-    "imageUrl": "/img/products/lapis-imperial.jpg",
+    "imageUrl": "/img/products/lapis-imperial.png",
     "description": "Define e preenche os lábios com precisão. Fórmula cremosa.",
-    "tags": [],
-    "stock": 35
+    "tags": ["Lábios"]
   },
   {
     "id": 402,
     "name": "Lápis Labial Nude Zen",
     "category": "Lapis Labial",
     "price": 49.90,
-    "imageUrl": "/img/products/lapis-zen.jpg",
+    "imageUrl": "/img/products/lapis-zen.png",
     "description": "O tom de nude perfeito para combinar com qualquer batom.",
-    "tags": [],
-    "stock": 35
+    "tags": ["Lábios"]
   },
   {
     "id": 403,
     "name": "Lápis Labial Vinho Geisha",
     "category": "Lapis Labial",
     "price": 49.90,
-    "imageUrl": "/img/products/lapis-geisha.jpg",
+    "imageUrl": "/img/products/lapis-geisha.png",
     "description": "Um tom de vinho profundo para um contorno dramático.",
-    "tags": [],
-    "stock": 35
+    "tags": ["Lábios"]
   },
   {
     "id": 501,
     "name": "Base Fluida Pele de Porcelana",
     "category": "Base",
     "price": 129.90,
-    "imageUrl": "/img/products/base-porcelana.jpg",
+    "imageUrl": "/img/products/base-porcelana.png",
     "description": "Cobertura média e acabamento natural. Disponível em 24 tons.",
-    "tags": ["lancamento"],
-    "stock": 40
+    "tags": ["Rosto", "Lançamentos"]
   },
   {
     "id": 502,
     "name": "Base Matte Veludo",
     "category": "Base",
     "price": 139.90,
-    "imageUrl": "/img/products/base-veludo.jpg",
+    "imageUrl": "/img/products/base-veludo.png",
     "description": "Longa duração e controle de oleosidade para uma pele impecável.",
-    "tags": [],
-    "stock": 40
+    "tags": ["Rosto"]
   },
   {
     "id": 503,
     "name": "Base Hidratante Glow",
     "category": "Base",
     "price": 125.90,
-    "imageUrl": "/img/products/base-glow.jpg",
+    "imageUrl": "/img/products/base-glow.png",
     "description": "Pele radiante e hidratada com cobertura leve.",
-    "tags": [],
-    "stock": 40
+    "tags": ["Rosto"]
   },
   {
     "id": 601,
     "name": "Corretivo Líquido Cobertura Total",
     "category": "Corretivo",
     "price": 69.90,
-    "imageUrl": "/img/products/corretivo-total.jpg",
+    "imageUrl": "/img/products/corretivo-total.png",
     "description": "Alta cobertura que não acumula nas linhas finas.",
-    "tags": [],
-    "stock": 45
+    "tags": ["Rosto"]
   },
   {
     "id": 602,
     "name": "Corretivo Iluminador Luz da Manhã",
     "category": "Corretivo",
     "price": 75.90,
-    "imageUrl": "/img/products/corretivo-luz.jpg",
+    "imageUrl": "/img/products/corretivo-luz.png",
     "description": "Disfarça olheiras e ilumina a área dos olhos.",
-    "tags": ["lancamento"],
-    "stock": 45
+    "tags": ["Rosto", "Lançamentos"]
   },
   {
     "id": 603,
     "name": "Corretivo Equilíbrio",
     "category": "Corretivo",
     "price": 65.90,
-    "imageUrl": "/img/products/corretivo-equilibrio.jpg",
+    "imageUrl": "/img/products/corretivo-equilibrio.png",
     "description": "Disponível em diversos tons para neutralizar imperfeições.",
-    "tags": [],
-    "stock": 45
+    "tags": ["Rosto"]
   },
   {
     "id": 701,
     "name": "Pó Compacto Translúcido Névoa",
     "category": "Po",
     "price": 99.90,
-    "imageUrl": "/img/products/po-nevoa.jpg",
+    "imageUrl": "/img/products/po-nevoa.png",
     "description": "Sela a maquiagem e controla o brilho sem adicionar cor.",
-    "tags": [],
-    "stock": 50
+    "tags": ["Rosto"]
   },
   {
     "id": 702,
     "name": "Pó Solto Finalizador Seda",
     "category": "Po",
     "price": 109.90,
-    "imageUrl": "/img/products/po-seda.jpg",
+    "imageUrl": "/img/products/po-seda.png",
     "description": "Textura ultrafina para um acabamento profissional.",
-    "tags": ["lancamento"],
-    "stock": 50
+    "tags": ["Rosto", "Lançamentos"]
   },
   {
     "id": 703,
     "name": "Pó Bronzeador Sol de Verão",
     "category": "Po",
     "price": 119.90,
-    "imageUrl": "/img/products/po-sol.jpg",
+    "imageUrl": "/img/products/po-sol.png",
     "description": "Um toque de cor e brilho para um visual bronzeado.",
-    "tags": [],
-    "stock": 50
+    "tags": ["Rosto", "Edições Limitadas"]
   },
   {
     "id": 801,
-    "name": "Blush em Creme Flor de Pêssego",
+    "name": "Blush Flor de Pêssego",
     "category": "Blush",
     "price": 85.90,
-    "imageUrl": "/img/products/blush-pessego.jpg",
-    "description": "Fácil de espalhar para um ar de saúde natural.",
-    "tags": [],
-    "stock": 50
+    "imageUrl": "/img/products/blush-pessego.png",
+    "description": "Fácil de fixar para um ar natural.",
+    "tags": ["Rosto"]
   },
   {
     "id": 802,
     "name": "Blush em Pó Rosa Hanami",
     "category": "Blush",
     "price": 79.90,
-    "imageUrl": "/img/products/blush-hanami.jpg",
+    "imageUrl": "/img/products/blush-hanami.png",
     "description": "O rosa perfeito que combina com todos os tons de pele.",
-    "tags": [],
-    "stock": 50
+    "tags": ["Rosto"]
   },
   {
     "id": 803,
-    "name": "Blush Líquido Gotas de Rubor",
+    "name": "Blush Gotas de Rubor",
     "category": "Blush",
     "price": 89.90,
-    "imageUrl": "/img/products/blush-gotas.jpg",
-    "description": "Pigmentação intensa e longa duração com apenas uma gota.",
-    "tags": ["lancamento"],
-    "stock": 50
+    "imageUrl": "/img/products/blush-gotas.png",
+    "description": "Pigmentação intensa e longa duração.",
+    "tags": ["Rosto", "Lançamentos", "Novidades"]
   },
   {
     "id": 901,
-    "name": "Paleta de Sombra Jardim Secreto",
+    "name": "Paleta de Sombra Mar",
     "category": "Sombra",
     "price": 199.90,
-    "imageUrl": "/img/products/sombra-jardim.jpg",
+    "imageUrl": "/img/products/sombra-mar.png",
     "description": "12 tons terrosos e cintilantes para looks versáteis.",
-    "tags": ["edicao-limitada"],
-    "stock": 50
+    "tags": ["Olhos", "Edições Limitadas"]
   },
   {
     "id": 902,
-    "name": "Sombra Brilho Estelar",
+    "name": "Paleta de Sombra Brilho Estelar",
     "category": "Sombra",
     "price": 79.90,
-    "imageUrl": "/img/products/sombra-brilho.jpg",
+    "imageUrl": "/img/products/sombra-brilho.png",
     "description": "Glitter intenso que não transfere. Perfeito para festas.",
-    "tags": [],
-    "stock": 50
+    "tags": ["Olhos"]
   },
   {
     "id": 903,
-    "name": "Sombra Ametista",
+    "name": "Paleta de Sombra solar",
     "category": "Sombra",
     "price": 69.90,
-    "imageUrl": "/img/products/sombra-ametista.jpg",
-    "description": "Cor e primer em um só passo. Não precisa de pincel.",
-    "tags": ["lancamento"],
-    "stock": 50
+    "imageUrl": "/img/products/sombra-solar.png",
+    "description": "Cor e brilho em um só passo.",
+    "tags": ["Olhos", "Lançamentos", "Novidades"]
   },
   {
     "id": 1001,
-    "name": "Máscara de Cílios Leque de Boneca",
+    "name": "Máscara de Cílios de Boneca",
     "category": "Mascara",
     "price": 95.90,
-    "imageUrl": "/img/products/mascara-leque.jpg",
+    "imageUrl": "/img/products/mascara-boneca.png",
     "description": "Volume e definição para um efeito de cílios postiços.",
-    "tags": [],
-    "stock": 50
+    "tags": ["Olhos"]
   },
   {
     "id": 1002,
     "name": "Máscara de Cílios Alongamento Infinito",
     "category": "Mascara",
     "price": 92.90,
-    "imageUrl": "/img/products/mascara-infinito.jpg",
+    "imageUrl": "/img/products/mascara-infinito.png",
     "description": "Fibras extensoras que deixam seus cílios visivelmente mais longos.",
-    "tags": [],
-    "stock": 50
+    "tags": ["Olhos"]
   },
   {
     "id": 1003,
     "name": "Máscara de Cílios À Prova D'Água",
     "category": "Mascara",
     "price": 99.90,
-    "imageUrl": "/img/products/mascara-prova-dagua.jpg",
+    "imageUrl": "/img/products/mascara-prova-dagua.png",
     "description": "Sua máscara favorita, agora resistente a tudo.",
-    "tags": [],
-    "stock": 50
+    "tags": ["Olhos"]
   },
   {
     "id": 1101,
     "name": "Delineador Caneta Traço Samurai",
     "category": "Delineador",
     "price": 88.90,
-    "imageUrl": "/img/products/delineador-samurai.jpg",
+    "imageUrl": "/img/products/delineador-samurai.png",
     "description": "Ponta ultrafina para um delineado gatinho preciso e sem esforço.",
-    "tags": ["lancamento"],
-    "stock": 50
+    "tags": ["Olhos", "Lançamentos"]
   },
   {
     "id": 1102,
     "name": "Delineador em Gel Nanquim",
     "category": "Delineador",
     "price": 92.90,
-    "imageUrl": "/img/products/delineador-nanquim.jpg",
+    "imageUrl": "/img/products/delineador-nanquim.png",
     "description": "Preto intenso e à prova d'água. Acompanha pincel de aplicação.",
-    "tags": [],
-    "stock": 50
+    "tags": ["Olhos"]
   },
   {
     "id": 1103,
-    "name": "Delineador Líquido 'Branco Origami'",
+    "name": "Delineador Líquido Branco Origami",
     "category": "Delineador",
     "price": 85.90,
-    "imageUrl": "/img/products/delineador-origami.jpg",
+    "imageUrl": "/img/products/delineador-origami.png",
     "description": "Para looks gráficos e criativos. Cor branca super pigmentada.",
-    "tags": ["edicao-limitada"],
-    "stock": 50
+    "tags": ["Olhos", "Edições Limitadas"]
   },
   {
     "id": 1201,
-    "name": "Lápis de Sobrancelha Precisão Fio a Fio",
-    "category": "Lapis",
-    "price": 65.90,
-    "imageUrl": "/img/products/lapis-fio-a-fio.jpg",
-    "description": "Ponta retrátil e escovinha para um acabamento natural.",
-    "tags": [],
-    "stock": 50
-  },
-  {
-    "id": 1202,
-    "name": "Lápis de Sobrancelha Iluminador",
-    "category": "Lapis",
-    "price": 59.90,
-    "imageUrl": "/img/products/lapis-iluminador.jpg",
-    "description": "Realça o arco da sobrancelha, abrindo o olhar.",
-    "tags": [],
-    "stock": 50
-  },
-  {
-    "id": 1203,
-    "name": "Lápis Universal para Sobrancelhas",
-    "category": "Lapis",
-    "price": 62.90,
-    "imageUrl": "/img/products/lapis-universal.jpg",
-    "description": "Cor universal que se adapta a diversos tons de pelo.",
-    "tags": [],
-    "stock": 50
+    "name": "Pincel Kabuki Toque de Pétala",
+    "category": "Pincel de Rosto",
+    "price": 129.90,
+    "imageUrl": "/img/products/pincel-petala.png",
+    "description": "Cerdas ultra macias e densas, ideal para aplicação de base e pó. Garante um acabamento aveludado e uniforme.",
+    "tags": ["Pincéis", "Edições Limitadas", "Lançamentos"]
   },
   {
     "id": 1301,
-    "name": "Gel de Sobrancelha Sempre no Lugar",
-    "category": "Gel",
-    "price": 72.90,
-    "imageUrl": "/img/products/gel-sempre-lugar.jpg",
-    "description": "Penteia e fixa os fios por horas. Disponível em incolor e com cor.",
-    "tags": ["lancamento"],
-    "stock": 50
-  },
-  {
-    "id": 1302,
-    "name": "Gel com Fibras Volume Extra",
-    "category": "Gel",
-    "price": 78.90,
-    "imageUrl": "/img/products/gel-volume-extra.jpg",
-    "description": "Preenche falhas e dá a impressão de sobrancelhas mais cheias.",
-    "tags": [],
-    "stock": 50
-  },
-  {
-    "id": 1303,
-    "name": "Gel Laminador Efeito Brow Lamination",
-    "category": "Gel",
-    "price": 75.90,
-    "imageUrl": "/img/products/gel-laminador.jpg",
-    "description": "Para o efeito de sobrancelhas penteadas para cima que é tendência.",
-    "tags": [],
-    "stock": 50
-  },
-  {
-    "id": 1401,
-    "name": "Pasta para Sobrancelha Desenho Perfeito",
-    "category": "Pasta",
-    "price": 82.90,
-    "imageUrl": "/img/products/pasta-desenho.jpg",
-    "description": "À prova d'água, preenche e define com alta pigmentação.",
-    "tags": [],
-    "stock": 50
-  },
-  {
-    "id": 1402,
-    "name": "Pasta Corretiva para Sobrancelha",
-    "category": "Pasta",
-    "price": 85.90,
-    "imageUrl": "/img/products/pasta-corretiva.jpg",
-    "description": "Cobre falhas de forma natural e duradoura.",
-    "tags": [],
-    "stock": 50
-  },
-  {
-    "id": 1403,
-    "name": "Pasta de Sobrancelha com Cera",
-    "category": "Pasta",
-    "price": 79.90,
-    "imageUrl": "/img/products/pasta-cera.jpg",
-    "description": "Modela e fixa os fios, ideal para um visual mais selvagem.",
-    "tags": [],
-    "stock": 50
+    "name": "Pincel de Esfumar Névoa Suave",
+    "category": "Pincel de Olhos",
+    "price": 69.90,
+    "imageUrl": "/img/products/pincel-nevoa.png",
+    "description": "Formato cônico perfeito para esfumar sombras com precisão. Cerdas macias que permitem uma transição de cores impecável.",
+    "tags": ["Pincéis", "Novidades"]
   }
 ]

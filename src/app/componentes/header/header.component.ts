@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common'; // Add NgOptimizedImage
 import { RouterModule } from '@angular/router';
-import { CartService } from '../../services/cart.service';
+import { BagService } from '../../services/bag.service';
 import { UiService } from '../../services/ui.service';
 import { AuthService } from '../../services/auth.service';
 import { SideModalComponent } from '../side-modal/side-modal.component';
@@ -21,32 +21,31 @@ import { ProfileModalContentComponent } from '../profile-modal-content/profile-m
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  cartService = inject(CartService);
+  bagService = inject(BagService);
   uiService = inject(UiService);
   authService = inject(AuthService);
+  
 
   activeMenu = signal<string | null>(null);
 
   getNavLinks(): string[] {
-    return ['Todos os produtos', 'Lançamentos', 'Rosto', 'Lábios', 'Olhos', 'Sobrancelha', 'Sobre nós', 'Contato'];
+    return ['Todos os produtos', 'Lançamentos', 'Rosto', 'Lábios', 'Olhos', 'Pincéis', 'Sobre nós', 'Contato'];
   }
 
   getSubmenu(link: string): string[] {
-    if (['Todos os produtos', 'Sobre nós', 'Contato'].includes(link)) {
+    if (['Todos os produtos', 'Lançamentos','Sobre nós', 'Contato'].includes(link)) {
       return [];
     }
     
     switch (link) {
-      case 'Lançamentos':
-        return ['Novidades', 'Kits', 'Edições Limitadas'];
       case 'Rosto':
-        return ['Base', 'Corretivo', 'Pó', 'Blush', 'Iluminador'];
+        return ['Base', 'Corretivo', 'Pó', 'Blush'];
       case 'Lábios':
-        return ['Batom', 'Gloss', 'Lápis Labial', 'Bálsamo'];
+        return ['Batom', 'Gloss', 'Lápis Labial'];
       case 'Olhos':
-        return ['Sombra', 'Máscara', 'Delineador', 'Lápis de Olho'];
-      case 'Sobrancelha':
-        return ['Lápis', 'Gel', 'Pasta', 'Sérum'];
+        return ['Sombra', 'Máscara', 'Delineador'];
+      case 'Pincéis':
+        return ['Pincéis para os Olhos', 'Pincéis para o rosto'];
       default:
         return [];
     }

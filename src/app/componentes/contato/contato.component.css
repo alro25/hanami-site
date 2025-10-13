@@ -2,14 +2,17 @@
   display: block;
   width: 100%;
   background-color: #f9f9f9;
+  padding-top: 80px;
 }
+
+/* contato.component.css */
 
 .pagina-contato {
     display: flex;
     width: 100%;
     max-width: 1200px;
-    min-height: calc(100vh - 200px);;
-    margin: 120px auto 0 auto; /* Ajustado para considerar o header fixo */
+    min-height: 100vh; 
+    margin: 80px auto 40px auto; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     overflow: hidden;
@@ -61,19 +64,19 @@ h1 {
   font-size: 2.5rem;
   color: #000000;
   text-align: center;
-  margin-block-end: 1rem;
+  margin-block-end: 0.5rem;
 }
 
 .subtitulo {
   color: #555;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
 .input-container {
   position: relative;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .input-field {
@@ -187,7 +190,12 @@ textarea.input-field {
 }
 
 .checkbox-group a {
-  color: var(--cor-principal, #E964BD);
-  text-decoration: underline;
+  color: var(--cor-principal); /* Isso já deve ser rosa */
+  text-decoration: none;
   font-weight: bold;
+}
+
+.checkbox-group a:hover {
+  text-decoration: underline;
+  color: #d455a8; /* Um tom mais escuro de rosa no hover */
 }

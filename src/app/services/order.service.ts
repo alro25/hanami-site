@@ -1,12 +1,12 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { CartItem } from './cart.service';
+import { BagItem } from './bag.service';
 import { Product } from '../componentes/models/product.model';
 
 export interface Order {
   id: string;
   date: Date;
   customer: string; // Exemplo: 'Usuário Padrão'
-  items: CartItem[];
+  items: BagItem[];
   total: number;
   status: 'Pendente' | 'Processando' | 'Enviado' | 'Entregue' | 'Cancelado';
 }
@@ -40,7 +40,7 @@ export class OrderService {
   }
 
   // Método para simular a redução do estoque após uma compra
-  reduceStock(items: CartItem[]) {
+  reduceStock(items: BagItem[]) {
     this._currentStock.update(currentStock => {
       const updatedStock = currentStock.map(product => {
         const purchasedItem = items.find(item => item.product.id === product.id);
