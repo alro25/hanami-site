@@ -1,0 +1,151 @@
+<div class="about-us-container">
+  <app-header></app-header>
+
+  <main class="about-us-content">
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <div class="hero-content">
+        <h1 class="hero-title">SOBRE A HANAMI</h1>
+        <p class="hero-subtitle">Celebrando a beleza única em cada pessoa</p>
+        <p class="hero-meaning">
+          HANAMI (花見) - "Observar as flores" - Uma tradição japonesa de apreciar a beleza efêmera
+        </p>
+      </div>
+      <div class="hero-image">
+        <img src="/img/about-hero.jpg" alt="Equipe HANAMI" class="hero-img">
+      </div>
+    </section>
+
+    <!-- Nossa História -->
+    <section class="our-story-section">
+      <div class="container">
+        <div class="story-grid">
+          <div class="story-content">
+            <h2 class="section-title">{{ ourStory.title }}</h2>
+            <p class="story-text">{{ ourStory.description }}</p>
+            
+            <!-- Significado Hanami -->
+            <div class="hanami-meaning">
+              <h3 class="hanami-title">{{ ourStory.hanamiMeaning.title }}</h3>
+              <p class="hanami-text">{{ ourStory.hanamiMeaning.description }}</p>
+              <p class="hanami-text">{{ ourStory.hanamiMeaning.philosophy }}</p>
+            </div>
+
+            <p class="story-text">
+              Desde nossa fundação, nos dedicamos a criar produtos que não apenas realçam a beleza externa, 
+              mas também fortalecem a confiança interior. Acreditamos que a maquiagem é uma forma de arte 
+              que permite a cada pessoa contar sua própria história, assim como cada flor de cerejeira 
+              conta uma história única de beleza passageira.
+            </p>
+          </div>
+          <div class="story-image">
+            <img [src]="ourStory.image" alt="Nossa história" class="story-img">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inspiração Hanami -->
+    <section class="inspiration-section">
+      <div class="container">
+        <h2 class="section-title text-center">{{ hanamiInspiration.title }}</h2>
+        <div class="inspiration-grid">
+          <div class="inspiration-card" *ngFor="let item of hanamiInspiration.items">
+            <div class="inspiration-image">
+              <img [src]="item.image" [alt]="item.title" class="inspiration-img">
+            </div>
+            <h3 class="inspiration-title">{{ item.title }}</h3>
+            <p class="inspiration-description">{{ item.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Missão, Visão e Valores -->
+    <section class="mission-section">
+      <div class="container">
+        <h2 class="section-title text-center">Nossa Essência</h2>
+        <div class="mission-grid">
+          <div class="mission-card" *ngFor="let item of ourMission">
+            <div class="mission-image">
+              <img [src]="item.image" [alt]="item.title" class="mission-img">
+            </div>
+            <h3 class="mission-title">{{ item.title }}</h3>
+            <p class="mission-description">{{ item.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nossos Diferenciais -->
+    <section class="differentiators-section">
+      <div class="container">
+        <h2 class="section-title text-center">O Que Nos Torna Únicos</h2>
+        <div class="differentiators-grid">
+          <div class="differentiator-card" *ngFor="let diff of differentiators">
+            <div class="diff-image">
+              <img [src]="diff.image" [alt]="diff.title" class="diff-img">
+            </div>
+            <div class="diff-content">
+              <h3 class="diff-title">{{ diff.title }}</h3>
+              <p class="diff-description">{{ diff.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+      <div class="container">
+        <h2 class="section-title text-center">Nossa Jornada</h2>
+        <div class="timeline">
+          <div class="timeline-item" *ngFor="let item of timeline; let i = index" 
+               [class.timeline-item-left]="i % 2 === 0"
+               [class.timeline-item-right]="i % 2 === 1">
+            <div class="timeline-content">
+              <div class="timeline-year">{{ item.year }}</div>
+              <h3 class="timeline-title">{{ item.title }}</h3>
+              <p class="timeline-description">{{ item.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compromissos -->
+    <section class="commitments-section">
+      <div class="container">
+        <h2 class="section-title text-center">Nossos Compromissos</h2>
+        <div class="commitments-grid">
+          <div class="commitment-card" *ngFor="let commitment of commitments">
+            <div class="commitment-image">
+              <img [src]="commitment.image" [alt]="commitment.title" class="commitment-img">
+            </div>
+            <h3 class="commitment-title">{{ commitment.title }}</h3>
+            <p class="commitment-description">{{ commitment.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Faça Parte da Nossa História</h2>
+          <p class="cta-text">
+            Junte-se à família HANAMI e descubra produtos que celebram sua beleza única, 
+            inspirados na milenar tradição japonesa de apreciar a beleza efêmera.
+          </p>
+          <div class="cta-buttons">
+            <button class="btn btn-primary" routerLink="/products">Conhecer Produtos</button>
+            <button class="btn btn-outline" routerLink="/contato">Fale Conosco</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <app-footer></app-footer>
+</div>

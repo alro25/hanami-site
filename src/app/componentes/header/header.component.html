@@ -30,9 +30,11 @@
     @for(link of getNavLinks(); track link) {
       <div class="nav-item" (mouseenter)="activeMenu.set(link)" (mouseleave)="activeMenu.set(null)">
         @if (link === 'Todos os produtos') {
-            <a href="#" (click)="$event.preventDefault(); navigateToAllProducts()">{{ link }}</a>
+            <a routerLink="/products">{{ link }}</a>
+        } @else if (link === 'Sobre nós') {
+            <a routerLink="/about-us">{{ link }}</a>
         } @else if (link === 'Contato') {
-            <a routerLink="/contato">{{ link }}</a>
+            <a routerLink="/contact">{{ link }}</a>
         } @else {
           <!-- Links do menu principal com navegação por filtro -->
           <a href="#" (click)="$event.preventDefault(); navigateToProductsWithFilter(

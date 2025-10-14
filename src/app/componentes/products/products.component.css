@@ -429,3 +429,59 @@
     min-width: 150px;
   }
 }
+
+/* ===== BOTÃO COMPRAR SEMPRE VISÍVEL NO MOBILE ===== */
+@media (max-width: 768px) {
+  /* Para os cards da página de produtos */
+  .product-card .buy-button {
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    width: 100%;
+    margin-top: 0.8rem;
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .product-card:hover .buy-button {
+    transform: none !important;
+  }
+
+  .product-card .buy-button:hover {
+    background-color: #E964BD;
+  }
+
+  /* Ajuste no container da imagem */
+  .product-image-container {
+    margin-bottom: 0.5rem;
+    height: 300px; /* Reduz um pouco a altura no mobile */
+  }
+
+  /* Ajuste no info do produto */
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-image-container {
+    height: 250px;
+  }
+  
+  .product-card .buy-button {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.75rem;
+  }
+}

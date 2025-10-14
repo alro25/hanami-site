@@ -493,6 +493,11 @@ app-side-modal {
   z-index: 1050 !important; /* Acima do header, abaixo do modal */
 }
 
+/* Ajuste para o hero carousel não ficar cortado */
+.hero-carousel {
+  margin-top: 0;
+}
+
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 1200px) {
   .product-card {
@@ -549,7 +554,45 @@ app-side-modal {
   }
 }
 
-/* Ajuste para o hero carousel não ficar cortado */
-.hero-carousel {
-  margin-top: 0;
+/* ===== BOTÃO COMPRAR SEMPRE VISÍVEL NO MOBILE ===== */
+@media (max-width: 768px) {
+  /* Para os cards do carousel na home */
+  .product-card .buy-button {
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    width: 100%;
+    margin-top: 0.8rem;
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .product-card:hover .buy-button {
+    transform: none !important;
+  }
+
+  .product-card .buy-button:hover {
+    background-color: #E964BD;
+  }
+
+  /* Ajuste no container da imagem para remover o espaço do botão */
+  .product-image-container {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Ajuste no info do produto */
+  .product-info {
+    display: flex;
+    flex-direction: column;
+  }
 }

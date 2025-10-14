@@ -46,7 +46,7 @@
   },
   {
     "id": 203,
-    "name": "Batom em Bala Lótus",
+    "name": "Batom Lótus",
     "category": "Batom",
     "price": 75.90,
     "imageUrl": "/img/products/batom-lotus.png",
@@ -64,10 +64,10 @@
   },
   {
     "id": 302,
-    "name": "Gloss Volumizador Monte Fuji",
+    "name": "Gloss Passion Fruit",
     "category": "Gloss",
     "price": 85.90,
-    "imageUrl": "/img/products/gloss-fuji.png",
+    "imageUrl": "/img/products/gloss-passion-fruit.png",
     "description": "Sensação de frescor e lábios visivelmente mais cheios.",
     "tags": ["Lábios", "Populares", "Recomendado"]
   },
