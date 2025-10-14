@@ -6,7 +6,7 @@
     "price": 299.90,
     "imageUrl": "/img/products/kit-essencial.png",
     "description": "O kit perfeito para o dia a dia, com base, batom e máscara.",
-    "tags": ["Kits", "Lançamentos"]
+    "tags": ["Kits", "Lançamentos", "Populares", "Recomendado"]
   },
   {
     "id": 102,
@@ -15,7 +15,7 @@
     "price": 249.90,
     "imageUrl": "/img/products/kit-marcante.png",
     "description": "Blush, sombra e iluminador para um rosto marcante.",
-    "tags": ["Kits", "Novidades"]
+    "tags": ["Kits"]
   },
   {
     "id": 103,
@@ -33,7 +33,7 @@
     "price": 89.90,
     "imageUrl": "/img/products/batom-sakura.png",
     "description": "Um tom de rosa inspirado na flor de cerejeira, com acabamento aveludado.",
-    "tags": ["Lábios", "Lançamentos", "Edições Limitadas"]
+    "tags": ["Lábios", "Lançamentos", "Edições Limitadas", "Populares"]
   },
   {
     "id": 202,
@@ -42,7 +42,7 @@
     "price": 79.90,
     "imageUrl": "/img/products/batom-camelia.png",
     "description": "Cor e hidratação com extrato de camélia. Acabamento acetinado.",
-    "tags": ["Lábios"]
+    "tags": ["Lábios", "Recomendado"]
   },
   {
     "id": 203,
@@ -51,7 +51,7 @@
     "price": 75.90,
     "imageUrl": "/img/products/batom-lotus.png",
     "description": "Um nude clássico e elegante para todas as ocasiões.",
-    "tags": ["Lábios"]
+    "tags": ["Lábios", "Populares"]
   },
   {
     "id": 301,
@@ -60,7 +60,7 @@
     "price": 79.90,
     "imageUrl": "/img/products/gloss-kyoto.png",
     "description": "Efeito espelhado com partículas de brilho dourado.",
-    "tags": ["Lábios", "Lançamentos", "Novidades"]
+    "tags": ["Lábios", "Lançamentos", "Populares"]
   },
   {
     "id": 302,
@@ -69,7 +69,7 @@
     "price": 85.90,
     "imageUrl": "/img/products/gloss-fuji.png",
     "description": "Sensação de frescor e lábios visivelmente mais cheios.",
-    "tags": ["Lábios"]
+    "tags": ["Lábios", "Populares", "Recomendado"]
   },
   {
     "id": 303,
@@ -87,7 +87,7 @@
     "price": 49.90,
     "imageUrl": "/img/products/lapis-imperial.png",
     "description": "Define e preenche os lábios com precisão. Fórmula cremosa.",
-    "tags": ["Lábios"]
+    "tags": ["Lábios", "Recomendado"]
   },
   {
     "id": 402,
@@ -96,7 +96,7 @@
     "price": 49.90,
     "imageUrl": "/img/products/lapis-zen.png",
     "description": "O tom de nude perfeito para combinar com qualquer batom.",
-    "tags": ["Lábios"]
+    "tags": ["Lábios", "Populares"]
   },
   {
     "id": 403,
@@ -114,7 +114,7 @@
     "price": 129.90,
     "imageUrl": "/img/products/base-porcelana.png",
     "description": "Cobertura média e acabamento natural. Disponível em 24 tons.",
-    "tags": ["Rosto", "Lançamentos"]
+    "tags": ["Rosto", "Lançamentos", "Populares"]
   },
   {
     "id": 502,
@@ -123,7 +123,7 @@
     "price": 139.90,
     "imageUrl": "/img/products/base-veludo.png",
     "description": "Longa duração e controle de oleosidade para uma pele impecável.",
-    "tags": ["Rosto"]
+    "tags": ["Rosto", "Populares"]
   },
   {
     "id": 503,
@@ -132,7 +132,7 @@
     "price": 125.90,
     "imageUrl": "/img/products/base-glow.png",
     "description": "Pele radiante e hidratada com cobertura leve.",
-    "tags": ["Rosto"]
+    "tags": ["Rosto", "Recomendado"]
   },
   {
     "id": 601,
@@ -141,7 +141,7 @@
     "price": 69.90,
     "imageUrl": "/img/products/corretivo-total.png",
     "description": "Alta cobertura que não acumula nas linhas finas.",
-    "tags": ["Rosto"]
+    "tags": ["Rosto", "Populares"]
   },
   {
     "id": 602,
@@ -150,7 +150,7 @@
     "price": 75.90,
     "imageUrl": "/img/products/corretivo-luz.png",
     "description": "Disfarça olheiras e ilumina a área dos olhos.",
-    "tags": ["Rosto", "Lançamentos"]
+    "tags": ["Rosto", "Lançamentos", "Recomendado"]
   },
   {
     "id": 603,
@@ -168,7 +168,7 @@
     "price": 99.90,
     "imageUrl": "/img/products/po-nevoa.png",
     "description": "Sela a maquiagem e controla o brilho sem adicionar cor.",
-    "tags": ["Rosto"]
+    "tags": ["Rosto", "Populares"]
   },
   {
     "id": 702,
@@ -177,7 +177,7 @@
     "price": 109.90,
     "imageUrl": "/img/products/po-seda.png",
     "description": "Textura ultrafina para um acabamento profissional.",
-    "tags": ["Rosto", "Lançamentos"]
+    "tags": ["Rosto", "Lançamentos", "Recomendado"]
   },
   {
     "id": 703,
@@ -186,7 +186,7 @@
     "price": 119.90,
     "imageUrl": "/img/products/po-sol.png",
     "description": "Um toque de cor e brilho para um visual bronzeado.",
-    "tags": ["Rosto", "Edições Limitadas"]
+    "tags": ["Rosto", "Edições Limitadas", "Populares"]
   },
   {
     "id": 801,
@@ -195,7 +195,7 @@
     "price": 85.90,
     "imageUrl": "/img/products/blush-pessego.png",
     "description": "Fácil de fixar para um ar natural.",
-    "tags": ["Rosto"]
+    "tags": ["Rosto", "Recomendado"]
   },
   {
     "id": 802,
@@ -204,7 +204,7 @@
     "price": 79.90,
     "imageUrl": "/img/products/blush-hanami.png",
     "description": "O rosa perfeito que combina com todos os tons de pele.",
-    "tags": ["Rosto"]
+    "tags": ["Rosto", "Populares"]
   },
   {
     "id": 803,
@@ -213,7 +213,7 @@
     "price": 89.90,
     "imageUrl": "/img/products/blush-gotas.png",
     "description": "Pigmentação intensa e longa duração.",
-    "tags": ["Rosto", "Lançamentos", "Novidades"]
+    "tags": ["Rosto", "Lançamentos", "Populares"]
   },
   {
     "id": 901,
@@ -222,7 +222,7 @@
     "price": 199.90,
     "imageUrl": "/img/products/sombra-mar.png",
     "description": "12 tons terrosos e cintilantes para looks versáteis.",
-    "tags": ["Olhos", "Edições Limitadas"]
+    "tags": ["Olhos", "Edições Limitadas", "Populares", "Recomendado"]
   },
   {
     "id": 902,
@@ -240,16 +240,16 @@
     "price": 69.90,
     "imageUrl": "/img/products/sombra-solar.png",
     "description": "Cor e brilho em um só passo.",
-    "tags": ["Olhos", "Lançamentos", "Novidades"]
+    "tags": ["Olhos", "Lançamentos"]
   },
   {
     "id": 1001,
-    "name": "Máscara de Cílios de Boneca",
+    "name": "Máscara de Cílios Gold",
     "category": "Mascara",
     "price": 95.90,
-    "imageUrl": "/img/products/mascara-boneca.png",
+    "imageUrl": "/img/products/mascara-gold.png",
     "description": "Volume e definição para um efeito de cílios postiços.",
-    "tags": ["Olhos"]
+    "tags": ["Olhos", "Populares"]
   },
   {
     "id": 1002,
@@ -258,7 +258,7 @@
     "price": 92.90,
     "imageUrl": "/img/products/mascara-infinito.png",
     "description": "Fibras extensoras que deixam seus cílios visivelmente mais longos.",
-    "tags": ["Olhos"]
+    "tags": ["Olhos", "Populares"]
   },
   {
     "id": 1003,
@@ -267,16 +267,16 @@
     "price": 99.90,
     "imageUrl": "/img/products/mascara-prova-dagua.png",
     "description": "Sua máscara favorita, agora resistente a tudo.",
-    "tags": ["Olhos"]
+    "tags": ["Olhos", "Recomendado"]
   },
   {
     "id": 1101,
-    "name": "Delineador Caneta Traço Samurai",
+    "name": "Delineador Samurai",
     "category": "Delineador",
     "price": 88.90,
     "imageUrl": "/img/products/delineador-samurai.png",
     "description": "Ponta ultrafina para um delineado gatinho preciso e sem esforço.",
-    "tags": ["Olhos", "Lançamentos"]
+    "tags": ["Olhos", "Lançamentos", "Populares"]
   },
   {
     "id": 1102,
@@ -285,11 +285,11 @@
     "price": 92.90,
     "imageUrl": "/img/products/delineador-nanquim.png",
     "description": "Preto intenso e à prova d'água. Acompanha pincel de aplicação.",
-    "tags": ["Olhos"]
+    "tags": ["Olhos", "Recomendado"]
   },
   {
     "id": 1103,
-    "name": "Delineador Líquido Branco Origami",
+    "name": "Delineador Líquido Origami",
     "category": "Delineador",
     "price": 85.90,
     "imageUrl": "/img/products/delineador-origami.png",
@@ -303,7 +303,7 @@
     "price": 129.90,
     "imageUrl": "/img/products/pincel-petala.png",
     "description": "Cerdas ultra macias e densas, ideal para aplicação de base e pó. Garante um acabamento aveludado e uniforme.",
-    "tags": ["Pincéis", "Edições Limitadas", "Lançamentos"]
+    "tags": ["Pincéis", "Edições Limitadas", "Lançamentos", "Populares"]
   },
   {
     "id": 1301,
@@ -312,6 +312,6 @@
     "price": 69.90,
     "imageUrl": "/img/products/pincel-nevoa.png",
     "description": "Formato cônico perfeito para esfumar sombras com precisão. Cerdas macias que permitem uma transição de cores impecável.",
-    "tags": ["Pincéis", "Novidades"]
+    "tags": ["Pincéis", "Recomendado", "Populares"]
   }
 ]

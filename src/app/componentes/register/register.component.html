@@ -1,7 +1,23 @@
 <div class="pagina-auth">
   <section class="imagem-container">
     <div class="carousel">
-      <img src="/img/insp3.jpg" width="600" height="800" alt="Imagem de registro - mulher aplicando maquiagem" />
+      @for (slide of slides; track slide.imageUrl; let i = $index) {
+        <div class="carousel-slide" [class.active]="i === currentSlide()">
+          <img [src]="slide.imageUrl" [alt]="slide.alt" width="600" height="800" />
+        </div>
+      }
+      
+      <!-- Carousel Dots -->
+      <div class="carousel-dots">
+        @for (slide of slides; track slide.imageUrl; let i = $index) {
+          <button 
+            class="carousel-dot" 
+            [class.active]="i === currentSlide()"
+            (click)="goToSlide(i)"
+            [attr.aria-label]="'Ir para imagem ' + (i + 1)">
+          </button>
+        }
+      </div>
     </div>
   </section>
 
@@ -64,8 +80,12 @@
           }
         </div>
 
-        <button type="submit" class="botao-principal" [disabled]="registerForm.invalid">
-          Cadastrar
+        <button type="submit" class="botao-principal" [disabled]="registerForm.invalid || isLoading">
+          @if (isLoading) {
+            <span>Carregando...</span>
+          } @else {
+            <span>Cadastrar</span>
+          }
         </button>
 
         <div class="auth-footer">

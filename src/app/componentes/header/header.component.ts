@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common'; // Add NgOptimizedImage
-import { RouterModule } from '@angular/router';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { BagService } from '../../services/bag.service';
 import { UiService } from '../../services/ui.service';
 import { AuthService } from '../../services/auth.service';
@@ -13,7 +13,7 @@ import { ProfileModalContentComponent } from '../profile-modal-content/profile-m
   imports: [
     CommonModule,
     RouterModule,
-    NgOptimizedImage, // Add this import
+    NgOptimizedImage,
     SideModalComponent,
     ProfileModalContentComponent
   ],
@@ -24,7 +24,7 @@ export class HeaderComponent {
   bagService = inject(BagService);
   uiService = inject(UiService);
   authService = inject(AuthService);
-  
+  private router = inject(Router);
 
   activeMenu = signal<string | null>(null);
 
@@ -49,5 +49,45 @@ export class HeaderComponent {
       default:
         return [];
     }
+  }
+
+  // Nova função para navegar para produtos com filtro
+  navigateToProductsWithFilter(category?: string, subcategory?: string, tag?: string) {
+    // Sempre limpar todos os filtros anteriores e aplicar apenas o novo filtro
+    const queryParams: any = {};
+    
+    if (category) {
+      queryParams.category = category;
+      // Limpar subcategoria quando uma nova categoria principal é selecionada
+      queryParams.subcategory = null;
+      queryParams.tag = null;
+    }
+    
+    if (subcategory) {
+      queryParams.subcategory = subcategory;
+      // Manter a categoria pai, mas limpar tag
+      queryParams.tag = null;
+    }
+    
+    if (tag) {
+      queryParams.tag = tag;
+      // Limpar categoria e subcategoria quando uma tag é selecionada
+      queryParams.category = null;
+      queryParams.subcategory = null;
+    }
+
+    this.router.navigate(['/products'], { 
+      queryParams,
+      queryParamsHandling: 'merge' // Isso garante que outros parâmetros sejam mantidos se necessário
+    });
+    this.uiService.closeAllModals();
+  }
+
+  // Função específica para "Todos os produtos" que limpa todos os filtros
+  navigateToAllProducts() {
+    this.router.navigate(['/products'], {
+      queryParams: {} // Limpa todos os parâmetros
+    });
+    this.uiService.closeAllModals();
   }
 }

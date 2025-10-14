@@ -30,16 +30,22 @@
     @for(link of getNavLinks(); track link) {
       <div class="nav-item" (mouseenter)="activeMenu.set(link)" (mouseleave)="activeMenu.set(null)">
         @if (link === 'Todos os produtos') {
-            <a routerLink="/products">{{ link }}</a>
+            <a href="#" (click)="$event.preventDefault(); navigateToAllProducts()">{{ link }}</a>
         } @else if (link === 'Contato') {
             <a routerLink="/contato">{{ link }}</a>
         } @else {
-        <a href="#">{{ link }}</a>
+          <!-- Links do menu principal com navegação por filtro -->
+          <a href="#" (click)="$event.preventDefault(); navigateToProductsWithFilter(
+            link === 'Lançamentos' ? undefined : link,
+            undefined,
+            link === 'Lançamentos' ? 'Lançamentos' : undefined
+          )">{{ link }}</a>
         }
         @if (activeMenu() === link && getSubmenu(link).length > 0) {
           <div class="submenu">
             @for (sublink of getSubmenu(link); track sublink) {
-              <a href="#">{{ sublink }}</a>
+              <!-- Links do submenu com navegação por subcategoria -->
+              <a href="#" (click)="$event.preventDefault(); navigateToProductsWithFilter(link, sublink)">{{ sublink }}</a>
             }
           </div>
         }

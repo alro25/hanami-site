@@ -16,7 +16,10 @@
 
   <main>
 
-    <section class="hero-carousel">
+    <section class="hero-carousel" 
+             #heroCarousel
+             (mouseenter)="onCarouselMouseEnter()" 
+             (mouseleave)="onCarouselMouseLeave()">
       <div class="slides-container">
         @for (slide of slides; track slide.imageUrl; let i = $index) {
           <div class="slide" [class.active]="i === currentIndex()">
@@ -41,20 +44,89 @@
       </div>
     </section>
 
+   <!-- Lançamentos Section -->
    <section class="popular-products">
-      <h2>Populares</h2>
+      <h2>Lançamentos</h2>
       <div class="products-carousel">
         <!-- Left Arrow -->
         <button 
           class="carousel-arrow-products left" 
-          (click)="scrollProducts(-1)"
-          [class.hidden]="!showProductArrows()"
+          (click)="scrollProducts(-1, 'newReleases')"
+          [class.hidden]="!showProductArrows(newReleases())"
           aria-label="Produtos anteriores">
           ‹
         </button>
 
         <!-- Products Grid -->
-        <div class="product-grid" #productsContainer>
+        <div class="product-grid" #newReleasesContainer>
+          @for (product of newReleases(); track product.id) {
+            <div class="product-card">
+              <div class="product-image-container">
+                <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300">
+                <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
+              </div>
+              <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p>R$ {{ product.price.toFixed(2) }}</p>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Right Arrow -->
+        <button 
+          class="carousel-arrow-products right" 
+          (click)="scrollProducts(1, 'newReleases')"
+          [class.hidden]="!showProductArrows(newReleases())"
+          aria-label="Próximos produtos">
+          ›
+        </button>
+      </div>
+
+      <!-- Carousel Dots -->
+      @if (showProductDots(newReleases())) {
+        <div class="carousel-dots-products">
+          @for (dot of getProductDots(newReleases()); track dot; let i = $index) {
+            <button 
+              class="carousel-dot" 
+              [class.active]="i === currentNewReleasesPage()"
+              (click)="goToProductPage(i, 'newReleases')"
+              [attr.aria-label]="'Ir para página ' + (i + 1)">
+            </button>
+          }
+        </div>
+      }
+    </section>
+
+    <!-- First promo with background -->
+    <div class="promo-background gloss-background">
+      <section class="promo-section gloss-promo">
+        <div class="promo-text">
+          <h2>CONHEÇA O GLOSS PASSIONFRUIT</h2>
+          <p>A fusão perfeita entre brilho intenso e frescor tropical. <br>Com textura leve e acabamento luminoso, ele realça os lábios com um toque exótico e irresistível. <br>Ideal para quem quer seduzir com naturalidade e sofisticação.</p>
+          <button class="btn btn-dark">VER MAIS</button>
+        </div>
+        <div class="promo-image">
+          <img src="/img/passion-fruit.png" width="600" height="600" alt="Gloss Passionfruit product">
+        </div>
+      </section>
+    </div>
+
+    <!-- Populares Section (between promos) -->
+    <section class="popular-products">
+      <h2>Populares</h2>
+      <div class="products-carousel">
+        <!-- Left Arrow -->
+        <button 
+          class="carousel-arrow-products left" 
+          (click)="scrollProducts(-1, 'popular')"
+          [class.hidden]="!showProductArrows(popularProducts())"
+          aria-label="Produtos anteriores">
+          ‹
+        </button>
+
+        <!-- Products Grid -->
+        <div class="product-grid" #popularContainer>
           @for (product of popularProducts(); track product.id) {
             <div class="product-card">
               <div class="product-image-container">
@@ -72,43 +144,27 @@
         <!-- Right Arrow -->
         <button 
           class="carousel-arrow-products right" 
-          (click)="scrollProducts(1)"
-          [class.hidden]="!showProductArrows()"
+          (click)="scrollProducts(1, 'popular')"
+          [class.hidden]="!showProductArrows(popularProducts())"
           aria-label="Próximos produtos">
           ›
         </button>
       </div>
 
       <!-- Carousel Dots -->
-      @if (showProductDots()) {
+      @if (showProductDots(popularProducts())) {
         <div class="carousel-dots-products">
-          @for (dot of getProductDots(); track dot; let i = $index) {
+          @for (dot of getProductDots(popularProducts()); track dot; let i = $index) {
             <button 
               class="carousel-dot" 
-              [class.active]="i === currentProductPage()"
-              (click)="goToProductPage(i)"
+              [class.active]="i === currentPopularPage()"
+              (click)="goToProductPage(i, 'popular')"
               [attr.aria-label]="'Ir para página ' + (i + 1)">
             </button>
           }
         </div>
       }
-
-      <button class="btn btn-outline" style="margin-top: 2rem;">VER MAIS</button>
     </section>
-
-    <!-- First promo with background -->
-    <div class="promo-background gloss-background">
-      <section class="promo-section gloss-promo">
-        <div class="promo-text">
-          <h2>CONHEÇA O GLOSS PASSIONFRUIT</h2>
-          <p>A fusão perfeita entre brilho intenso e frescor tropical. <br>Com textura leve e acabamento luminoso, ele realça os lábios com um toque exótico e irresistível. <br>Ideal para quem quer seduzir com naturalidade e sofisticação.</p>
-          <button class="btn btn-dark">VER MAIS</button>
-        </div>
-        <div class="promo-image">
-          <img src="/img/passion-fruit.png" width="600" height="600" alt="Gloss Passionfruit product">
-        </div>
-      </section>
-    </div>
 
     <!-- Second promo with background -->
     <div class="promo-background lipstick-background">
@@ -123,6 +179,60 @@
         </div>
       </section>
     </div>
+
+    <!-- Recomendados Section (after last promo) -->
+    <section class="popular-products">
+      <h2>Recomendados</h2>
+      <div class="products-carousel">
+        <!-- Left Arrow -->
+        <button 
+          class="carousel-arrow-products left" 
+          (click)="scrollProducts(-1, 'recommended')"
+          [class.hidden]="!showProductArrows(recommendedProducts())"
+          aria-label="Produtos anteriores">
+          ‹
+        </button>
+
+        <!-- Products Grid -->
+        <div class="product-grid" #recommendedContainer>
+          @for (product of recommendedProducts(); track product.id) {
+            <div class="product-card">
+              <div class="product-image-container">
+                <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300">
+                <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
+              </div>
+              <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p>R$ {{ product.price.toFixed(2) }}</p>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Right Arrow -->
+        <button 
+          class="carousel-arrow-products right" 
+          (click)="scrollProducts(1, 'recommended')"
+          [class.hidden]="!showProductArrows(recommendedProducts())"
+          aria-label="Próximos produtos">
+          ›
+        </button>
+      </div>
+
+      <!-- Carousel Dots -->
+      @if (showProductDots(recommendedProducts())) {
+        <div class="carousel-dots-products">
+          @for (dot of getProductDots(recommendedProducts()); track dot; let i = $index) {
+            <button 
+              class="carousel-dot" 
+              [class.active]="i === currentRecommendedPage()"
+              (click)="goToProductPage(i, 'recommended')"
+              [attr.aria-label]="'Ir para página ' + (i + 1)">
+            </button>
+          }
+        </div>
+      }
+    </section>
 
   </main>
 

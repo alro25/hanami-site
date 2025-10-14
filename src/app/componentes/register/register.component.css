@@ -172,17 +172,6 @@
   z-index: 2;
 }
 
-.checkbox-group a {
-  color: var(--cor-principal); /* Isso já deve ser rosa */
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.checkbox-group a:hover {
-  text-decoration: underline;
-  color: #d455a8; /* Um tom mais escuro de rosa no hover */
-}
-
 /* Botões - CORRIGIDO o problema do hover */
 .botao-principal {
   width: 100%;
@@ -334,6 +323,101 @@
   animation: spin 1s linear infinite;
 }
 
+/* Carousel Styles - Slide Right Transition */
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-slide.active {
+  transform: translateX(0);
+  z-index: 2;
+}
+
+.carousel-slide.next {
+  transform: translateX(100%);
+  z-index: 1;
+}
+
+.carousel-slide.previous {
+  transform: translateX(-100%);
+  z-index: 1;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Carousel Dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-dot:hover,
+.carousel-dot.active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+/* Checkbox group styling */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-top: 2px;
+  accent-color: var(--cor-principal);
+}
+
+.checkbox-group label {
+  color: #000000;
+  line-height: 1.4;
+}
+
+.checkbox-group a {
+  color: var(--cor-principal);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.checkbox-group a:hover {
+  text-decoration: underline;
+  color: #d455a8;
+}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

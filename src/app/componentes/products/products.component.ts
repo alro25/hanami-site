@@ -1,6 +1,6 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router'; // Adicione ActivatedRoute
 import { FormsModule } from '@angular/forms';
 import { Product } from '../models/product.model';
 import { ProductService } from '../../services/product.service';
@@ -21,10 +21,11 @@ interface Category {
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit { // Adicione OnInit
   private productService = inject(ProductService);
   private bagService = inject(BagService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   // Products and filtering
   allProducts = this.productService.productsInStock;
@@ -56,6 +57,33 @@ export class ProductsComponent {
       subcategories: ['Pincéis para os Olhos', 'Pincéis para o rosto'] 
     }
   ]);
+
+  ngOnInit() {
+    // Ler parâmetros da URL ao inicializar o componente
+    this.route.queryParams.subscribe((params: any) => {
+      const categories: string[] = [];
+      const subcategories: string[] = [];
+      const tags: string[] = [];
+
+      // Só aplicar um tipo de filtro por vez
+      if (params['category']) {
+        categories.push(params['category']);
+      }
+      
+      if (params['subcategory']) {
+        subcategories.push(params['subcategory']);
+      }
+      
+      if (params['tag']) {
+        tags.push(params['tag']);
+      }
+
+      this.selectedCategories.set(categories);
+      this.selectedSubcategories.set(subcategories);
+      this.selectedTags.set(tags);
+    });
+  }
+
 
   // Computed sorted and filtered products
   filteredProducts = computed(() => {
@@ -217,6 +245,8 @@ export class ProductsComponent {
     this.selectedCategories.set([]);
     this.selectedSubcategories.set([]);
     this.selectedTags.set([]);
+    // Navegar para a URL sem parâmetros
+    this.router.navigate(['/products']);
   }
 
   // Bag methods
