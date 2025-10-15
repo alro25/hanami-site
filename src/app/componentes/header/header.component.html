@@ -1,27 +1,18 @@
 <header class="main-header">
   <div class="header-top">
-    <div class="logo">
+    <div class="logo" routerLink="/home">
       <h1>HANAMI</h1>
     </div>
     
     <div class="nav-icons">
-      <a href="#" aria-label="Search" (click)="$event.preventDefault(); uiService.toggleSearch()">
-        <span class="icon">
-          <img ngSrc="/img/busca-icon.png" alt="Buscar" width="24" height="24">
-        </span>
+      <a aria-label="Minha Conta" (click)="$event.preventDefault(); uiService.toggleUser()">
+        <img ngSrc="/img/usuario-icon.png" alt="Minha Conta" width="24" height="24">
       </a>
-      <a href="#" aria-label="User Account" (click)="$event.preventDefault(); uiService.toggleProfile()">
-        <span class="icon">
-          <img ngSrc="/img/usuario-icon.png" alt="Minha Conta" width="24" height="24">
-        </span>
-      </a>
-      <a href="#" aria-label="Shopping Bag" (click)="$event.preventDefault(); uiService.toggleBag()" class="bag-icon">
-        <span class="icon">
-          <img ngSrc="/img/sacola-icon.png" alt="Carrinho" width="24" height="24">
-          @if (bagService.itemCount() > 0) {
-            <span class="bag-badge">{{ bagService.itemCount() }}</span>
-          }
-        </span>
+      <a aria-label="Carrinho" (click)="$event.preventDefault(); uiService.toggleBag()" class="bag-icon">
+        <img ngSrc="/img/sacola-icon.png" alt="Carrinho" width="24" height="24">
+        @if (bagService.itemCount() > 0) {
+          <span class="bag-badge">{{ bagService.itemCount() }}</span>
+        }
       </a>
     </div>
   </div>
@@ -36,7 +27,6 @@
         } @else if (link === 'Contato') {
             <a routerLink="/contact">{{ link }}</a>
         } @else {
-          <!-- Links do menu principal com navegação por filtro -->
           <a href="#" (click)="$event.preventDefault(); navigateToProductsWithFilter(
             link === 'Lançamentos' ? undefined : link,
             undefined,
@@ -46,7 +36,6 @@
         @if (activeMenu() === link && getSubmenu(link).length > 0) {
           <div class="submenu">
             @for (sublink of getSubmenu(link); track sublink) {
-              <!-- Links do submenu com navegação por subcategoria -->
               <a href="#" (click)="$event.preventDefault(); navigateToProductsWithFilter(link, sublink)">{{ sublink }}</a>
             }
           </div>
@@ -56,55 +45,20 @@
   </nav>
 </header>
 
-<!-- Modals -->
-<app-side-modal [isOpen]="uiService.isBagOpen()" (close)="uiService.closeAllModals()" position="right">
-  <div class="bag-header">
-    <h2>Sua sacola</h2>
-    <span>({{ bagService.itemCount() }} itens)</span>
+@if (uiService.isUserOpen()) {
+  <div class="modal-overlay" (click)="uiService.closeAllModals()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="uiService.closeAllModals()">×</button>
+      <app-user-modal></app-user-modal>
+    </div>
   </div>
+}
 
-  @if (bagService.bagItems().length > 0) {
-    <div class="bag-items">
-      @for (item of bagService.bagItems(); track item.product.id) {
-        <div class="bag-item">
-          <img [ngSrc]="item.product.imageUrl" width="80" height="80" [alt]="item.product.name">
-          <div class="item-info">
-            <p class="item-name">{{ item.product.name }}</p>
-            <div class="item-controls">
-              <div class="quantity-selector">
-                <button (click)="bagService.updateQuantity(item.product.id, -1)" aria-label="Remover uma unidade">-</button>
-                <span>{{ item.quantity }}</span>
-                <button (click)="bagService.updateQuantity(item.product.id, 1)" aria-label="Adicionar uma unidade">+</button>
-              </div>
-              <button class="remove-btn" (click)="bagService.removeFromBag(item.product.id)">Remover</button>
-            </div>
-          </div>
-          <div class="item-price">
-            <p>R$ {{ (item.product.price * item.quantity).toFixed(2) }}</p>
-          </div>
-        </div>
-      }
+@if (uiService.isBagOpen()) {
+  <div class="modal-overlay" (click)="uiService.closeAllModals()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="uiService.closeAllModals()">×</button>
+      <app-bag-modal></app-bag-modal>
     </div>
-    <div class="bag-footer">
-      <div class="subtotal">
-        <span>Subtotal</span>
-        <strong>R$ {{ bagService.bagTotal().toFixed(2) }}</strong>
-      </div>
-      <button class="btn btn-dark checkout-btn" (click)="bagService.checkout()">Finalizar Compra</button>
-    </div>
-  } @else {
-    <div class="bag-empty">
-      <p>Sua sacola está vazia.</p>
-      <button class="btn btn-outline" (click)="uiService.closeAllModals()">Continuar Comprando</button>
-    </div>
-  }
-</app-side-modal>
-
-<app-side-modal [isOpen]="uiService.isSearchOpen()" (close)="uiService.closeAllModals()" position="right">
-  <h2>Pesquisar Produtos</h2>
-  <input type="search" placeholder="O que você procura?" style="width: 100%; padding: 0.5rem;"/>
-</app-side-modal>
-
-<app-side-modal [isOpen]="uiService.isProfileOpen()" (close)="uiService.closeAllModals()" position="right">
-  <app-profile-modal-content></app-profile-modal-content>
-</app-side-modal>
+  </div>
+}

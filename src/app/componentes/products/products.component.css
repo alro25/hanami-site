@@ -46,6 +46,7 @@
   display: grid;
   grid-template-columns: 280px 1fr;
   min-height: 80vh;
+  gap: 2rem;
 }
 
 /* ===== FILTROS NA LATERAL ESQUERDA ===== */
@@ -56,6 +57,7 @@
   top: 0;
   height: 100vh;
   overflow-y: auto;
+  border-right: 1px solid var(--border-color);
 }
 
 .filters-header {
@@ -64,6 +66,7 @@
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .filters-header h3 {
@@ -179,6 +182,7 @@
   align-items: center;
   margin-bottom: 2.5rem;
   padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .results-count {
@@ -226,27 +230,27 @@
   gap: 3rem 2rem;
 }
 
-/* Cards de produtos - Estilo Fenty */
+/* Cards de produtos */
 .product-card {
   position: relative;
   border: none;
   background: transparent;
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.product-card:hover .buy-button {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
+.product-card:hover {
+  transform: translateY(-5px);
 }
 
 .product-image-container {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 450px;
   overflow: hidden;
   background-color: #f8f8f8;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .product-image-container img {
@@ -260,42 +264,44 @@
   transform: scale(1.03);
 }
 
-/* Botão de compra - Estilo mais discreto */
+/* ===== BOTÃO DE COMPRA - SEMPRE ABAIXO DO PREÇO ===== */
 .buy-button {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
+  position: static;
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
   background-color: #000000;
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 2px;
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  min-width: 140px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  transition: background-color 0.3s ease;
   font-family: 'Montserrat', sans-serif;
-}
-
-.product-card:hover .buy-button {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
 }
 
 .buy-button:hover {
   background-color: #E964BD;
 }
 
+/* Remove os estilos de hover que moviam o botão */
+.product-card:hover .buy-button {
+  transform: none;
+}
+
 .product-info {
   text-align: left;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 .product-info h3 {
@@ -332,6 +338,20 @@
   font-weight: 300;
 }
 
+.no-products .clear-filters {
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #000;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.no-products .clear-filters:hover {
+  background-color: #E964BD;
+  color: white;
+}
+
 /* ===== BOTÃO VOLTAR ===== */
 .back-button {
   display: block;
@@ -361,13 +381,14 @@
   }
   
   .product-image-container {
-    height: 450px;
+    height: 400px;
   }
 }
 
 @media (max-width: 992px) {
   .products-main-layout {
     grid-template-columns: 1fr;
+    gap: 0;
   }
   
   .filters-section {
@@ -375,6 +396,8 @@
     height: auto;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
+    max-height: 400px;
+    overflow-y: auto;
   }
   
   .products-content-header {
@@ -386,6 +409,10 @@
   .sorting-section {
     width: 100%;
     justify-content: flex-start;
+  }
+  
+  .product-image-container {
+    height: 350px;
   }
 }
 
@@ -408,7 +435,16 @@
   }
   
   .product-image-container {
-    height: 400px;
+    height: 300px;
+  }
+  
+  .buy-button {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .filters-section {
+    padding: 1.5rem 1rem;
   }
 }
 
@@ -418,70 +454,32 @@
   }
   
   .product-image-container {
-    height: 350px;
+    height: 250px;
   }
   
   .filters-section {
-    padding: 1.5rem 1rem;
+    padding: 1rem;
   }
   
   .sort-select {
     min-width: 150px;
-  }
-}
-
-/* ===== BOTÃO COMPRAR SEMPRE VISÍVEL NO MOBILE ===== */
-@media (max-width: 768px) {
-  /* Para os cards da página de produtos */
-  .product-card .buy-button {
-    position: static !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
     width: 100%;
-    margin-top: 0.8rem;
-    padding: 0.8rem 1rem;
-    border-radius: 4px;
-    background-color: #000000;
-    color: white;
-    border: none;
-    font-weight: 600;
-    font-size: 0.8rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: background-color 0.3s ease;
-  }
-
-  .product-card:hover .buy-button {
-    transform: none !important;
-  }
-
-  .product-card .buy-button:hover {
-    background-color: #E964BD;
-  }
-
-  /* Ajuste no container da imagem */
-  .product-image-container {
-    margin-bottom: 0.5rem;
-    height: 300px; /* Reduz um pouco a altura no mobile */
-  }
-
-  /* Ajuste no info do produto */
-  .product-info {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .product-image-container {
-    height: 250px;
   }
   
-  .product-card .buy-button {
-    padding: 0.7rem 0.8rem;
+  .sorting-section {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  .buy-button {
+    padding: 0.6rem 0.7rem;
     font-size: 0.75rem;
+  }
+  
+  .back-button {
+    width: 90%;
+    margin: 2rem auto;
+    padding: 0.8rem 1.5rem;
   }
 }

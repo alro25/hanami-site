@@ -1,98 +1,134 @@
 <div class="dashboard-container">
+  <!-- Header do Dashboard -->
   <header class="dashboard-header">
     <h1>Dashboard Hanami</h1>
-    <div class="date-filter">
-      <button class="filter-btn">Últimos 30 dias ▼</button>
-    </div>
+    <button class="back-home-btn" (click)="voltarParaHome()" aria-label="Voltar para página inicial">
+      ← Voltar para Home
+    </button>
   </header>
 
-  @if (summary(); as data) {
-    <section class="summary-cards">
-      <div class="card">
-        <div class="card-header">Total de Vendas</div>
-        <div class="card-body">
-          <span class="value">{{ data.totalVendas | currency:'BRL' }}</span>
-        </div>
+  <!-- Cards de Métricas Principais -->
+  <section class="summary-cards" aria-label="Métricas principais do dashboard">
+    <div class="card">
+      <div class="card-header">Total de Vendas</div>
+      <div class="card-body">
+        <span class="value">R$ {{ dashboardData().totalVendas.toFixed(2) }}</span>
       </div>
-      <div class="card">
-        <div class="card-header">Novos Clientes</div>
-        <div class="card-body">
-          <span class="value">{{ data.novosClientes }}</span>
-        </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">Novos Clientes</div>
+      <div class="card-body">
+        <span class="value">{{ dashboardData().novosClientes }}</span>
       </div>
-      <div class="card">
-        <div class="card-header">Pedidos</div>
-        <div class="card-body">
-          <span class="value">{{ data.pedidos }}</span>
-        </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">Pedidos</div>
+      <div class="card-body">
+        <span class="value">{{ dashboardData().totalPedidos }}</span>
       </div>
-      <div class="card">
-        <div class="card-header">Ticket Médio</div>
-        <div class="card-body">
-          <span class="value">{{ data.ticketMedio | currency:'BRL' }}</span>
-        </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">Ticket Médio</div>
+      <div class="card-body">
+        <span class="value">R$ {{ dashboardData().ticketMedio.toFixed(2) }}</span>
       </div>
-    </section>
-  } @else {
-    <p class="loading-text">Carregando resumo...</p>
-  }
+    </div>
+  </section>
 
-  <section class="charts-section">
+  <!-- Seção de Gráficos -->
+  <section class="charts-section" aria-label="Gráficos analíticos">
+    <!-- Gráfico Principal - Vendas Mensais -->
     <div class="chart-main card">
       <h3 class="chart-title">Vendas Mensais</h3>
       <div class="chart-container">
-        <canvas #vendasMensaisChart></canvas>
+        <canvas #vendasMensaisChart 
+                role="img" 
+                aria-label="Gráfico de linhas mostrando a evolução das vendas mensais ao longo do ano">
+        </canvas>
       </div>
     </div>
+
+    <!-- Gráficos Secundários -->
     <div class="charts-side">
+      <!-- Top Produtos -->
       <div class="chart-secondary card">
         <h3 class="chart-title">Top Produtos</h3>
         <div class="chart-container">
-          <canvas #topProdutosChart></canvas>
+          <canvas #topProdutosChart 
+                  role="img" 
+                  aria-label="Gráfico de barras horizontais mostrando os produtos mais vendidos">
+          </canvas>
         </div>
       </div>
+
+      <!-- Categorias Populares -->
       <div class="chart-secondary card">
         <h3 class="chart-title">Categorias Populares</h3>
         <div class="chart-container">
-          <canvas #categoriasPopularesChart></canvas>
+          <canvas #categoriasPopularesChart 
+                  role="img" 
+                  aria-label="Gráfico de rosca mostrando a distribuição de vendas por categoria">
+          </canvas>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="recent-orders card">
+  <!-- Tabela de Pedidos Recentes -->
+  <section class="recent-orders card" aria-label="Lista de pedidos recentes">
     <h3 class="chart-title">Pedidos Recentes</h3>
-    @if (recentOrders(); as orders) {
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Pedido ID</th>
-              <th>Cliente</th>
-              <th>Data</th>
-              <th>Valor</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (order of orders; track order.id) {
-              <tr>
-                <td>{{ order.id }}</td>
-                <td>{{ order.cliente }}</td>
-                <td>{{ order.data }}</td>
-                <td>{{ order.valor | currency:'BRL' }}</td>
-                <td>
-                  <span class="status" [ngClass]="order.status.toLowerCase()">{{ order.status }}</span>
-                </td>
-              </tr>
-            } @empty {
-              <tr><td colspan="5">Nenhum pedido recente.</td></tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    } @else {
-      <p class="loading-text">Carregando pedidos...</p>
-    }
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Pedido ID</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Data</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#00123</td>
+            <td>Ana Silva</td>
+            <td>15/03/2024</td>
+            <td>R$ 189,90</td>
+            <td><span class="status entregue" aria-label="Status: Entregue">Entregue</span></td>
+          </tr>
+          <tr>
+            <td>#00122</td>
+            <td>Carlos Santos</td>
+            <td>14/03/2024</td>
+            <td>R$ 245,50</td>
+            <td><span class="status pendente" aria-label="Status: Pendente">Pendente</span></td>
+          </tr>
+          <tr>
+            <td>#00121</td>
+            <td>Marina Oliveira</td>
+            <td>14/03/2024</td>
+            <td>R$ 98,75</td>
+            <td><span class="status entregue" aria-label="Status: Entregue">Entregue</span></td>
+          </tr>
+          <tr>
+            <td>#00120</td>
+            <td>João Pereira</td>
+            <td>13/03/2024</td>
+            <td>R$ 156,30</td>
+            <td><span class="status entregue" aria-label="Status: Entregue">Entregue</span></td>
+          </tr>
+          <tr>
+            <td>#00119</td>
+            <td>Beatriz Lima</td>
+            <td>13/03/2024</td>
+            <td>R$ 312,80</td>
+            <td><span class="status pendente" aria-label="Status: Pendente">Pendente</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </div>

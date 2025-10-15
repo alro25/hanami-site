@@ -17,10 +17,10 @@
   background-color: var(--background-color);
   text-align: center;
   padding-top: 120px;
-  margin-top: 0; /* Changed from 120px since header is now fixed in its own component */
+  margin-top: 0;
 }
 
-checkout-alert {
+.checkout-alert {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -210,6 +210,8 @@ checkout-alert {
   border: none;
   background: transparent;
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
@@ -219,10 +221,10 @@ checkout-alert {
 .product-image-container {
   position: relative;
   width: 100%;
-  height: 580px;
+  height: 400px;
   overflow: hidden;
   background-color: #f8f8f8;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .product-image-container img {
@@ -236,42 +238,44 @@ checkout-alert {
   transform: scale(1.05);
 }
 
-/* Botão de compra */
+/* ===== BOTÃO DE COMPRA - SEMPRE ABAIXO DO PREÇO ===== */
 .buy-button {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
+  position: static;
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
   background-color: #000000;
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 2px;
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  min-width: 140px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  transition: background-color 0.3s ease;
   font-family: 'Montserrat', sans-serif;
-}
-
-.product-card:hover .buy-button {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
 }
 
 .buy-button:hover {
   background-color: #E964BD;
 }
 
+/* Remove os estilos de hover que moviam o botão */
+.product-card:hover .buy-button {
+  transform: none;
+}
+
 .product-info {
   text-align: center;
   padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 .product-info h3 {
@@ -479,21 +483,17 @@ checkout-alert {
 }
 
 app-side-modal {
-  z-index: 1100 !important; /* Modais acima do header e submenu */
+  z-index: 1100 !important;
 }
 
-/* Se o componente SideModal tiver um container, ajuste também */
 .side-modal-container {
   z-index: 1100 !important;
 }
 
-/* ===== OVERLAY DOS MODAIS ===== */
-/* Se houver um overlay, ele deve ficar entre o header e o modal */
 .modal-overlay {
-  z-index: 1050 !important; /* Acima do header, abaixo do modal */
+  z-index: 1050 !important;
 }
 
-/* Ajuste para o hero carousel não ficar cortado */
 .hero-carousel {
   margin-top: 0;
 }
@@ -503,6 +503,27 @@ app-side-modal {
   .product-card {
     flex: 0 0 calc(25% - 1.2rem);
   }
+  
+  .product-image-container {
+    height: 350px;
+  }
+}
+
+@media (max-width: 992px) {
+  .promo-section {
+    width: 90%;
+    height: auto;
+    flex-direction: column;
+  }
+  
+  .promo-text, .promo-image {
+    width: 100%;
+    height: 400px;
+  }
+  
+  .promo-section.image-first {
+    flex-direction: column-reverse;
+  }
 }
 
 @media (max-width: 768px) {
@@ -511,7 +532,7 @@ app-side-modal {
   }
   
   .product-image-container {
-    height: 240px;
+    height: 300px;
   }
   
   .carousel-arrow-products {
@@ -532,6 +553,11 @@ app-side-modal {
     text-align: center;
     padding: 3rem 5%;
   }
+  
+  .buy-button {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -540,7 +566,7 @@ app-side-modal {
   }
   
   .product-image-container {
-    height: 200px;
+    height: 250px;
   }
   
   .carousel-arrow-products {
@@ -548,51 +574,25 @@ app-side-modal {
   }
   
   .buy-button {
-    min-width: 120px;
-    padding: 10px 20px;
-    font-size: 0.8rem;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.75rem;
   }
-}
-
-/* ===== BOTÃO COMPRAR SEMPRE VISÍVEL NO MOBILE ===== */
-@media (max-width: 768px) {
-  /* Para os cards do carousel na home */
-  .product-card .buy-button {
-    position: static !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-    width: 100%;
-    margin-top: 0.8rem;
-    padding: 0.8rem 1rem;
-    border-radius: 4px;
-    background-color: #000000;
-    color: white;
-    border: none;
-    font-weight: 600;
-    font-size: 0.8rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: background-color 0.3s ease;
+  
+  .popular-products h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    padding-left: 0;
   }
-
-  .product-card:hover .buy-button {
-    transform: none !important;
+  
+  .promo-background {
+    height: 800px;
   }
-
-  .product-card .buy-button:hover {
-    background-color: #E964BD;
+  
+  .promo-text h2 {
+    font-size: 1.8rem;
   }
-
-  /* Ajuste no container da imagem para remover o espaço do botão */
-  .product-image-container {
-    margin-bottom: 0.5rem;
-  }
-
-  /* Ajuste no info do produto */
-  .product-info {
-    display: flex;
-    flex-direction: column;
+  
+  .promo-text p {
+    font-size: 1rem;
   }
 }

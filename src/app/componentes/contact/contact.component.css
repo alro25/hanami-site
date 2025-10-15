@@ -5,36 +5,27 @@
   padding-top: 80px;
 }
 
-/* contato.component.css */
-
 .pagina-contato {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    min-height: 100vh; 
-    margin: 80px auto 40px auto; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
-    overflow: hidden;
-    background-color: #fff;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  min-height: calc(100vh - 120px);
+  margin: 80px auto 40px auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #fff;
 }
 
 .imagem-container {
   flex: 1;
-  display: none; /* Esconde a imagem em telas menores por padrão */
+  display: none;
 }
 
 .imagem-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* Mostra a imagem em telas maiores */
-@media (min-width: 992px) {
-  .imagem-container {
-    display: block;
-  }
 }
 
 .form-container {
@@ -64,104 +55,134 @@ h1 {
   font-size: 2.5rem;
   color: #000000;
   text-align: center;
-  margin-block-end: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .subtitulo {
   color: #555;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
 .input-container {
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .input-field {
   width: 100%;
   background-color: transparent;
   border: 1.5px solid #000000;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 1rem;
   color: #000000;
   padding: 16px;
-}
-
-textarea.input-field {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.input-label {
-  position: absolute;
-  left: 12px;
-  top: 16px; /* Alinhado com o padding do input */
-  background-color: #fff;
-  padding: 0 4px;
-  font-size: 1rem;
-  color: #888;
-  transition: all 0.2s ease;
-  pointer-events: none; /* Permite clicar através do label */
-}
-
-/* Animação do label quando o campo está focado ou preenchido */
-.input-field:focus + .input-label,
-.input-field:not(:placeholder-shown) + .input-label {
-  top: -10px;
-  font-size: 14px;
-  color: #E964BD; /* Cor principal da Hanami */
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
 .input-field:focus {
   outline: none;
   border-color: #E964BD;
+  box-shadow: 0 0 0 3px rgba(233, 100, 189, 0.1);
+}
+
+.input-field.ng-invalid.ng-touched,
+.input-field.ng-invalid.ng-dirty {
+  border-color: #d9534f;
+}
+
+textarea.input-field {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.input-label {
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  background-color: #fff;
+  padding: 0 4px;
+  font-size: 1rem;
+  color: #888;
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown) + .input-label {
+  top: -10px;
+  font-size: 14px;
+  color: #E964BD;
+  font-weight: 500;
 }
 
 .botoes-container {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  gap: 0.5rem;
 }
 
 .botao-enviar {
-  flex: 1;
-  font-size: 1rem;
-  border-radius: 5px;
-  padding: 16px;
+  width: 100%;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 16px 24px;
   transition: all 0.3s ease;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
   background-color: #000000;
   color: #fff;
-  border: 1.5px solid #000000;
+  border: 2px solid #000000;
+  position: relative;
 }
 
-.botao-enviar:hover:not(:disabled) {
+.botao-enviar:hover:not(.botao-desabilitado) {
   transform: translateY(-2px);
   background-color: #E964BD;
   border-color: #E964BD;
+  box-shadow: 0 4px 12px rgba(233, 100, 189, 0.3);
 }
 
-.botao-enviar:disabled {
+.botao-enviar.botao-desabilitado {
   background-color: #ccc;
   border-color: #ccc;
+  color: #666;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .error-message {
   color: #d9534f;
   font-size: 0.8rem;
+  margin-top: 6px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.help-text {
+  color: #666;
+  font-size: 0.8rem;
   margin-top: 4px;
   text-align: left;
+  font-style: italic;
 }
-/* --- Estilos LGPD --- */
+
 .lgpd-container {
   text-align: left;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
   color: #555;
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
 }
 
 .lgpd-text {
@@ -172,29 +193,104 @@ textarea.input-field {
 
 .checkbox-group {
   display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 0.75rem;
 }
 
 .checkbox-group input[type="checkbox"] {
-  margin-right: 0.5rem;
-  /* Estilo moderno para o checkbox */
+  margin-top: 0.2rem;
   width: 1.15em;
   height: 1.15em;
-  accent-color: var(--cor-principal, #E964BD); /* Usando a cor da Hanami */
+  accent-color: #E964BD;
+  flex-shrink: 0;
 }
 
 .checkbox-group label {
   line-height: 1.5;
+  font-size: 0.9rem;
 }
 
 .checkbox-group a {
-  color: var(--cor-principal); /* Isso já deve ser rosa */
+  color: #E964BD;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .checkbox-group a:hover {
   text-decoration: underline;
-  color: #d455a8; /* Um tom mais escuro de rosa no hover */
+  color: #d455a8;
+}
+
+/* Responsividade */
+@media (min-width: 992px) {
+  .imagem-container {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .pagina-contato {
+    margin: 60px auto 20px auto;
+    min-height: calc(100vh - 80px);
+  }
+
+  .form-container {
+    padding: 30px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .subtitulo {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagina-contato {
+    margin: 40px 15px 10px 15px;
+    border-radius: 10px;
+    min-height: calc(100vh - 50px);
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .input-field {
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+
+  .botao-enviar {
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+
+  .checkbox-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .checkbox-group input[type="checkbox"] {
+    margin-top: 0;
+  }
+}
+
+/* Estados de foco para acessibilidade */
+.botao-enviar:focus:not(.botao-desabilitado) {
+  outline: 2px solid #E964BD;
+  outline-offset: 2px;
+}
+
+.input-field:focus {
+  outline: 2px solid #E964BD;
+  outline-offset: -1px;
 }

@@ -12,7 +12,6 @@ import { FooterComponent } from '../footer/footer.component';
   styleUrls: ['./about-us.component.css']
 })
 export class AboutUsComponent {
-  // Dados da nossa história
   ourStory = {
     title: 'Nossa História',
     description: `A HANAMI nasceu da paixão pela beleza autêntica e pela celebração da diversidade. 
@@ -29,54 +28,43 @@ export class AboutUsComponent {
       única e passageira que merece ser celebrada. Nossos produtos são criados para realçar essa 
       beleza natural, assim como as flores de cerejeira que florescem brevemente, mas deixam 
       uma impressão duradoura.`
-    },
-    image: '/img/about-history.jpg'
+    }
   };
 
-  // Nossa missão
   ourMission = [
     {
-      image: '/img/icons/mission-icon.png',
       title: 'Missão',
       description: 'Oferecer produtos de beleza inovadores e de alta performance que celebrem a individualidade e empoderem cada pessoa a expressar sua beleza única, inspirados na filosofia Hanami de apreciar a beleza efêmera.'
     },
     {
-      image: '/img/icons/vision-icon.png',
       title: 'Visão',
       description: 'Ser a marca de beleza mais amada e confiável do Brasil, reconhecida pela qualidade, inovação e compromisso com a autoestima de nossos consumidores, celebrando a diversidade como as diferentes flores de cerejeira.'
     },
     {
-      image: '/img/icons/values-icon.png',
       title: 'Valores',
       description: 'Autenticidade, Inovação, Qualidade, Diversidade, Sustentabilidade e Respeito ao consumidor - valores que refletem a essência da tradição Hanami.'
     }
   ];
 
-  // Nossos diferenciais
   differentiators = [
     {
-      image: '/img/icons/technology-icon.png',
       title: 'Tecnologia e Inovação',
       description: 'Investimos em pesquisa e desenvolvimento para criar fórmulas exclusivas que atendem às necessidades da pele brasileira, combinando sabedoria ancestral com tecnologia moderna.'
     },
     {
-      image: '/img/icons/quality-icon.png',
       title: 'Compromisso com a Qualidade',
       description: 'Todos os nossos produtos passam por rigorosos testes de qualidade e segurança antes de chegarem até você, seguindo o princípio japonês de excelência em cada detalhe.'
     },
     {
-      image: '/img/icons/sustainability-icon.png',
       title: 'Sustentabilidade',
       description: 'Trabalhamos constantemente para reduzir nosso impacto ambiental através de embalagens sustentáveis e processos responsáveis, honrando a natureza que inspira nossa marca.'
     },
     {
-      image: '/img/icons/diversity-icon.png',
       title: 'Diversidade e Inclusão',
       description: 'Criamos produtos para todos os tons de pele e tipos de beleza, celebrando a diversidade que nos torna únicos - assim como as variedades de cerejeiras no Hanami.'
     }
   ];
 
-  // Timeline da marca
   timeline = [
     {
       year: '2018',
@@ -110,46 +98,37 @@ export class AboutUsComponent {
     }
   ];
 
-  // Compromissos
   commitments = [
     {
-      image: '/img/icons/cruelty-free-icon.png',
       title: 'Cruelty Free',
       description: 'Nenhum de nossos produtos é testado em animais, honrando o respeito por todas as formas de vida.'
     },
     {
-      image: '/img/icons/recycling-icon.png',
       title: 'Embalagens Sustentáveis',
       description: '70% das nossas embalagens são feitas com materiais reciclados, refletindo nosso cuidado com a natureza.'
     },
     {
-      image: '/img/icons/natural-icon.png',
       title: 'Ingredientes Naturais',
       description: 'Priorizamos ingredientes de origem natural em nossas fórmulas, inspirados na pureza da natureza.'
     },
     {
-      image: '/img/icons/factory-icon.png',
       title: 'Produção Responsável',
       description: 'Nossa fábrica opera com energia renovável e processos sustentáveis, seguindo princípios de harmonia ambiental.'
     }
   ];
 
-  // Inspiração Hanami
   hanamiInspiration = {
     title: 'A Inspiração Hanami',
     items: [
       {
-        image: '/img/icons/cherry-blossom-icon.png',
         title: 'Beleza Efêmera',
         description: 'Assim como as flores de cerejeira, acreditamos que a verdadeira beleza está em sua natureza passageira e única.'
       },
       {
-        image: '/img/icons/harmony-icon.png',
         title: 'Harmonia',
         description: 'Buscamos o equilíbrio perfeito entre tradição e inovação, natureza e tecnologia.'
       },
       {
-        image: '/img/icons/celebration-icon.png',
         title: 'Celebração',
         description: 'Cada produto é uma celebração da individualidade e da beleza que existe em cada pessoa.'
       }

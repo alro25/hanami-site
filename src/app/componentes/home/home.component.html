@@ -2,7 +2,7 @@
 
   <app-header></app-header>
 
-  <!-- Checkout Success Alert -->
+  <!-- Alerta de Checkout Concluído -->
   @if (showCheckoutAlert()) {
     <div class="checkout-alert">
       <div class="alert-content">
@@ -16,6 +16,7 @@
 
   <main>
 
+    <!-- Seção do Carrossel Hero -->
     <section class="hero-carousel" 
              #heroCarousel
              (mouseenter)="onCarouselMouseEnter()" 
@@ -28,11 +29,11 @@
         }
       </div>
 
-      <!-- Hero Carousel Arrows -->
+      <!-- Setas de Navegação do Carrossel Hero -->
       <button class="carousel-arrow left" (click)="goToPrevious()" aria-label="Slide anterior">‹</button>
       <button class="carousel-arrow right" (click)="goToNext()" aria-label="Próximo slide">›</button>
 
-      <!-- Hero Carousel Dots -->
+      <!-- Indicadores de Página do Carrossel -->
       <div class="carousel-dots">
         @for (slide of slides; track slide.imageUrl; let i = $index) {
           <button 
@@ -44,11 +45,11 @@
       </div>
     </section>
 
-   <!-- Lançamentos Section -->
-   <section class="popular-products">
+    <!-- Seção de Lançamentos -->
+    <section class="popular-products">
       <h2>Lançamentos</h2>
       <div class="products-carousel">
-        <!-- Left Arrow -->
+        <!-- Seta Esquerda -->
         <button 
           class="carousel-arrow-products left" 
           (click)="scrollProducts(-1, 'newReleases')"
@@ -57,23 +58,24 @@
           ‹
         </button>
 
-        <!-- Products Grid -->
+        <!-- Grade de Produtos -->
         <div class="product-grid" #newReleasesContainer>
           @for (product of newReleases(); track product.id) {
-            <div class="product-card">
+            <article class="product-card">
               <div class="product-image-container">
-                <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300">
-                <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
+                <img [src]="product.imageUrl" [alt]="product.name">
               </div>
               <div class="product-info">
                 <h3>{{ product.name }}</h3>
                 <p>R$ {{ product.price.toFixed(2) }}</p>
+                <!-- Botão Comprar - Sempre abaixo do preço -->
+                <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
               </div>
-            </div>
+            </article>
           }
         </div>
 
-        <!-- Right Arrow -->
+        <!-- Seta Direita -->
         <button 
           class="carousel-arrow-products right" 
           (click)="scrollProducts(1, 'newReleases')"
@@ -83,7 +85,7 @@
         </button>
       </div>
 
-      <!-- Carousel Dots -->
+      <!-- Indicadores de Página do Carrossel -->
       @if (showProductDots(newReleases())) {
         <div class="carousel-dots-products">
           @for (dot of getProductDots(newReleases()); track dot; let i = $index) {
@@ -98,7 +100,7 @@
       }
     </section>
 
-    <!-- First promo with background -->
+    <!-- Primeira Promoção com Fundo -->
     <div class="promo-background gloss-background">
       <section class="promo-section gloss-promo">
         <div class="promo-text">
@@ -112,11 +114,11 @@
       </section>
     </div>
 
-    <!-- Populares Section (between promos) -->
+    <!-- Seção de Produtos Populares -->
     <section class="popular-products">
       <h2>Populares</h2>
       <div class="products-carousel">
-        <!-- Left Arrow -->
+        <!-- Seta Esquerda -->
         <button 
           class="carousel-arrow-products left" 
           (click)="scrollProducts(-1, 'popular')"
@@ -125,23 +127,24 @@
           ‹
         </button>
 
-        <!-- Products Grid -->
+        <!-- Grade de Produtos -->
         <div class="product-grid" #popularContainer>
           @for (product of popularProducts(); track product.id) {
-            <div class="product-card">
+            <article class="product-card">
               <div class="product-image-container">
-                <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300">
-                <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
+                <img [src]="product.imageUrl" [alt]="product.name">
               </div>
               <div class="product-info">
                 <h3>{{ product.name }}</h3>
                 <p>R$ {{ product.price.toFixed(2) }}</p>
+                <!-- Botão Comprar - Sempre abaixo do preço -->
+                <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
               </div>
-            </div>
+            </article>
           }
         </div>
 
-        <!-- Right Arrow -->
+        <!-- Seta Direita -->
         <button 
           class="carousel-arrow-products right" 
           (click)="scrollProducts(1, 'popular')"
@@ -151,7 +154,7 @@
         </button>
       </div>
 
-      <!-- Carousel Dots -->
+      <!-- Indicadores de Página do Carrossel -->
       @if (showProductDots(popularProducts())) {
         <div class="carousel-dots-products">
           @for (dot of getProductDots(popularProducts()); track dot; let i = $index) {
@@ -166,7 +169,7 @@
       }
     </section>
 
-    <!-- Second promo with background -->
+    <!-- Segunda Promoção com Fundo -->
     <div class="promo-background lipstick-background">
       <section class="promo-section lipstick-promo image-first">
         <div class="promo-text">
@@ -180,11 +183,11 @@
       </section>
     </div>
 
-    <!-- Recomendados Section (after last promo) -->
+    <!-- Seção de Produtos Recomendados -->
     <section class="popular-products">
       <h2>Recomendados</h2>
       <div class="products-carousel">
-        <!-- Left Arrow -->
+        <!-- Seta Esquerda -->
         <button 
           class="carousel-arrow-products left" 
           (click)="scrollProducts(-1, 'recommended')"
@@ -193,23 +196,24 @@
           ‹
         </button>
 
-        <!-- Products Grid -->
+        <!-- Grade de Produtos -->
         <div class="product-grid" #recommendedContainer>
           @for (product of recommendedProducts(); track product.id) {
-            <div class="product-card">
+            <article class="product-card">
               <div class="product-image-container">
-                <img [ngSrc]="product.imageUrl" [alt]="product.name" width="250" height="300">
-                <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
+                <img [src]="product.imageUrl" [alt]="product.name">
               </div>
               <div class="product-info">
                 <h3>{{ product.name }}</h3>
                 <p>R$ {{ product.price.toFixed(2) }}</p>
+                <!-- Botão Comprar - Sempre abaixo do preço -->
+                <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
               </div>
-            </div>
+            </article>
           }
         </div>
 
-        <!-- Right Arrow -->
+        <!-- Seta Direita -->
         <button 
           class="carousel-arrow-products right" 
           (click)="scrollProducts(1, 'recommended')"
@@ -219,7 +223,7 @@
         </button>
       </div>
 
-      <!-- Carousel Dots -->
+      <!-- Indicadores de Página do Carrossel -->
       @if (showProductDots(recommendedProducts())) {
         <div class="carousel-dots-products">
           @for (dot of getProductDots(recommendedProducts()); track dot; let i = $index) {

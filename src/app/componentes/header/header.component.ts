@@ -4,8 +4,8 @@ import { RouterModule, Router } from '@angular/router';
 import { BagService } from '../../services/bag.service';
 import { UiService } from '../../services/ui.service';
 import { AuthService } from '../../services/auth.service';
-import { SideModalComponent } from '../side-modal/side-modal.component';
-import { ProfileModalContentComponent } from '../profile-modal-content/profile-modal-content.component';
+import { BagModalComponent } from '../bag-modal/bag-modal.component';
+import { UserModalComponent } from '../user-modal/user-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +14,8 @@ import { ProfileModalContentComponent } from '../profile-modal-content/profile-m
     CommonModule,
     RouterModule,
     NgOptimizedImage,
-    SideModalComponent,
-    ProfileModalContentComponent
+    BagModalComponent,
+    UserModalComponent
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
@@ -51,9 +51,7 @@ export class HeaderComponent {
     }
   }
 
-  // Nova função para navegar para produtos com filtro
   navigateToProductsWithFilter(category?: string, subcategory?: string, tag?: string) {
-    // Sempre limpar todos os filtros anteriores e aplicar apenas o novo filtro
     const queryParams: any = {};
     
     if (category) {
@@ -76,18 +74,16 @@ export class HeaderComponent {
       queryParams.subcategory = null;
     }
 
+
     this.router.navigate(['/products'], { 
       queryParams,
-      queryParamsHandling: 'merge' // Isso garante que outros parâmetros sejam mantidos se necessário
+      queryParamsHandling: 'merge'
     });
     this.uiService.closeAllModals();
   }
 
-  // Função específica para "Todos os produtos" que limpa todos os filtros
   navigateToAllProducts() {
-    this.router.navigate(['/products'], {
-      queryParams: {} // Limpa todos os parâmetros
-    });
+    this.router.navigate(['/products']);
     this.uiService.closeAllModals();
   }
 }

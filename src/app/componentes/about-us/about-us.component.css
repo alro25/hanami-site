@@ -1,4 +1,3 @@
-/* ===== IMPORTAÇÃO DE FONTE E VARIÁVEIS ===== */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 :host {
@@ -13,7 +12,6 @@
   --hanami-sakura: #FFB7C5;
 }
 
-/* ===== ESTILOS GERAIS ===== */
 .about-us-container {
   font-family: var(--font-family);
   color: var(--text-color);
@@ -44,13 +42,11 @@
   letter-spacing: 2px;
 }
 
-/* ===== HERO SECTION ===== */
 .about-hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 70vh;
   background: linear-gradient(135deg, #f8f8f8 0%, var(--hanami-pink) 100%);
-  position: relative;
 }
 
 .hero-content {
@@ -98,21 +94,9 @@
   object-fit: cover;
 }
 
-/* ===== NOSSA HISTÓRIA ===== */
 .our-story-section {
   padding: 6rem 0;
   background-color: #f8f8f8;
-}
-
-.story-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.story-content {
-  padding-right: 2rem;
 }
 
 .story-text {
@@ -122,7 +106,6 @@
   color: #555;
 }
 
-/* Significado Hanami */
 .hanami-meaning {
   background: white;
   padding: 2rem;
@@ -146,24 +129,6 @@
   color: #555;
 }
 
-.story-image {
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  box-shadow: var(--box-shadow);
-}
-
-.story-img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.story-img:hover {
-  transform: scale(1.05);
-}
-
-/* ===== INSPIRAÇÃO HANAMI ===== */
 .inspiration-section {
   padding: 6rem 0;
   background: linear-gradient(135deg, var(--hanami-pink) 0%, #f8f8f8 100%);
@@ -188,21 +153,6 @@
   transform: translateY(-5px);
 }
 
-.inspiration-image {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.inspiration-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .inspiration-title {
   font-size: 1.3rem;
   font-weight: 600;
@@ -216,7 +166,6 @@
   color: #666;
 }
 
-/* ===== MISSÃO, VISÃO E VALORES ===== */
 .mission-section {
   padding: 6rem 0;
   background-color: var(--background-color);
@@ -240,21 +189,6 @@
   box-shadow: var(--box-shadow);
 }
 
-.mission-image {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mission-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .mission-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -268,7 +202,6 @@
   color: #666;
 }
 
-/* ===== DIFERENCIAIS ===== */
 .differentiators-section {
   padding: 6rem 0;
   background-color: #f8f8f8;
@@ -289,25 +222,12 @@
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   transition: transform 0.3s ease;
+  text-align: center;
+  justify-content: center;
 }
 
 .differentiator-card:hover {
   transform: translateY(-3px);
-}
-
-.diff-image {
-  width: 60px;
-  height: 60px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.diff-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
 }
 
 .diff-content {
@@ -327,7 +247,6 @@
   color: #666;
 }
 
-/* ===== TIMELINE ===== */
 .timeline-section {
   padding: 6rem 0;
   background-color: var(--background-color);
@@ -419,7 +338,6 @@
   color: #666;
 }
 
-/* ===== COMPROMISSOS ===== */
 .commitments-section {
   padding: 6rem 0;
   background-color: #f8f8f8;
@@ -444,21 +362,6 @@
   transform: translateY(-5px);
 }
 
-.commitment-image {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.commitment-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .commitment-title {
   font-size: 1.2rem;
   font-weight: 600;
@@ -472,7 +375,6 @@
   color: #666;
 }
 
-/* ===== CTA SECTION ===== */
 .cta-section {
   padding: 6rem 0;
   background: linear-gradient(135deg, var(--hanami-pink) 0%, #f8f8f8 100%);
@@ -539,7 +441,6 @@
   color: white;
 }
 
-/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   .about-hero {
     grid-template-columns: 1fr;
@@ -559,15 +460,6 @@
     font-size: 2rem;
   }
 
-  .story-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .story-content {
-    padding-right: 0;
-  }
-
   .inspiration-grid,
   .mission-grid {
     grid-template-columns: 1fr;
@@ -582,10 +474,6 @@
   .differentiator-card {
     flex-direction: column;
     text-align: center;
-  }
-
-  .diff-image {
-    margin: 0 auto;
   }
 
   .timeline::before {
@@ -639,13 +527,5 @@
 
   .section-title {
     font-size: 1.8rem;
-  }
-
-  .mission-image,
-  .diff-image,
-  .commitment-image,
-  .inspiration-image {
-    width: 50px;
-    height: 50px;
   }
 }

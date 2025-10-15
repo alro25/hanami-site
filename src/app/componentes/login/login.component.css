@@ -1,15 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --cor-principal: #E964BD;
-  --cor-secundaria: #000000;
-  --transition-speed: 0.4s;
-}
-
 :host {
   display: grid;
   place-items: center;
@@ -24,43 +12,44 @@
 
 .pagina-auth {
   display: flex;
-  width: 1200px;
-  height: 800px;
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  min-height: 600px;
   box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.15);
   border-radius: 15px;
   overflow: hidden;
+  background: white;
 }
 
 .imagem-container {
-  width: 600px;
-  height: 100%;
-  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
-.carousel {
+.static-image {
   width: 100%;
   height: 100%;
   display: flex;
 }
 
-.carousel img {
+.static-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  flex-shrink: 0;
 }
 
 .auth-container {
-  width: 600px;
-  height: 100%;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background-color: rgb(255, 255, 255, 0.65);
+  background-color: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 .auth-card {
@@ -72,7 +61,6 @@
   color: #000000;
 }
 
-/* Header com Tabs - CORRIGIDO */
 .auth-header {
   display: flex;
   position: relative;
@@ -90,40 +78,25 @@
   font-weight: bold;
   color: #666;
   cursor: pointer;
-  transition: color var(--transition-speed) ease;
-  position: relative;
+  transition: color 0.3s ease;
 }
 
 .tab-button.active {
-  color: var(--cor-secundaria);
+  color: #000000;
   font-weight: 800;
 }
 
-/* Indicador das Tabs - CORRIGIDO */
 .tab-indicator {
   position: absolute;
   bottom: -1px;
   left: 0;
-  height: 3px; /* Mais grosso */
-  background: var(--cor-principal); /* Cor padrão para login */
-  transition: all var(--transition-speed) ease;
+  height: 3px;
+  background: #E964BD;
+  transition: all 0.3s ease;
   width: 50%;
   border-radius: 2px;
 }
 
-/* Quando estiver na página de login, o indicador fica rosa */
-:host-context(.pagina-login) .tab-indicator {
-  background: var(--cor-principal);
-  transform: translateX(0);
-}
-
-/* Quando estiver na página de registro, o indicador fica preto */
-:host-context(.pagina-register) .tab-indicator {
-  background: var(--cor-secundaria);
-  transform: translateX(100%);
-}
-
-/* Forms */
 .auth-form {
   width: 100%;
   display: flex;
@@ -149,14 +122,14 @@
 
 .input-field:focus {
   outline: none;
-  border-color: var(--cor-principal);
+  border-color: #E964BD;
 }
 
 .input-label {
   position: absolute;
   left: 12px;
   top: 16px;
-  background-color: #fdfafd;
+  background-color: #ffffff;
   padding: 0 4px;
   font-size: 1rem;
   color: #888;
@@ -168,7 +141,7 @@
 .input-field:not(:placeholder-shown) + .input-label {
   top: -10px;
   font-size: 14px;
-  color: var(--cor-principal);
+  color: #E964BD;
 }
 
 .toggle-password {
@@ -183,7 +156,6 @@
   z-index: 2;
 }
 
-/* Options */
 .options-container {
   display: flex;
   justify-content: space-between;
@@ -201,7 +173,7 @@
 }
 
 .forgot-password {
-  color: var(--cor-principal);
+  color: #E964BD;
   text-decoration: none;
 }
 
@@ -209,8 +181,6 @@
   text-decoration: underline;
 }
 
-/* Botões - CORRIGIDO o problema do hover */
-/* Botões - CORRIGIDO o problema do hover */
 .botao-principal {
   width: 100%;
   background-color: #000000;
@@ -227,26 +197,10 @@
   overflow: hidden;
 }
 
-.botao-principal::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
-}
-
 .botao-principal:hover:not(:disabled) {
   transform: translateY(-2px);
-  background-color: #E964BD; /* Alterado para rosa igual ao contact */
-  border-color: #E964BD; /* Alterado para rosa igual ao contact */
-  color: #fff; /* Mantém o texto branco */
-}
-
-.botao-principal:hover:not(:disabled)::before {
-  left: 100%;
+  background-color: #E964BD;
+  border-color: #E964BD;
 }
 
 .botao-principal:disabled {
@@ -256,14 +210,13 @@
   transform: none;
 }
 
-/* Footer dos Forms */
 .auth-footer {
   text-align: center;
   margin-bottom: 20px;
 }
 
 .auth-footer a {
-  color: var(--cor-principal);
+  color: #E964BD;
   text-decoration: none;
   font-weight: bold;
 }
@@ -272,7 +225,6 @@
   text-decoration: underline;
 }
 
-/* Seção Visitante */
 .guest-section {
   width: 100%;
   margin-top: 20px;
@@ -309,33 +261,15 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.botao-convidado::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(233, 100, 189, 0.1), transparent);
-  transition: left 0.5s;
 }
 
 .botao-convidado:hover {
   background-color: #f8f8f8;
-  border-color: var(--cor-principal);
-  color: var(--cor-principal);
+  border-color: #E964BD;
+  color: #E964BD;
   transform: translateY(-2px);
 }
 
-.botao-convidado:hover::before {
-  left: 100%;
-}
-
-/* Mensagens de Erro */
 .error-message {
   color: #d32f2f;
   font-size: 0.8rem;
@@ -343,70 +277,55 @@
   text-align: left;
 }
 
+@media (max-width: 768px) {
+  .pagina-auth {
+    flex-direction: column;
+    height: auto;
+  }
 
+  .imagem-container {
+    height: 300px;
+  }
 
-/* Carousel Styles - Slide Right Transition */
-.carousel {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+  .auth-container {
+    padding: 30px 20px;
+  }
+
+  .auth-header {
+    margin-bottom: 30px;
+  }
+
+  .tab-button {
+    font-size: 1.1rem;
+    padding: 14px 0;
+  }
 }
 
-.carousel-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+@media (max-width: 480px) {
+  :host {
+    padding: 10px;
+  }
 
-.carousel-slide.active {
-  transform: translateX(0);
-  z-index: 2;
-}
+  .auth-container {
+    padding: 20px 15px;
+  }
 
-.carousel-slide.next {
-  transform: translateX(100%);
-  z-index: 1;
-}
+  .auth-header {
+    margin-bottom: 25px;
+  }
 
-.carousel-slide.previous {
-  transform: translateX(-100%);
-  z-index: 1;
-}
+  .tab-button {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
 
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+  .input-container {
+    margin-bottom: 20px;
+  }
 
-/* Carousel Dots */
-.carousel-dots {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  display: flex;
-  gap: 10px;
-}
-
-.carousel-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid white;
-  background-color: transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.carousel-dot:hover,
-.carousel-dot.active {
-  background-color: white;
-  transform: scale(1.2);
+  .options-container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
 }

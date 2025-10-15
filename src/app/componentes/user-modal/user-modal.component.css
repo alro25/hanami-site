@@ -1,0 +1,136 @@
+/* Layout principal */
+.user-modal {
+  padding: 1rem;
+}
+
+.user-modal h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+/* Seções de usuário e visitante */
+.user-section,
+.guest-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.welcome-message {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #666;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.welcome-message strong {
+  color: #E964BD;
+  font-weight: 600;
+}
+
+/* Links de menu */
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-link {
+  display: block;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.modal-link:hover {
+  background-color: #E964BD;
+  color: white;
+  border-color: #E964BD;
+  transform: translateY(-1px);
+}
+
+/* Botões */
+.btn {
+  padding: 12px 24px;
+  border: 2px solid;
+  border-radius: 6px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  font-size: 0.95rem;
+}
+
+.btn-outline {
+  color: #000;
+  border-color: #000;
+}
+
+.btn-outline:hover {
+  background-color: #000;
+  color: white;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 1rem;
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.logout-btn:hover {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-section,
+.guest-section {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .user-modal {
+    padding: 0.75rem;
+  }
+  
+  .user-modal h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .modal-link {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}

@@ -1,8 +1,9 @@
 :host {
   display: block;
-  background-color: #f4f7f6;
-  padding: 2rem;
+  background-color: #f8f9fa;
+  padding: 1.5rem;
   font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
 }
 
 .dashboard-container {
@@ -10,25 +11,47 @@
   margin: 0 auto;
 }
 
+/* Header do Dashboard */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .dashboard-header h1 {
   font-size: 2rem;
   font-weight: 700;
   color: #222;
+  margin: 0;
 }
 
-.filter-btn {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 0.5rem 1rem;
+.back-home-btn {
+  background-color: #E964BD;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.back-home-btn:hover {
+  background-color: #d455a8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 100, 189, 0.3);
+}
+
+/* Cards de Resumo */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .card {
@@ -36,27 +59,28 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.summary-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-.summary-cards .card-header {
+.card-header {
   font-size: 0.9rem;
   color: #666;
   margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
-.summary-cards .value {
+.card-body .value {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #E964BD; /* Hanami Pink */
+  color: #E964BD;
 }
 
+/* Seção de Gráficos */
 .charts-section {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -72,8 +96,9 @@
 
 .chart-title {
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 1rem;
+  color: #333;
 }
 
 .chart-container {
@@ -82,47 +107,140 @@
 }
 
 .chart-main .chart-container {
-  height: calc(500px + 1.5rem);
+  height: 350px;
+}
+
+/* Tabela de Pedidos Recentes */
+.recent-orders {
+  overflow: hidden;
+}
+
+.table-container {
+  overflow-x: auto;
+  border-radius: 8px;
 }
 
 .recent-orders table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 }
 
-.recent-orders th, .recent-orders td {
+.recent-orders th,
+.recent-orders td {
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid #eee;
 }
 
 .recent-orders th {
-  font-weight: 500;
-  color: #666;
+  font-weight: 600;
+  color: #444;
+  background-color: #f8f9fa;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
+.recent-orders td {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* Status dos Pedidos */
 .status {
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: bold;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.status.entregue { background-color: #d4edda; color: #155724; }
-.status.pendente { background-color: #fff3cd; color: #856404; }
-.status.cancelado { background-color: #f8d7da; color: #721c24; }
-
-.loading-text {
-  padding: 2rem;
-  text-align: center;
-  color: #888;
+.status.entregue {
+  background-color: #e8f5e8;
+  color: #2e7d32;
 }
 
-@media (max-width: 992px) {
+.status.pendente {
+  background-color: #fff8e1;
+  color: #f57c00;
+}
+
+.status.cancelado {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
   .charts-section {
     grid-template-columns: 1fr;
   }
+  
   .chart-main .chart-container {
     height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .summary-cards {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .card {
+    padding: 1.25rem;
+  }
+  
+  .card-body .value {
+    font-size: 1.8rem;
+  }
+  
+  .chart-container {
+    height: 200px;
+  }
+  
+  .chart-main .chart-container {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+  
+  .recent-orders th,
+  .recent-orders td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .status {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
   }
 }

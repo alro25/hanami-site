@@ -1,0 +1,48 @@
+<div class="user-modal">
+  <h2>Minha Conta</h2>
+
+  @if (authService.currentUser()) {
+    <!-- Seção para usuário logado -->
+    <div class="user-section">
+      <p class="welcome-message">
+        Olá, <strong>{{ authService.currentUser() }}</strong>!
+      </p>
+      
+      <div class="menu-links">
+        <a 
+          href="#" 
+          (click)="navigateTo('/dashboard', $event)" 
+          class="modal-link">
+          Acessar Dashboard
+        </a>
+      </div>
+
+      <button class="btn btn-outline logout-btn" (click)="logout()">
+        Sair
+      </button>
+    </div>
+  } @else {
+    <!-- Seção para visitante -->
+    <div class="guest-section">
+      <p class="welcome-message">
+        Faça login para acessar todos os recursos!
+      </p>
+      
+      <div class="menu-links">
+        <a 
+          href="#" 
+          (click)="navigateTo('/login', $event)" 
+          class="modal-link">
+          Fazer Login
+        </a>
+        
+        <a 
+          href="#" 
+          (click)="navigateTo('/register', $event)" 
+          class="modal-link">
+          Criar Conta
+        </a>
+      </div>
+    </div>
+  }
+</div>

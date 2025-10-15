@@ -1,0 +1,75 @@
+<div class="bag-header">
+  <h2>Sua sacola</h2>
+  <span>({{ bagService.itemCount() }} itens)</span>
+</div>
+
+@if (purchaseCompleted()) {
+  <!-- Mensagem de sucesso após compra -->
+  <div class="purchase-success">
+    <div class="success-icon">✓</div>
+    <h3>Compra realizada com sucesso!</h3>
+    <p>Obrigado pela sua compra. Em breve você receberá um e-mail com os detalhes do pedido.</p>
+    <button class="continue-shopping-btn" (click)="uiService.closeAllModals()">
+      Continuar Comprando
+    </button>
+  </div>
+} @else if (bagService.bagItems().length > 0) {
+  <!-- Lista de itens na sacola -->
+  <div class="bag-items">
+    @for (item of bagService.bagItems(); track item.product.id) {
+      <div class="bag-item">
+        <img 
+          [src]="item.product.imageUrl" 
+          width="80" 
+          height="80" 
+          [alt]="item.product.name"
+          loading="lazy">
+        <div class="item-info">
+          <p class="item-name">{{ item.product.name }}</p>
+          <div class="item-controls">
+            <div class="quantity-selector">
+              <button 
+                (click)="bagService.updateQuantity(item.product.id, -1)" 
+                aria-label="Remover uma unidade">
+                -
+              </button>
+              <span>{{ item.quantity }}</span>
+              <button 
+                (click)="bagService.updateQuantity(item.product.id, 1)" 
+                aria-label="Adicionar uma unidade">
+                +
+              </button>
+            </div>
+            <button 
+              class="remove-btn" 
+              (click)="bagService.removeFromBag(item.product.id)">
+              Remover
+            </button>
+          </div>
+        </div>
+        <div class="item-price">
+          <p>R$ {{ (item.product.price * item.quantity).toFixed(2) }}</p>
+        </div>
+      </div>
+    }
+  </div>
+  
+  <!-- Rodapé com total e botão de finalizar -->
+  <div class="bag-footer">
+    <div class="subtotal">
+      <span>Subtotal</span>
+      <strong>R$ {{ bagService.bagTotal().toFixed(2) }}</strong>
+    </div>
+    <button class="checkout-btn" (click)="completePurchase()">
+      Finalizar Compra
+    </button>
+  </div>
+} @else {
+  <!-- Sacola vazia -->
+  <div class="bag-empty">
+    <p>Sua sacola está vazia.</p>
+    <button class="btn-outline" (click)="uiService.closeAllModals()">
+      Continuar Comprando
+    </button>
+  </div>
+}

@@ -93,14 +93,15 @@
         @if (filteredProducts().length > 0) {
           <div class="products-grid">
             @for (product of filteredProducts(); track product.id) {
+              <!-- Exemplo de ajuste no product-card -->
               <article class="product-card">
                 <div class="product-image-container">
                   <img [src]="product.imageUrl" [alt]="product.name">
-                  <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
                 </div>
                 <div class="product-info">
                   <h3>{{ product.name }}</h3>
                   <p>R$ {{ product.price.toFixed(2) }}</p>
+                  <button class="buy-button" (click)="onAddToBag(product)">COMPRAR</button>
                 </div>
               </article>
             }

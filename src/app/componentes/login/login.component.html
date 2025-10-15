@@ -1,52 +1,52 @@
 <div class="pagina-auth">
   <section class="imagem-container">
-    <div class="carousel">
-      @for (slide of slides; track slide.imageUrl; let i = $index) {
-        <div class="carousel-slide" [class.active]="i === currentSlide()">
-          <img [ngSrc]="slide.imageUrl" [alt]="slide.alt" width="600" height="800" priority="{{ i === 0 ? 'true' : 'false' }}" />
-        </div>
-      }
-      
-      <!-- Carousel Dots -->
-      <div class="carousel-dots">
-        @for (slide of slides; track slide.imageUrl; let i = $index) {
-          <button 
-            class="carousel-dot" 
-            [class.active]="i === currentSlide()"
-            (click)="goToSlide(i)"
-            [attr.aria-label]="'Ir para imagem ' + (i + 1)">
-          </button>
-        }
-      </div>
+    <div class="static-image">
+      <img 
+        [ngSrc]="'/img/card-login.png'" 
+        alt="Duas garotas sorrindo em um fundo cor de rosa" 
+        width="600" 
+        height="800" 
+        priority="true" />
     </div>
   </section>
 
   <main class="auth-container">
     <section class="auth-card">
-      <!-- Header com tabs -->
       <div class="auth-header">
-        <button class="tab-button active" data-tab="login">
+        <button class="tab-button active">
           LOGIN
         </button>
-        <button class="tab-button" data-tab="register" (click)="navegarParaRegister()">
+        <button class="tab-button" (click)="navigateToRegister()">
           CADASTRO
         </button>
         <div class="tab-indicator"></div>
       </div>
 
-      <!-- Formulário de Login -->
-      <form class="auth-form active" (ngSubmit)="login()" #loginForm="ngForm">
+      <form class="auth-form" (ngSubmit)="login()" #loginForm="ngForm">
         <div class="input-container">
-          <input type="email" id="login-email" class="input-field" placeholder=" " 
-                [(ngModel)]="usuario" name="usuario" required email>
+          <input 
+            type="email" 
+            id="login-email" 
+            class="input-field" 
+            placeholder=" " 
+            [(ngModel)]="usuario" 
+            name="usuario" 
+            required 
+            email>
           <label for="login-email" class="input-label">E-mail</label>
         </div>
 
         <div class="input-container">
-          <input [type]="hide() ? 'password' : 'text'" id="login-senha" class="input-field" placeholder=" "
-                [(ngModel)]="senha" name="senha" required>
+          <input 
+            [type]="hide() ? 'password' : 'text'" 
+            id="login-senha" 
+            class="input-field" 
+            placeholder=" "
+            [(ngModel)]="senha" 
+            name="senha" 
+            required>
           <label for="login-senha" class="input-label">Senha</label>
-          <button type="button" class="toggle-password" (click)="clickEvent($event)">
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility($event)">
             <span class="material-icons">{{ hide() ? 'visibility_off' : 'visibility' }}</span>
           </button>
         </div>
@@ -56,10 +56,15 @@
             <input type="checkbox">
             Lembrar-me
           </label>
-          <a href="#" class="forgot-password" (click)="$event.preventDefault()">Esqueci minha senha</a>
+          <a href="#" class="forgot-password" (click)="$event.preventDefault()">
+            Esqueci minha senha
+          </a>
         </div>
 
-        <button type="submit" class="botao-principal" [disabled]="!loginForm.form.valid || isLoading">
+        <button 
+          type="submit" 
+          class="botao-principal" 
+          [disabled]="!loginForm.form.valid || isLoading">
           @if (isLoading) {
             <span>Carregando...</span>
           } @else {
@@ -68,11 +73,15 @@
         </button>
 
         <div class="auth-footer">
-          <p>Não tem uma conta? <a href="#" (click)="navegarParaRegister(); $event.preventDefault()">Clique aqui para se cadastrar!</a></p>
+          <p>
+            Não tem uma conta? 
+            <a href="#" (click)="navigateToRegister(); $event.preventDefault()">
+              Clique aqui para se cadastrar!
+            </a>
+          </p>
         </div>
       </form>
 
-      <!-- Seção de Visitante -->
       <div class="guest-section">
         <div class="separator">
           <span>ou</span>
