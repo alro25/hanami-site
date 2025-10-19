@@ -136,7 +136,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     const chart = new Chart(this.categoriasPopularesCanvas.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: ['Maquiagem', 'Skincare', 'Cabelos', 'Perfumaria', 'Outros'],
+        labels: ['Lançamentos', 'Rosto', 'Lábios', 'Olhos', 'Pincéis'],
         datasets: [{
           data: [45, 25, 15, 10, 5],
           backgroundColor: ['#E964BD', '#F28EC9', '#F8B6D9', '#FFDDEE', '#F5F5F5'],
