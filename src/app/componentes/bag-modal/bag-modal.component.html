@@ -3,17 +3,7 @@
   <span>({{ bagService.itemCount() }} itens)</span>
 </div>
 
-@if (purchaseCompleted()) {
-  <!-- Mensagem de sucesso após compra -->
-  <div class="purchase-success">
-    <div class="success-icon">✓</div>
-    <h3>Compra realizada com sucesso!</h3>
-    <p>Obrigado pela sua compra. Em breve você receberá um e-mail com os detalhes do pedido.</p>
-    <button class="continue-shopping-btn" (click)="uiService.closeAllModals()">
-      Continuar Comprando
-    </button>
-  </div>
-} @else if (bagService.bagItems().length > 0) {
+@if (bagService.bagItems().length > 0) {
   <!-- Lista de itens na sacola -->
   <div class="bag-items">
     @for (item of bagService.bagItems(); track item.product.id) {
@@ -30,7 +20,8 @@
             <div class="quantity-selector">
               <button 
                 (click)="bagService.updateQuantity(item.product.id, -1)" 
-                aria-label="Remover uma unidade">
+                aria-label="Remover uma unidade"
+                [disabled]="item.quantity <= 1">
                 -
               </button>
               <span>{{ item.quantity }}</span>
@@ -60,15 +51,27 @@
       <span>Subtotal</span>
       <strong>R$ {{ bagService.bagTotal().toFixed(2) }}</strong>
     </div>
-    <button class="checkout-btn" (click)="completePurchase()">
+    
+    <!-- Informações de frete -->
+    <div class="shipping-info">
+      <p>🚚 Frete grátis para compras acima de R$ 99,00</p>
+    </div>
+    
+    <button class="checkout-btn" (click)="navigateToCheckout()">
       Finalizar Compra
+    </button>
+    
+    <button class="continue-btn" (click)="continueShopping()">
+      Continuar Comprando
     </button>
   </div>
 } @else {
   <!-- Sacola vazia -->
   <div class="bag-empty">
-    <p>Sua sacola está vazia.</p>
-    <button class="btn-outline" (click)="uiService.closeAllModals()">
+    <div class="empty-icon">🛒</div>
+    <h3>Sua sacola está vazia</h3>
+    <p>Adicione alguns produtos incríveis da Hanami!</p>
+    <button class="btn-outline" (click)="continueShopping()">
       Continuar Comprando
     </button>
   </div>

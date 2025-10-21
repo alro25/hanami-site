@@ -9,10 +9,12 @@
 .bag-header h2 {
   margin: 0;
   font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .bag-header span {
   color: #666;
+  font-size: 0.9rem;
 }
 
 .bag-items {
@@ -20,19 +22,44 @@
   flex-direction: column;
   gap: 1.5rem;
   margin-top: 1.5rem;
-  flex-grow: 1;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar personalizada */
+.bag-items::-webkit-scrollbar {
+  width: 4px;
+}
+
+.bag-items::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.bag-items::-webkit-scrollbar-thumb {
+  background: #E964BD;
+  border-radius: 10px;
 }
 
 .bag-item {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.bag-item:hover {
+  background-color: #f9f9f9;
 }
 
 .bag-item img {
   border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
+  border: 1px solid #eee;
 }
 
 .item-info {
@@ -47,6 +74,7 @@
   margin: 0 0 0.5rem 0;
   font-size: 0.9rem;
   line-height: 1.3;
+  color: #333;
 }
 
 .item-controls {
@@ -59,30 +87,42 @@
 .quantity-selector {
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   overflow: hidden;
+  background: #fff;
 }
 
 .quantity-selector button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.25rem 0.75rem;
+  padding: 0.4rem 0.75rem;
   font-size: 1rem;
   line-height: 1;
-  transition: background-color 0.3s ease;
+  transition: all 0.2s ease;
+  color: #666;
 }
 
-.quantity-selector button:hover {
+.quantity-selector button:hover:not(:disabled) {
   background-color: #f5f5f5;
+  color: #E964BD;
+}
+
+.quantity-selector button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  background-color: #f9f9f9;
 }
 
 .quantity-selector span {
-  padding: 0.25rem 0.5rem;
-  min-width: 20px;
+  padding: 0.4rem 0.75rem;
+  min-width: 30px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
+  color: #333;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
 }
 
 .remove-btn {
@@ -108,13 +148,14 @@
 
 .item-price p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  color: #333;
 }
 
 .bag-footer {
   margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+  border-top: 2px solid #eee;
 }
 
 .subtotal {
@@ -122,106 +163,161 @@
   justify-content: space-between;
   margin-bottom: 1rem;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: #333;
+}
+
+.shipping-info {
+  text-align: center;
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: #f8f8f8;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.shipping-info p {
+  margin: 0;
 }
 
 .checkout-btn {
   width: 100%;
-  padding: 12px 24px;
+  padding: 14px 24px;
   background-color: #000;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
 }
 
 .checkout-btn:hover {
   background-color: #E964BD;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 100, 189, 0.3);
 }
 
-/* Estilos para a mensagem de sucesso */
-.purchase-success {
+.continue-btn {
+  width: 100%;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #666;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.continue-btn:hover {
+  border-color: #E964BD;
+  color: #E964BD;
+  background-color: rgba(233, 100, 189, 0.05);
+}
+
+.bag-empty {
   text-align: center;
   padding: 3rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-grow: 1;
 }
 
-.success-icon {
-  width: 60px;
-  height: 60px;
-  background-color: #4CAF50;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
 }
 
-.purchase-success h3 {
-  color: #4CAF50;
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+.bag-empty h3 {
+  color: #333;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
-.purchase-success p {
+.bag-empty p {
   color: #666;
   margin: 0 0 2rem 0;
   line-height: 1.5;
-  max-width: 300px;
-}
-
-.continue-shopping-btn {
-  padding: 12px 24px;
-  background-color: #000;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  min-width: 200px;
-}
-
-.continue-shopping-btn:hover {
-  background-color: #E964BD;
-  transform: translateY(-2px);
-}
-
-.bag-empty {
-  text-align: center;
-  padding: 2rem 0;
 }
 
 .btn-outline {
-  padding: 12px 24px;
+  padding: 12px 32px;
   border: 2px solid #000;
-  border-radius: 6px;
+  border-radius: 8px;
   background: transparent;
   cursor: pointer;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
   transition: all 0.3s ease;
-  width: 100%;
+  color: #000;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-outline:hover {
   background-color: #000;
   color: white;
+  transform: translateY(-2px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .bag-item {
+    gap: 0.75rem;
+  }
+  
+  .bag-item img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .item-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .bag-items {
+    max-height: 300px;
+  }
+  
+  .checkout-btn,
+  .continue-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bag-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .bag-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .item-name {
+    font-size: 0.85rem;
+  }
+  
+  .quantity-selector button {
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .quantity-selector span {
+    padding: 0.3rem 0.5rem;
+    min-width: 25px;
+  }
 }

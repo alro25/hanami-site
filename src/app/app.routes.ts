@@ -10,6 +10,7 @@ import { ProductsComponent } from './componentes/products/products.component';
 import { AboutUsComponent } from './componentes/about-us/about-us.component';
 import { BagModalComponent } from './componentes/bag-modal/bag-modal.component';
 import { UserModalComponent } from './componentes/user-modal/user-modal.component';
+import { CheckoutComponent } from './componentes/checkout/checkout.component';
 
 export const routes: Routes = [
     {path: "", pathMatch: 'full', redirectTo: 'home'},
@@ -24,5 +25,6 @@ export const routes: Routes = [
     {path:'about-us', component: AboutUsComponent},
     {path:'bag-modal', component: BagModalComponent},
     {path:'user-modal', component: UserModalComponent},
+    {path: 'checkout', component: CheckoutComponent},
     { path: '**', redirectTo: '' }
 ];

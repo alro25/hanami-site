@@ -1,5 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { BagService } from '../../services/bag.service';
 import { UiService } from '../../services/ui.service';
 
@@ -13,12 +14,16 @@ import { UiService } from '../../services/ui.service';
 export class BagModalComponent {
   bagService = inject(BagService);
   uiService = inject(UiService);
+  router = inject(Router);
 
-  purchaseCompleted = signal(false);
+  navigateToCheckout(): void {
+    // Fecha o modal e navega para o checkout
+    this.uiService.closeAllModals();
+    this.router.navigate(['/checkout']);
+  }
 
-  completePurchase(): void {
-    this.bagService.checkout();
-    this.purchaseCompleted.set(true);
-    this.bagService.clearBag();
+  // Método para continuar comprando
+  continueShopping(): void {
+    this.uiService.closeAllModals();
   }
 }
