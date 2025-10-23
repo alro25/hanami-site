@@ -3,272 +3,319 @@
   <header class="checkout-header">
     <div class="header-content">
       <h1 class="logo">Hanami</h1>
-      <nav class="checkout-steps">
-        <div class="step" [class.active]="currentStep() === 'information'">
-          <span class="step-number">1</span>
-          <span class="step-label">Informações</span>
-        </div>
-        <div class="step" [class.active]="currentStep() === 'shipping'">
-          <span class="step-number">2</span>
-          <span class="step-label">Entrega</span>
-        </div>
-        <div class="step" [class.active]="currentStep() === 'payment'">
-          <span class="step-number">3</span>
-          <span class="step-label">Pagamento</span>
-        </div>
-      </nav>
+      <div class="checkout-title">
+        <h2>Finalizar Compra</h2>
+      </div>
     </div>
   </header>
 
   <main class="checkout-main">
     <!-- Coluna do Formulário -->
     <div class="checkout-form-column">
-      <form [formGroup]="checkoutForm" class="checkout-form">
-        
-        <!-- Etapa 1: Informações de Contato -->
-        @if (currentStep() === 'information') {
-          <section class="form-section">
-            <h2>Informações de Contato</h2>
-            
+      <!-- Seção de Login para usuários não autenticados -->
+      @if (!authService.isAuthenticated()) {
+        <div class="login-section">
+          <h3>Já tem uma conta?</h3>
+          <p>Faça login para agilizar seu pedido</p>
+          
+          <div class="login-form">
             <div class="form-group">
-              <label for="email">E-mail *</label>
+              <label for="login-email">E-mail</label>
               <input 
                 type="email" 
-                id="email" 
-                formControlName="email"
+                id="login-email" 
+                [(ngModel)]="loginEmail"
+                [ngModelOptions]="{standalone: true}"
                 placeholder="seu@email.com">
-              @if (checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched) {
-                <span class="error">Por favor, insira um e-mail válido</span>
-              }
             </div>
-
-            <div class="form-group">
-              <label for="phone">Telefone *</label>
-              <input 
-                type="tel" 
-                id="phone" 
-                formControlName="phone"
-                placeholder="(11) 99999-9999">
-              @if (checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched) {
-                <span class="error">Telefone é obrigatório</span>
-              }
-            </div>
-
-            <button type="button" class="btn-next" (click)="nextStep()">
-              Continuar para Entrega
-            </button>
-          </section>
-        }
-
-        <!-- Etapa 2: Endereço de Entrega -->
-        @if (currentStep() === 'shipping') {
-          <section class="form-section">
-            <h2>Endereço de Entrega</h2>
             
-            <div class="form-row">
-              <div class="form-group">
-                <label for="firstName">Nome *</label>
-                <input 
-                  type="text" 
-                  id="firstName" 
-                  formControlName="firstName"
-                  placeholder="Nome">
-              </div>
-              <div class="form-group">
-                <label for="lastName">Sobrenome *</label>
-                <input 
-                  type="text" 
-                  id="lastName" 
-                  formControlName="lastName"
-                  placeholder="Sobrenome">
-              </div>
-            </div>
-
             <div class="form-group">
-              <label for="address">Endereço *</label>
+              <label for="login-password">Senha</label>
+              <input 
+                [type]="showLoginPassword ? 'text' : 'password'" 
+                id="login-password" 
+                [(ngModel)]="loginPassword"
+                [ngModelOptions]="{standalone: true}"
+                placeholder="Sua senha">
+              <button type="button" class="toggle-password" (click)="showLoginPassword = !showLoginPassword">
+                <span>{{ showLoginPassword ? '🙈' : '👁️' }}</span>
+              </button>
+            </div>
+            
+            <button type="button" class="btn-login" (click)="login()" [disabled]="isLoggingInValue">
+              @if (isLoggingInValue) {
+                <span>Entrando...</span>
+              } @else {
+                <span>Fazer Login</span>
+              }
+            </button>
+            
+            <div class="login-links">
+              <a href="#" (click)="navigateToRegister($event)">Criar uma conta</a>
+              <a href="#" (click)="$event.preventDefault()">Esqueci minha senha</a>
+            </div>
+          </div>
+          
+          <div class="separator">
+            <span>ou continue como visitante</span>
+          </div>
+        </div>
+      }
+
+      <form [formGroup]="checkoutForm" class="checkout-form">
+        
+        <!-- Informações de Contato -->
+        <section class="form-section">
+          <h2>Informações de Contato</h2>
+          
+          <div class="form-group">
+            <label for="email">E-mail *</label>
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email"
+              placeholder="seu@email.com">
+            @if (isFieldInvalid('email')) {
+              <span class="error">Por favor, insira um e-mail válido</span>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Telefone *</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              formControlName="phone"
+              placeholder="(11) 99999-9999">
+            @if (isFieldInvalid('phone')) {
+              <span class="error">Telefone é obrigatório</span>
+            }
+          </div>
+        </section>
+
+        <!-- Endereço de Entrega -->
+        <section class="form-section">
+          <h2>Endereço de Entrega</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Nome *</label>
               <input 
                 type="text" 
-                id="address" 
-                formControlName="address"
-                placeholder="Rua, número, complemento">
+                id="firstName" 
+                formControlName="firstName"
+                placeholder="Nome">
+              @if (isFieldInvalid('firstName')) {
+                <span class="error">Nome é obrigatório</span>
+              }
             </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="city">Cidade *</label>
-                <input 
-                  type="text" 
-                  id="city" 
-                  formControlName="city"
-                  placeholder="Cidade">
-              </div>
-              <div class="form-group">
-                <label for="state">Estado *</label>
-                <select id="state" formControlName="state">
-                  <option value="">Selecione</option>
-                  <option value="SP">São Paulo</option>
-                  <option value="RJ">Rio de Janeiro</option>
-                  <option value="MG">Minas Gerais</option>
-                  <option value="RS">Rio Grande do Sul</option>
-                  <option value="PR">Paraná</option>
-                  <option value="SC">Santa Catarina</option>
-                  <option value="BA">Bahia</option>
-                  <option value="DF">Distrito Federal</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="zipCode">CEP *</label>
-                <input 
-                  type="text" 
-                  id="zipCode" 
-                  formControlName="zipCode"
-                  placeholder="00000-000">
-              </div>
-            </div>
-
             <div class="form-group">
-              <label for="country">País *</label>
-              <select id="country" formControlName="country">
-                <option value="Brasil">Brasil</option>
+              <label for="lastName">Sobrenome *</label>
+              <input 
+                type="text" 
+                id="lastName" 
+                formControlName="lastName"
+                placeholder="Sobrenome">
+              @if (isFieldInvalid('lastName')) {
+                <span class="error">Sobrenome é obrigatório</span>
+              }
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Endereço *</label>
+            <input 
+              type="text" 
+              id="address" 
+              formControlName="address"
+              placeholder="Rua, número, complemento">
+            @if (isFieldInvalid('address')) {
+              <span class="error">Endereço é obrigatório</span>
+            }
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">Cidade *</label>
+              <input 
+                type="text" 
+                id="city" 
+                formControlName="city"
+                placeholder="Cidade">
+              @if (isFieldInvalid('city')) {
+                <span class="error">Cidade é obrigatória</span>
+              }
+            </div>
+            <div class="form-group">
+              <label for="state">Estado *</label>
+              <select id="state" formControlName="state">
+                <option value="">Selecione</option>
+                <option value="SP">São Paulo</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="PR">Paraná</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="BA">Bahia</option>
+                <option value="DF">Distrito Federal</option>
               </select>
+              @if (isFieldInvalid('state')) {
+                <span class="error">Estado é obrigatório</span>
+              }
             </div>
-
-            <div class="shipping-methods">
-              <h3>Método de Entrega</h3>
-              <div class="shipping-options">
-                <label class="shipping-option">
-                  <input type="radio" formControlName="shippingMethod" value="standard">
-                  <div class="option-content">
-                    <span class="option-name">Entrega Padrão</span>
-                    <span class="option-price">
-                      @if (bagTotal() >= 99) {
-                        Grátis
-                      } @else {
-                        R$ 15,90
-                      }
-                    </span>
-                    <span class="option-time">5-7 dias úteis</span>
-                  </div>
-                </label>
-                
-                <label class="shipping-option">
-                  <input type="radio" formControlName="shippingMethod" value="express">
-                  <div class="option-content">
-                    <span class="option-name">Entrega Expressa</span>
-                    <span class="option-price">R$ 29,90</span>
-                    <span class="option-time">2-3 dias úteis</span>
-                  </div>
-                </label>
-              </div>
+            <div class="form-group">
+              <label for="zipCode">CEP *</label>
+              <input 
+                type="text" 
+                id="zipCode" 
+                formControlName="zipCode"
+                placeholder="00000-000">
+              @if (isFieldInvalid('zipCode')) {
+                <span class="error">CEP é obrigatório</span>
+              }
             </div>
+          </div>
 
-            <div class="form-actions">
-              <button type="button" class="btn-back" (click)="previousStep()">
-                Voltar
-              </button>
-              <button type="button" class="btn-next" (click)="nextStep()">
-                Continuar para Pagamento
-              </button>
+          <div class="form-group">
+            <label for="country">País *</label>
+            <select id="country" formControlName="country">
+              <option value="Brasil">Brasil</option>
+            </select>
+          </div>
+
+          <div class="shipping-methods">
+            <h3>Método de Entrega</h3>
+            <div class="shipping-options">
+              <label class="shipping-option">
+                <input type="radio" formControlName="shippingMethod" value="standard">
+                <div class="option-content">
+                  <span class="option-name">Entrega Padrão</span>
+                  <span class="option-price">
+                    @if (bagTotal() >= 99) {
+                      Grátis
+                    } @else {
+                      R$ 15,90
+                    }
+                  </span>
+                  <span class="option-time">5-7 dias úteis</span>
+                </div>
+              </label>
+              
+              <label class="shipping-option">
+                <input type="radio" formControlName="shippingMethod" value="express">
+                <div class="option-content">
+                  <span class="option-name">Entrega Expressa</span>
+                  <span class="option-price">R$ 29,90</span>
+                  <span class="option-time">2-3 dias úteis</span>
+                </div>
+              </label>
             </div>
-          </section>
-        }
+          </div>
+        </section>
 
-        <!-- Etapa 3: Pagamento -->
-        @if (currentStep() === 'payment') {
-          <section class="form-section">
-            <h2>Método de Pagamento</h2>
+        <!-- Pagamento -->
+        <section class="form-section">
+          <h2>Método de Pagamento</h2>
+          
+          <div class="payment-methods">
+            <label class="payment-option">
+              <input type="radio" formControlName="paymentMethod" value="credit">
+              <span class="option-label">Cartão de Crédito</span>
+            </label>
             
-            <div class="payment-methods">
-              <label class="payment-option">
-                <input type="radio" formControlName="paymentMethod" value="credit">
-                <span class="option-label">Cartão de Crédito</span>
-              </label>
-              
-              <label class="payment-option">
-                <input type="radio" formControlName="paymentMethod" value="debit">
-                <span class="option-label">Cartão de Débito</span>
-              </label>
-              
-              <label class="payment-option">
-                <input type="radio" formControlName="paymentMethod" value="pix">
-                <span class="option-label">PIX</span>
-              </label>
-            </div>
+            <label class="payment-option">
+              <input type="radio" formControlName="paymentMethod" value="debit">
+              <span class="option-label">Cartão de Débito</span>
+            </label>
+            
+            <label class="payment-option">
+              <input type="radio" formControlName="paymentMethod" value="pix">
+              <span class="option-label">PIX</span>
+            </label>
+          </div>
 
-            <!-- Campos do Cartão (visíveis apenas para cartão) -->
-            @if (checkoutForm.get('paymentMethod')?.value === 'credit' || checkoutForm.get('paymentMethod')?.value === 'debit') {
-              <div class="card-form">
-                <div class="form-group">
-                  <label for="cardNumber">Número do Cartão *</label>
-                  <input 
-                    type="text" 
-                    id="cardNumber" 
-                    formControlName="cardNumber"
-                    placeholder="0000 0000 0000 0000">
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="expiryDate">Validade *</label>
-                    <input 
-                      type="text" 
-                      id="expiryDate" 
-                      formControlName="expiryDate"
-                      placeholder="MM/AA">
-                  </div>
-                  <div class="form-group">
-                    <label for="cvv">CVV *</label>
-                    <input 
-                      type="text" 
-                      id="cvv" 
-                      formControlName="cvv"
-                      placeholder="000">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="cardName">Nome no Cartão *</label>
-                  <input 
-                    type="text" 
-                    id="cardName" 
-                    formControlName="cardName"
-                    placeholder="Como está no cartão">
-                </div>
-              </div>
-            }
-
-            <!-- PIX (visível apenas para PIX) -->
-            @if (checkoutForm.get('paymentMethod')?.value === 'pix') {
-              <div class="pix-info">
-                <div class="pix-code">
-                  <p>Pague com PIX e ganhe 5% de desconto!</p>
-                  <p>O código PIX será gerado após a confirmação do pedido.</p>
-                </div>
-              </div>
-            }
-
-            <div class="form-actions">
-              <button type="button" class="btn-back" (click)="previousStep()">
-                Voltar
-              </button>
-              <button 
-                type="button" 
-                class="btn-complete" 
-                (click)="completeOrder()"
-                [disabled]="isLoading()">
-                @if (isLoading()) {
-                  <span>Processando...</span>
-                } @else {
-                  <span>Completar Pedido</span>
+          <!-- Campos do Cartão (visíveis apenas para cartão) -->
+          @if (checkoutForm.get('paymentMethod')?.value === 'credit' || checkoutForm.get('paymentMethod')?.value === 'debit') {
+            <div class="card-form">
+              <div class="form-group">
+                <label for="cardNumber">Número do Cartão *</label>
+                <input 
+                  type="text" 
+                  id="cardNumber" 
+                  formControlName="cardNumber"
+                  placeholder="0000 0000 0000 0000">
+                @if (isFieldInvalid('cardNumber')) {
+                  <span class="error">Número do cartão é obrigatório</span>
                 }
-              </button>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="expiryDate">Validade *</label>
+                  <input 
+                    type="text" 
+                    id="expiryDate" 
+                    formControlName="expiryDate"
+                    placeholder="MM/AA">
+                  @if (isFieldInvalid('expiryDate')) {
+                    <span class="error">Validade é obrigatória</span>
+                  }
+                </div>
+                <div class="form-group">
+                  <label for="cvv">CVV *</label>
+                  <input 
+                    type="text" 
+                    id="cvv" 
+                    formControlName="cvv"
+                    placeholder="000">
+                  @if (isFieldInvalid('cvv')) {
+                    <span class="error">CVV é obrigatório</span>
+                  }
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="cardName">Nome no Cartão *</label>
+                <input 
+                  type="text" 
+                  id="cardName" 
+                  formControlName="cardName"
+                  placeholder="Como está no cartão">
+                @if (isFieldInvalid('cardName')) {
+                  <span class="error">Nome no cartão é obrigatório</span>
+                }
+              </div>
             </div>
-          </section>
-        }
+          }
+
+          <!-- PIX (visível apenas para PIX) -->
+          @if (checkoutForm.get('paymentMethod')?.value === 'pix') {
+            <div class="pix-info">
+              <div class="pix-code">
+                <p>Pague com PIX e ganhe 5% de desconto!</p>
+                <p>O código PIX será gerado após a confirmação do pedido.</p>
+              </div>
+            </div>
+          }
+
+          <div class="form-actions">
+            <button 
+              type="button" 
+              class="btn-complete" 
+              (click)="completeOrder()"
+              [disabled]="isLoadingValue">
+              @if (isLoadingValue) {
+                <span>Processando...</span>
+              } @else {
+                <span>Completar Pedido</span>
+              }
+            </button>
+          </div>
+        </section>
       </form>
     </div>
 
-    <!-- Coluna do Resumo -->
+    <!-- Coluna do Resumo (mantida igual) -->
     <div class="checkout-summary-column">
       <div class="order-summary">
         <h3>Seu Pedido</h3>
@@ -317,11 +364,7 @@
           <div class="total-line final">
             <span>Total</span>
             <span class="final-price">
-              @if (checkoutForm.get('paymentMethod')?.value === 'pix') {
-                R$ {{ (finalTotal() - (bagTotal() * 0.05)).toFixed(2) }}
-              } @else {
-                R$ {{ finalTotal().toFixed(2) }}
-              }
+              R$ {{ finalTotal().toFixed(2) }}
             </span>
           </div>
         </div>

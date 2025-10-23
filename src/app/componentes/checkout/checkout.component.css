@@ -483,7 +483,158 @@
     gap: 1rem;
   }
 }
+/* ... (mantenha todos os estilos anteriores) ... */
 
+/* Seção de Login */
+.login-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e1e1e1;
+}
+
+.login-section h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.login-section p {
+  margin: 0 0 1.5rem 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.login-form {
+  margin-bottom: 1.5rem;
+}
+
+.login-form .form-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.login-form .toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 0.875rem 2rem;
+  background: #E964BD;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.btn-login:hover:not(:disabled) {
+  background: #d455a8;
+  transform: translateY(-1px);
+}
+
+.btn-login:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.login-links {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.login-links a {
+  color: #E964BD;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+/* Adicione isso ao checkout.component.css */
+
+.checkout-title {
+  text-align: center;
+  flex: 1;
+}
+
+.checkout-title h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Remove as etapas do header */
+.checkout-steps {
+  display: none;
+}
+
+/* Separador */
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.separator span {
+  padding: 0 1rem;
+}
+
+/* Estados para usuário logado */
+.user-welcome {
+  background: #f0f8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.user-welcome p {
+  margin: 0;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .login-section {
+    padding: 1.5rem;
+  }
+  
+  .login-links {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
 @media (max-width: 480px) {
   .checkout-form-column {
     padding: 1rem;

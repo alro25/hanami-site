@@ -26,4 +26,9 @@ export class BagModalComponent {
   continueShopping(): void {
     this.uiService.closeAllModals();
   }
+
+  // Método para formatar preços (opcional)
+  formatPrice(price: number): string {
+    return price.toFixed(2).replace('.', ',');
+  }
 }

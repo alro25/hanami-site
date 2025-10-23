@@ -1,7 +1,7 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
 import { BagService } from '../../services/bag.service';
 import { OrderService } from '../../services/order.service';
 import { AuthService } from '../../services/auth.service';
@@ -9,20 +9,25 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
   private bagService = inject(BagService);
   private orderService = inject(OrderService);
-  private authService = inject(AuthService);
+  public authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
   // Estados reativos
   isLoading = signal(false);
-  currentStep = signal<'information' | 'shipping' | 'payment'>('information');
+  isLoggingIn = signal(false);
+  
+  // Dados de login
+  loginEmail = '';
+  loginPassword = '';
+  showLoginPassword = false;
 
   // Formulário de checkout
   checkoutForm = this.fb.group({
@@ -56,25 +61,46 @@ export class CheckoutComponent implements OnInit {
   itemCount = this.bagService.itemCount;
 
   shippingCost = computed(() => {
+    const method = this.checkoutForm.get('shippingMethod')?.value;
     const total = this.bagTotal();
+    
+    if (method === 'express') {
+      return 29.90;
+    }
+    
     return total >= 99 ? 0 : 15.90;
   });
 
   finalTotal = computed(() => {
-    return this.bagTotal() + this.shippingCost();
+    const total = this.bagTotal() + this.shippingCost();
+    const paymentMethod = this.checkoutForm.get('paymentMethod')?.value;
+    
+    if (paymentMethod === 'pix') {
+      return total * 0.95; // 5% de desconto
+    }
+    
+    return total;
   });
 
   ngOnInit() {
     // Preenche o email se o usuário estiver logado
-    if (this.authService.currentUser()) {
+    if (this.authService.isAuthenticated()) {
       this.checkoutForm.patchValue({
-        email: this.authService.currentUser()!
+        email: this.authService.currentUser()!,
+        firstName: this.authService.currentUserName()?.split(' ')[0] || '',
+        lastName: this.authService.currentUserName()?.split(' ').slice(1).join(' ') || ''
       });
     }
 
     // Atualiza validações baseadas no método de pagamento
     this.checkoutForm.get('paymentMethod')?.valueChanges.subscribe(method => {
       this.updatePaymentValidations(method);
+    });
+
+    // Atualiza validações baseadas no método de envio
+    this.checkoutForm.get('shippingMethod')?.valueChanges.subscribe(() => {
+      // Força atualização do custo de envio
+      this.shippingCost();
     });
   }
 
@@ -102,22 +128,58 @@ export class CheckoutComponent implements OnInit {
     cardName?.updateValueAndValidity();
   }
 
-  nextStep(): void {
-    // Valida a etapa atual antes de avançar
-    if (this.currentStep() === 'information') {
-      const emailControl = this.checkoutForm.get('email');
-      const phoneControl = this.checkoutForm.get('phone');
-      
-      if (emailControl?.invalid || phoneControl?.invalid) {
-        emailControl?.markAsTouched();
-        phoneControl?.markAsTouched();
-        return;
-      }
-    } else if (this.currentStep() === 'shipping') {
-      const shippingControls = ['firstName', 'lastName', 'address', 'city', 'state', 'zipCode'];
+  // Método de login
+  login(): void {
+    if (!this.loginEmail || !this.loginPassword) {
+      alert('Por favor, preencha e-mail e senha');
+      return;
+    }
+
+    this.isLoggingIn.set(true);
+
+    this.authService.login(this.loginEmail, this.loginPassword)
+      .subscribe({
+        next: (success) => {
+          this.isLoggingIn.set(false);
+          if (success) {
+            // Preenche automaticamente os dados do usuário
+            this.checkoutForm.patchValue({
+              email: this.authService.currentUser()!,
+              firstName: this.authService.currentUserName()?.split(' ')[0] || '',
+              lastName: this.authService.currentUserName()?.split(' ').slice(1).join(' ') || ''
+            });
+          } else {
+            alert('E-mail ou senha inválidos');
+          }
+        },
+        error: () => {
+          this.isLoggingIn.set(false);
+          alert('Erro ao fazer login. Tente novamente.');
+        }
+      });
+  }
+
+  navigateToRegister(event: Event): void {
+    event.preventDefault();
+    this.router.navigate(['/register']);
+  }
+
+  completeOrder(): void {
+    // Marca todos os campos como touched para mostrar erros
+    this.markAllFieldsAsTouched();
+
+    if (this.checkoutForm.invalid) {
+      alert('Por favor, preencha todos os campos obrigatórios corretamente.');
+      return;
+    }
+
+    // Validação específica para pagamento com cartão
+    const paymentMethod = this.checkoutForm.get('paymentMethod')?.value;
+    if (paymentMethod === 'credit' || paymentMethod === 'debit') {
+      const cardControls = ['cardNumber', 'expiryDate', 'cvv', 'cardName'];
       let hasError = false;
       
-      shippingControls.forEach(controlName => {
+      cardControls.forEach(controlName => {
         const control = this.checkoutForm.get(controlName);
         if (control?.invalid) {
           control.markAsTouched();
@@ -125,46 +187,11 @@ export class CheckoutComponent implements OnInit {
         }
       });
 
-      if (hasError) return;
-    }
-
-    const steps: Array<'information' | 'shipping' | 'payment'> = ['information', 'shipping', 'payment'];
-    const currentIndex = steps.indexOf(this.currentStep());
-    if (currentIndex < steps.length - 1) {
-      this.currentStep.set(steps[currentIndex + 1]);
-    }
-  }
-
-  previousStep(): void {
-    const steps: Array<'information' | 'shipping' | 'payment'> = ['information', 'shipping', 'payment'];
-    const currentIndex = steps.indexOf(this.currentStep());
-    if (currentIndex > 0) {
-      this.currentStep.set(steps[currentIndex - 1]);
-    }
-  }
-
-  completeOrder(): void {
-    // Valida a etapa de pagamento
-    if (this.currentStep() === 'payment') {
-      const paymentMethod = this.checkoutForm.get('paymentMethod')?.value;
-      
-      if (paymentMethod === 'credit' || paymentMethod === 'debit') {
-        const cardControls = ['cardNumber', 'expiryDate', 'cvv', 'cardName'];
-        let hasError = false;
-        
-        cardControls.forEach(controlName => {
-          const control = this.checkoutForm.get(controlName);
-          if (control?.invalid) {
-            control.markAsTouched();
-            hasError = true;
-          }
-        });
-
-        if (hasError) return;
+      if (hasError) {
+        alert('Por favor, preencha todos os dados do cartão corretamente.');
+        return;
       }
     }
-
-    if (this.checkoutForm.invalid) return;
 
     this.isLoading.set(true);
 
@@ -187,9 +214,26 @@ export class CheckoutComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  // Marca todos os campos como touched para mostrar erros de validação
+  private markAllFieldsAsTouched(): void {
+    Object.keys(this.checkoutForm.controls).forEach(key => {
+      const control = this.checkoutForm.get(key);
+      control?.markAsTouched();
+    });
+  }
+
   // Helper methods para validação no template
   isFieldInvalid(fieldName: string): boolean {
     const field = this.checkoutForm.get(fieldName);
     return !!(field?.invalid && field?.touched);
+  }
+
+  // Getters para usar no template
+  get isLoadingValue(): boolean {
+    return this.isLoading();
+  }
+
+  get isLoggingInValue(): boolean {
+    return this.isLoggingIn();
   }
 }

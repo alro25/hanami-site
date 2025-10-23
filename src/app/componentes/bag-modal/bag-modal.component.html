@@ -1,28 +1,30 @@
 <div class="bag-header">
-  <h2>Sua sacola</h2>
-  <span>({{ bagService.itemCount() }} itens)</span>
+  <h2>Sua Sacola</h2>
+  <span>({{ bagService.itemCount() }} {{ bagService.itemCount() === 1 ? 'item' : 'itens' }})</span>
 </div>
 
 @if (bagService.bagItems().length > 0) {
   <!-- Lista de itens na sacola -->
   <div class="bag-items">
-    @for (item of bagService.bagItems(); track item.product.id) {
+    @for (item of bagService.bagItems(); track item.product.id; let i = $index) {
       <div class="bag-item">
-        <img 
-          [src]="item.product.imageUrl" 
-          width="80" 
-          height="80" 
-          [alt]="item.product.name"
-          loading="lazy">
+        <div class="item-image">
+          <img 
+            [src]="item.product.imageUrl" 
+            [alt]="item.product.name"
+            loading="lazy">
+        </div>
+        
         <div class="item-info">
           <p class="item-name">{{ item.product.name }}</p>
+          
           <div class="item-controls">
             <div class="quantity-selector">
               <button 
                 (click)="bagService.updateQuantity(item.product.id, -1)" 
                 aria-label="Remover uma unidade"
                 [disabled]="item.quantity <= 1">
-                -
+                −
               </button>
               <span>{{ item.quantity }}</span>
               <button 
@@ -31,15 +33,17 @@
                 +
               </button>
             </div>
+            
             <button 
               class="remove-btn" 
               (click)="bagService.removeFromBag(item.product.id)">
-              Remover
+              🗑️ Remover
             </button>
           </div>
         </div>
+        
         <div class="item-price">
-          <p>R$ {{ (item.product.price * item.quantity).toFixed(2) }}</p>
+          <p>R$ {{ (item.product.price * item.quantity).toFixed(2).replace('.', ',') }}</p>
         </div>
       </div>
     }
@@ -49,7 +53,7 @@
   <div class="bag-footer">
     <div class="subtotal">
       <span>Subtotal</span>
-      <strong>R$ {{ bagService.bagTotal().toFixed(2) }}</strong>
+      <strong>R$ {{ bagService.bagTotal().toFixed(2).replace('.', ',') }}</strong>
     </div>
     
     <!-- Informações de frete -->
@@ -68,11 +72,11 @@
 } @else {
   <!-- Sacola vazia -->
   <div class="bag-empty">
-    <div class="empty-icon">🛒</div>
+    <div class="empty-icon">🛍️</div>
     <h3>Sua sacola está vazia</h3>
-    <p>Adicione alguns produtos incríveis da Hanami!</p>
+    <p>Explore nossos produtos incríveis e adicione itens à sua sacola</p>
     <button class="btn-outline" (click)="continueShopping()">
-      Continuar Comprando
+      Explorar Produtos
     </button>
   </div>
 }
