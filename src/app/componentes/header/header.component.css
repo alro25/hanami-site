@@ -57,6 +57,7 @@
   padding: 0.5rem 0;
   position: relative;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .nav-links a:hover {
@@ -71,6 +72,7 @@
   display: flex;
   gap: 2rem;
   align-items: center;
+  cursor: pointer;
 }
 
 .bag-icon {

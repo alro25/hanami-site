@@ -1,0 +1,22 @@
+<div class="admin-modal">
+  <h2>Administração</h2>
+
+  <div class="admin-section">
+    <p class="welcome-message">
+      Olá, <strong>{{ authService.getDisplayName() }}</strong>!
+    </p>
+    
+    <div class="menu-links">
+      <a 
+        href="#" 
+        (click)="navigateTo('/dashboard', $event)" 
+        class="modal-link">
+        Acessar Dashboard
+      </a>
+    </div>
+
+    <button class="btn btn-outline logout-btn" (click)="logout()">
+      Sair
+    </button>
+  </div>
+</div>

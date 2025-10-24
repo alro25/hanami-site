@@ -84,7 +84,7 @@ export class RegisterComponent {
         next: (success) => {
           this.isLoading = false;
           if (success) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/login']);
           } else {
             alert('Este e-mail já está em uso');
           }

@@ -2,6 +2,7 @@ import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef, inject, sig
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
+import { AuthService } from '../../services/auth.service';
 
 Chart.register(...registerables);
 
@@ -14,6 +15,7 @@ Chart.register(...registerables);
 })
 export class DashboardComponent implements AfterViewInit, OnDestroy {
   private router = inject(Router);
+  private authService = inject(AuthService);
   private charts: Chart[] = [];
 
   // Dados mockados para o dashboard
@@ -27,6 +29,14 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
   @ViewChild('vendasMensaisChart') vendasMensaisCanvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('topProdutosChart') topProdutosCanvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('categoriasPopularesChart') categoriasPopularesCanvas!: ElementRef<HTMLCanvasElement>;
+
+  ngOnInit() {
+  // Verificar se usuário é admin
+    if (!this.authService.isAdmin()) {
+      this.router.navigate(['/']);
+      return;
+    }
+  }
 
   ngAfterViewInit(): void {
     this.initCharts();

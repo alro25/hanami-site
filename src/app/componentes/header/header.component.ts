@@ -6,6 +6,7 @@ import { UiService } from '../../services/ui.service';
 import { AuthService } from '../../services/auth.service';
 import { BagModalComponent } from '../bag-modal/bag-modal.component';
 import { UserModalComponent } from '../user-modal/user-modal.component';
+import { AdminModalComponent } from '../admin-modal/admin-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,8 @@ import { UserModalComponent } from '../user-modal/user-modal.component';
     RouterModule,
     NgOptimizedImage,
     BagModalComponent,
-    UserModalComponent
+    UserModalComponent,
+    AdminModalComponent
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
@@ -56,24 +58,20 @@ export class HeaderComponent {
     
     if (category) {
       queryParams.category = category;
-      // Limpar subcategoria quando uma nova categoria principal é selecionada
       queryParams.subcategory = null;
       queryParams.tag = null;
     }
     
     if (subcategory) {
       queryParams.subcategory = subcategory;
-      // Manter a categoria pai, mas limpar tag
       queryParams.tag = null;
     }
     
     if (tag) {
       queryParams.tag = tag;
-      // Limpar categoria e subcategoria quando uma tag é selecionada
       queryParams.category = null;
       queryParams.subcategory = null;
     }
-
 
     this.router.navigate(['/products'], { 
       queryParams,
@@ -85,5 +83,20 @@ export class HeaderComponent {
   navigateToAllProducts() {
     this.router.navigate(['/products']);
     this.uiService.closeAllModals();
+  }
+
+  openUserModal() {
+    if (this.authService.isAuthenticated()) {
+      if (this.authService.isAdmin()) {
+        // Se for admin, abre o modal de admin
+        this.uiService.openModal('admin');
+      } else {
+        // Se for usuário comum, abre o modal de usuário
+        this.uiService.openModal('user');
+      }
+    } else {
+      // Se não estiver autenticado, abre o modal de usuário (para login/cadastro)
+      this.uiService.openModal('user');
+    }
   }
 }

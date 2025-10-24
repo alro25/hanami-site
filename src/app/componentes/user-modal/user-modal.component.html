@@ -4,17 +4,71 @@
   @if (authService.currentUser()) {
     <!-- Seção para usuário logado -->
     <div class="user-section">
-      <p class="welcome-message">
-        Olá, <strong>{{ authService.currentUser() }}</strong>!
-      </p>
-      
-      <div class="menu-links">
-        <a 
-          href="#" 
-          (click)="navigateTo('/dashboard', $event)" 
-          class="modal-link">
-          Acessar Dashboard
-        </a>
+      <div class="tabs-header">
+        <button 
+          class="tab-button" 
+          [class.active]="activeTab() === 'account'"
+          (click)="setActiveTab('account')">
+          Minha Conta
+        </button>
+        <button 
+          class="tab-button" 
+          [class.active]="activeTab() === 'orders'"
+          (click)="setActiveTab('orders')">
+          Meus Pedidos
+        </button>
+      </div>
+
+      <div class="tab-content">
+        @if (activeTab() === 'account') {
+          <div class="account-tab">
+            <p class="welcome-message">
+              Olá, <strong>{{ authService.currentUserName() }}</strong>!
+            </p>
+            
+            <div class="user-info">
+              <p><strong>E-mail:</strong> {{ authService.currentUser() }}</p>
+              <!-- Aqui pode adicionar mais informações do perfil -->
+            </div>
+          </div>
+        }
+
+        @if (activeTab() === 'orders') {
+          <div class="orders-tab">
+            @if (userService.userOrders().length === 0) {
+              <p class="no-orders">Nenhum pedido encontrado.</p>
+            } @else {
+              <div class="orders-list">
+                @for (order of userService.userOrders(); track order.id) {
+                  <div class="order-item">
+                    <div class="order-header">
+                      <span class="order-id">Pedido #{{ order.id }}</span>
+                      <span class="order-date">{{ order.date | date:'dd/MM/yyyy' }}</span>
+                    </div>
+                    <div class="order-details">
+                      <div class="order-total">
+                        <strong>Total:</strong> R$ {{ order.total.toFixed(2) }}
+                      </div>
+                      <div class="order-status">
+                        <span [class]="'status ' + getStatusClass(order.status)">
+                          {{ order.status }}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="order-items">
+                      <strong>Itens:</strong>
+                      <ul>
+                        @for (item of order.items; track item.product.id) {
+                          <li>{{ item.quantity }}x {{ item.product.name }} - R$ {{ (item.product.price * item.quantity).toFixed(2) }}</li>
+                        }
+                      </ul>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
       </div>
 
       <button class="btn btn-outline logout-btn" (click)="logout()">

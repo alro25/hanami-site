@@ -7,6 +7,7 @@ export interface User {
   nome: string;
   email: string;
   password: string;
+  role: 'user' | 'admin'; // Adicionando role
 }
 
 @Injectable({
@@ -20,10 +21,12 @@ export class AuthService {
   private _isAuthenticated = signal<boolean>(this.getInitialAuthState());
   private _currentUser = signal<string | null>(this.getStoredCurrentUser());
   private _currentUserName = signal<string | null>(this.getStoredCurrentUserName());
+  private _currentUserRole = signal<'user' | 'admin' | null>(this.getStoredCurrentUserRole());
 
   public isAuthenticated = this._isAuthenticated.asReadonly();
   public currentUser = this._currentUser.asReadonly();
   public currentUserName = this._currentUserName.asReadonly();
+  public currentUserRole = this._currentUserRole.asReadonly();
 
   constructor(private router: Router) {}
 
@@ -37,6 +40,10 @@ export class AuthService {
 
   private getStoredCurrentUserName(): string | null {
     return this.getFromStorage('currentUserName');
+  }
+
+  private getStoredCurrentUserRole(): 'user' | 'admin' | null {
+    return this.getFromStorage('currentUserRole') as 'user' | 'admin' | null;
   }
 
   private getFromStorage(key: string): string | null {
@@ -72,10 +79,12 @@ export class AuthService {
       this._isAuthenticated.set(true);
       this._currentUser.set(email);
       this._currentUserName.set(user.nome);
+      this._currentUserRole.set(user.role);
       
       this.setToStorage(this.STORAGE_KEY, 'true');
       this.setToStorage('currentUser', email);
       this.setToStorage('currentUserName', user.nome);
+      this.setToStorage('currentUserRole', user.role);
       
       return true;
     }
@@ -86,10 +95,12 @@ export class AuthService {
     this._isAuthenticated.set(false);
     this._currentUser.set(null);
     this._currentUserName.set(null);
+    this._currentUserRole.set(null);
     
     this.removeFromStorage(this.STORAGE_KEY);
     this.removeFromStorage('currentUser');
     this.removeFromStorage('currentUserName');
+    this.removeFromStorage('currentUserRole');
     
     this.router.navigate(['/']);
   }
@@ -108,13 +119,13 @@ export class AuthService {
       return false;
     }
 
-    // Adiciona novo usuário
-    const newUser: User = { nome, email, password };
+    // Adiciona novo usuário como 'user'
+    const newUser: User = { nome, email, password, role: 'user' };
     users.push(newUser);
     this.setStoredUsers(users);
     
-    // Login automático após registro
-    return this.authenticateUser(email, password);
+    // Não faz login automático - redireciona para login
+    return true;
   }
 
   private getStoredUsers(): User[] {
@@ -125,8 +136,8 @@ export class AuthService {
     
     // Usuários padrão para demonstração
     return [
-      { nome: 'Administrador', email: 'admin@hanami.com', password: 'admin123' },
-      { nome: 'Cliente Teste', email: 'cliente@hanami.com', password: '123456' }
+      { nome: 'Administrador', email: 'admin@hanami.com', password: 'admin123', role: 'admin' },
+      { nome: 'Cliente Teste', email: 'cliente@hanami.com', password: '123456', role: 'user' }
     ];
   }
 
@@ -136,5 +147,9 @@ export class AuthService {
 
   getDisplayName(): string {
     return this._currentUserName() || this._currentUser()?.split('@')[0] || 'Visitante';
+  }
+
+  isAdmin(): boolean {
+    return this._currentUserRole() === 'admin';
   }
 }

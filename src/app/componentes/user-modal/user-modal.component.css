@@ -1,6 +1,6 @@
-/* Layout principal */
 .user-modal {
   padding: 1rem;
+  max-width: 500px;
 }
 
 .user-modal h2 {
@@ -11,12 +11,30 @@
   padding-bottom: 0.5rem;
 }
 
-/* Seções de usuário e visitante */
-.user-section,
-.guest-section {
+.tabs-header {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+
+.tab-button {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  border-bottom-color: #E964BD;
+  color: #E964BD;
+  font-weight: 600;
+}
+
+.tab-content {
+  min-height: 200px;
 }
 
 .welcome-message {
@@ -32,7 +50,103 @@
   font-weight: 600;
 }
 
-/* Links de menu */
+.user-info {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.no-orders {
+  text-align: center;
+  color: #666;
+  padding: 2rem;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.order-item {
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 1rem;
+  background: #f8f9fa;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.order-id {
+  font-weight: 600;
+  color: #333;
+}
+
+.order-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.order-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.order-total {
+  font-size: 1rem;
+}
+
+.order-items {
+  font-size: 0.9rem;
+}
+
+.order-items ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1rem;
+}
+
+.order-items li {
+  margin-bottom: 0.25rem;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-entregue {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+}
+
+.status-pendente {
+  background-color: #fff8e1;
+  color: #f57c00;
+}
+
+.status-processando {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-cancelado {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
 .menu-links {
   display: flex;
   flex-direction: column;
@@ -59,7 +173,6 @@
   transform: translateY(-1px);
 }
 
-/* Botões */
 .btn {
   padding: 12px 24px;
   border: 2px solid;
@@ -96,7 +209,6 @@
   border-color: #dc3545;
 }
 
-/* Animações */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -113,7 +225,6 @@
   animation: fadeIn 0.3s ease-out;
 }
 
-/* Responsividade */
 @media (max-width: 480px) {
   .user-modal {
     padding: 0.75rem;
@@ -124,6 +235,11 @@
     margin-bottom: 1rem;
   }
   
+  .tab-button {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
   .modal-link {
     padding: 10px 14px;
     font-size: 0.9rem;
@@ -132,5 +248,17 @@
   .btn {
     padding: 10px 20px;
     font-size: 0.9rem;
+  }
+  
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .order-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 }

@@ -5,7 +5,7 @@
     </div>
     
     <div class="nav-icons">
-      <a aria-label="Minha Conta" (click)="$event.preventDefault(); uiService.toggleUser()">
+      <a aria-label="Minha Conta" (click)="$event.preventDefault(); openUserModal()">
         <img ngSrc="/img/usuario-icon.png" alt="Minha Conta" width="24" height="24">
       </a>
       <a aria-label="Carrinho" (click)="$event.preventDefault(); uiService.toggleBag()" class="bag-icon">
@@ -59,6 +59,15 @@
     <div class="modal-content" (click)="$event.stopPropagation()">
       <button class="close-btn" (click)="uiService.closeAllModals()">×</button>
       <app-bag-modal></app-bag-modal>
+    </div>
+  </div>
+}
+
+@if (uiService.isAdminOpen()) {
+  <div class="modal-overlay" (click)="uiService.closeAllModals()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="uiService.closeAllModals()">×</button>
+      <app-admin-modal></app-admin-modal>
     </div>
   </div>
 }
