@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -46,6 +46,35 @@
   box-shadow: 0 4px 12px rgba(233, 100, 189, 0.3);
 }
 
+/* Navegação por Abas */
+.dashboard-tabs {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-tabs .nav-tabs {
+  border-bottom: 2px solid #dee2e6;
+}
+
+.dashboard-tabs .nav-link {
+  border: none;
+  background: none;
+  color: #6c757d;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.dashboard-tabs .nav-link.active {
+  color: #E964BD;
+  background-color: white;
+  border-bottom: 3px solid #E964BD;
+}
+
+.dashboard-tabs .nav-link:hover {
+  color: #E964BD;
+  background-color: rgba(233, 100, 189, 0.1);
+}
+
 /* Cards de Resumo */
 .summary-cards {
   display: grid;
@@ -60,6 +89,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .card:hover {
@@ -72,6 +102,8 @@
   color: #666;
   margin-bottom: 0.5rem;
   font-weight: 500;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.75rem;
 }
 
 .card-body .value {
@@ -172,6 +204,67 @@
   color: #c62828;
 }
 
+/* Gerenciamento de Produtos */
+.product-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Formulários */
+.form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #E964BD;
+  box-shadow: 0 0 0 0.2rem rgba(233, 100, 189, 0.25);
+}
+
+/* Botões */
+.btn {
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #E964BD;
+  border-color: #E964BD;
+}
+
+.btn-primary:hover {
+  background-color: #d455a8;
+  border-color: #d455a8;
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+  color: #E964BD;
+  border-color: #E964BD;
+}
+
+.btn-outline-primary:hover {
+  background-color: #E964BD;
+  border-color: #E964BD;
+}
+
+/* Cards de Slides */
+.card-img-top {
+  border-radius: 8px 8px 0 0;
+}
+
 /* Responsividade */
 @media (max-width: 1200px) {
   .charts-section {
@@ -218,6 +311,11 @@
   .chart-main .chart-container {
     height: 250px;
   }
+  
+  .dashboard-tabs .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -233,14 +331,16 @@
     padding: 1rem;
   }
   
-  .recent-orders th,
-  .recent-orders td {
-    padding: 0.75rem 0.5rem;
-    font-size: 0.85rem;
+  .dashboard-tabs .nav-tabs {
+    flex-direction: column;
   }
   
-  .status {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.75rem;
+  .dashboard-tabs .nav-item {
+    width: 100%;
+  }
+  
+  .dashboard-tabs .nav-link {
+    text-align: center;
+    border-radius: 0;
   }
 }

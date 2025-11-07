@@ -1,8 +1,8 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Product } from '../componentes/models/product.model';
 
 export interface BagItem {
-  product: any;
+  product: Product;
   quantity: number;
 }
 
@@ -10,70 +10,68 @@ export interface BagItem {
   providedIn: 'root'
 })
 export class BagService {
-  // Signal para os itens da sacola
-  private bagItemsSignal = signal<BagItem[]>([]);
+  private _bagItems = signal<BagItem[]>([]);
 
-  // Computed values - SEM o $
-  public bagItems = computed(() => this.bagItemsSignal());
-  public bagTotal = computed(() => 
-    this.bagItems().reduce((total, item) => total + (item.product.price * item.quantity), 0)
-  );
+  public bagItems = this._bagItems.asReadonly();
   public itemCount = computed(() => 
-    this.bagItems().reduce((count, item) => count + item.quantity, 0)
+    this._bagItems().reduce((total, item) => total + item.quantity, 0)
+  );
+  public totalPrice = computed(() =>
+    this._bagItems().reduce((total, item) => 
+      total + (item.product.price * item.quantity), 0
+    )
   );
 
-  addToBag(product: any): void {
-    const currentItems = this.bagItemsSignal();
-    const existingItem = currentItems.find(item => item.product.id === product.id);
-    
-    if (existingItem) {
-      this.bagItemsSignal.set(
-        currentItems.map(item =>
-          item.product.id === product.id
+  addToBag(product: Product): void {
+    this._bagItems.update(items => {
+      const existingItem = items.find(item => item.product.id === product.id);
+      if (existingItem) {
+        return items.map(item =>
+          item.product.id === product.id 
             ? { ...item, quantity: item.quantity + 1 }
             : item
-        )
-      );
-    } else {
-      this.bagItemsSignal.set([...currentItems, { product, quantity: 1 }]);
-    }
+        );
+      } else {
+        return [...items, { product, quantity: 1 }];
+      }
+    });
   }
 
-  removeFromBag(productId: string): void {
-    this.bagItemsSignal.set(
-      this.bagItems().filter(item => item.product.id !== productId)
+  removeFromBag(productId: number): void {
+    this._bagItems.update(items =>
+      items.filter(item => item.product.id !== productId)
     );
   }
 
-  updateQuantity(productId: string, change: number): void {
-    this.bagItemsSignal.set(
-      this.bagItems().map(item => {
-        if (item.product.id === productId) {
-          const newQuantity = Math.max(0, item.quantity + change);
-          return newQuantity > 0 ? { ...item, quantity: newQuantity } : null;
-        }
-        return item;
-      }).filter(Boolean) as BagItem[]
+  updateQuantity(productId: number, quantity: number): void {
+    if (quantity <= 0) {
+      this.removeFromBag(productId);
+      return;
+    }
+
+    this._bagItems.update(items =>
+      items.map(item =>
+        item.product.id === productId ? { ...item, quantity } : item
+      )
     );
   }
 
   clearBag(): void {
-    this.bagItemsSignal.set([]);
+    this._bagItems.set([]);
   }
 
-  checkout(): Observable<string> {
-    return new Observable<string>(subscriber => {
-      setTimeout(() => {
-        // Generate order code
-        const orderCode = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-        
-        // Clear the bag
-        this.clearBag();
-        
-        // Emit the order code
-        subscriber.next(orderCode);
-        subscriber.complete();
-      }, 1000);
-    });
+  checkout() {
+    // Simula um checkout
+    const orderCode = 'ORD-' + Date.now();
+    
+    // Limpa o carrinho após checkout
+    this.clearBag();
+    
+    return {
+      subscribe: (callback: any) => {
+        callback(orderCode);
+        return { unsubscribe: () => {} };
+      }
+    };
   }
 }

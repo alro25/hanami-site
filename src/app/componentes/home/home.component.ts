@@ -259,21 +259,20 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   // Checkout method with alert
   onCheckout() {
-    if (this.bagService.bagItems().length === 0) {
-      return;
-    }
+  if (this.bagService.bagItems().length === 0) {
+    return;
+  }
 
     this.bagService.checkout().subscribe({
       next: (orderCode: string) => {
         this.orderCode.set(orderCode);
         this.showCheckoutAlert.set(true);
         
-        // Auto-hide alert after 5 seconds
         setTimeout(() => {
           this.showCheckoutAlert.set(false);
         }, 5000);
       },
-      error: (error) => {
+      error: (error: any) => { // CORREÇÃO: Adicionado tipo 'any'
         console.error('Checkout error:', error);
       }
     });

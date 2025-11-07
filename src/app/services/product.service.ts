@@ -1,128 +1,126 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, signal, computed } from '@angular/core';
 import { Product } from '../componentes/models/product.model';
-import { shareReplay, tap } from 'rxjs/operators';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { OrderService } from './order.service';
+import { BagItem } from './bag.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private http = inject(HttpClient);
-  private orderService = inject(OrderService);
-  private productsUrl = 'assets/data/products.json';
+  private _productsInStock = signal<Product[]>([
+    {
+      id: 1,
+      name: 'Base Líquida HD',
+      price: 49.90,
+      category: 'Rosto',
+      subcategory: 'Base',
+      description: 'Base líquida de alta cobertura e acabamento natural',
+      imageUrl: '/img/base-liquida.jpg',
+      stock: 50,
+      tags: ['Lançamentos', 'Populares']
+    },
+    {
+      id: 2,
+      name: 'Batom Vermelho Intenso',
+      price: 29.90,
+      category: 'Lábios',
+      subcategory: 'Batom',
+      description: 'Batom de longa duração com cor vibrante',
+      imageUrl: '/img/batom-vermelho.jpg',
+      stock: 30,
+      tags: ['Populares', 'Recomendado']
+    },
+    {
+      id: 3, 
+      name: 'Paleta de Sombras',
+      price: 79.90,
+      category: 'Olhos',
+      subcategory: 'Sombra',
+      description: 'Paleta com 12 cores neutras e pigmentadas',
+      imageUrl: '/img/paleta-sombras.jpg',
+      stock: 25,
+      tags: ['Lançamentos', 'Recomendado']
+    },
+    {
+      id: 4,
+      name: 'Gloss Passionfruit',
+      price: 24.90,
+      category: 'Lábios',
+      subcategory: 'Gloss',
+      description: 'Gloss com brilho intenso e sabor de maracujá',
+      imageUrl: '/img/gloss-passionfruit.jpg',
+      stock: 40,
+      tags: ['Lançamentos']
+    },
+    {
+      id: 5,
+      name: 'Pó Compacto Translúcido',
+      price: 39.90,
+      category: 'Rosto',
+      subcategory: 'Pó',
+      description: 'Pó compacto para fixação da maquiagem',
+      imageUrl: '/img/po-compacto.jpg',
+      stock: 35,
+      tags: ['Populares']
+    }
+  ]);
 
-  // Signal para produtos em estoque
-  private _productsInStock = signal<Product[]>([]);
-  public readonly productsInStock = this._productsInStock.asReadonly();
+  public productsInStock = computed(() => this._productsInStock());
 
-  // Signal para estado de carregamento
-  private _isLoading = signal<boolean>(true);
-  public readonly isLoading = this._isLoading.asReadonly();
-
-  // Signal para erro
-  private _error = signal<string | null>(null);
-  public readonly error = this._error.asReadonly();
-
-  constructor() {
-    this.loadInitialProducts();
+  // MÉTODOS DE GERENCIAMENTO
+  addProduct(product: Product): void {
+    this._productsInStock.update(products => [...products, product]);
   }
 
-  private loadInitialProducts() {
-    this._isLoading.set(true);
-    this._error.set(null);
-
-    this.http.get<Product[]>(this.productsUrl).pipe(
-      tap({
-        next: (products) => {
-          this._productsInStock.set(products);
-          this.orderService.updateStock(products);
-          this._isLoading.set(false);
-        },
-        error: (err) => {
-          this._error.set('Erro ao carregar produtos');
-          this._isLoading.set(false);
-          console.error('Erro ao carregar produtos:', err);
-        }
-      }),
-      shareReplay(1)
-    ).subscribe();
+  updateProduct(updatedProduct: Product): void {
+    this._productsInStock.update(products => 
+      products.map(product => 
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
   }
 
-  // Método para obter todos os produtos
-  getAllProducts(): Product[] {
-    return this.productsInStock();
+  removeProduct(productId: number): void {
+    this._productsInStock.update(products => 
+      products.filter(product => product.id !== productId)
+    );
   }
 
-  // Método para obter produto por ID
-  getProductById(id: number): Product | undefined {
-    return this.productsInStock().find(product => product.id === id);
-  }
-
-  // Método para atualizar o estoque de um produto específico
-  updateProductStock(productId: number, newStock: number) {
+  updateProductStock(productId: number, newStock: number): void {
     this._productsInStock.update(products =>
       products.map(p =>
         p.id === productId ? { ...p, stock: newStock } : p
       )
     );
-    // Atualiza o estoque no OrderService para manter a consistência
-    this.orderService.updateStock(this._productsInStock());
   }
 
-  // Método para reduzir estoque (usado durante checkout)
-  reduceStock(items: Array<{productId: number, quantity: number}>) {
-    this._productsInStock.update(products =>
-      products.map(product => {
-        const item = items.find(i => i.productId === product.id);
-        if (item) {
-          return { 
-            ...product, 
-            stock: Math.max(0, product.stock - item.quantity) 
-          };
-        }
-        return product;
-      })
+  getProductsFromBagItems(items: BagItem[]): Product[] {
+    return this.productsInStock().filter(product =>
+      items.some(i => i.product.id === product.id)
     );
-    this.orderService.updateStock(this._productsInStock());
   }
 
-  // Getter para produtos populares (lógica melhorada)
-  getPopularProducts(): Product[] {
-    return this.productsInStock()
-      .filter(product => product.stock > 0) // Apenas produtos com estoque
-      .slice(0, 8); // Retorna até 8 produtos
+  getProductById(productId: number): Product | undefined {
+    return this.productsInStock().find(product => product.id === productId);
   }
 
-  // Método para produtos por categoria
   getProductsByCategory(category: string): Product[] {
-    return this.productsInStock()
-      .filter(product => 
-        product.category.toLowerCase().includes(category.toLowerCase()) && 
-        product.stock > 0
-      );
+    return this.productsInStock().filter(product => 
+      product.category.toLowerCase() === category.toLowerCase()
+    );
   }
 
-  // Método para buscar produtos
-  searchProducts(query: string): Product[] {
-    const lowerQuery = query.toLowerCase();
-    return this.productsInStock()
-      .filter(product =>
-        product.name.toLowerCase().includes(lowerQuery) ||
-        product.category.toLowerCase().includes(lowerQuery) ||
-        product.description.toLowerCase().includes(lowerQuery)
-      );
+  getProductsByTag(tag: string): Product[] {
+    return this.productsInStock().filter(product => 
+      product.tags.includes(tag)
+    );
   }
 
-  // Método para recarregar produtos
-  reloadProducts() {
-    this.loadInitialProducts();
-  }
-
-  // Getter para produtos com estoque baixo (útil para dashboard)
-  getLowStockProducts(threshold: number = 5): Product[] {
-    return this.productsInStock()
-      .filter(product => product.stock > 0 && product.stock <= threshold);
+  searchProducts(term: string): Product[] {
+    const lowerTerm = term.toLowerCase();
+    return this.productsInStock().filter(product =>
+      product.name.toLowerCase().includes(lowerTerm) ||
+      product.category.toLowerCase().includes(lowerTerm) ||
+      product.description.toLowerCase().includes(lowerTerm)
+    );
   }
 }

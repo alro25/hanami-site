@@ -7,128 +7,481 @@
     </button>
   </header>
 
-  <!-- Cards de Métricas Principais -->
-  <section class="summary-cards" aria-label="Métricas principais do dashboard">
-    <div class="card">
-      <div class="card-header">Total de Vendas</div>
-      <div class="card-body">
-        <span class="value">R$ {{ dashboardData().totalVendas.toFixed(2) }}</span>
-      </div>
+  <!-- Navegação por Abas -->
+  <nav class="dashboard-tabs">
+    <div class="nav nav-tabs">
+      <button 
+        class="nav-link" 
+        [class.active]="activeTab() === 'stats'"
+        (click)="setActiveTab('stats')">
+        📊 Estatísticas
+      </button>
+      <button 
+        class="nav-link" 
+        [class.active]="activeTab() === 'products'"
+        (click)="setActiveTab('products')">
+        🛍️ Gerenciar Produtos
+      </button>
+      <button 
+        class="nav-link" 
+        [class.active]="activeTab() === 'carousel'"
+        (click)="setActiveTab('carousel')">
+        🎠 Gerenciar Carrossel
+      </button>
     </div>
-    
-    <div class="card">
-      <div class="card-header">Novos Clientes</div>
-      <div class="card-body">
-        <span class="value">{{ dashboardData().novosClientes }}</span>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-header">Pedidos</div>
-      <div class="card-body">
-        <span class="value">{{ dashboardData().totalPedidos }}</span>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-header">Ticket Médio</div>
-      <div class="card-body">
-        <span class="value">R$ {{ dashboardData().ticketMedio.toFixed(2) }}</span>
-      </div>
-    </div>
-  </section>
+  </nav>
 
-  <!-- Seção de Gráficos -->
-  <section class="charts-section" aria-label="Gráficos analíticos">
-    <!-- Gráfico Principal - Vendas Mensais -->
-    <div class="chart-main card">
-      <h3 class="chart-title">Vendas Mensais</h3>
-      <div class="chart-container">
-        <canvas #vendasMensaisChart 
-                role="img" 
-                aria-label="Gráfico de linhas mostrando a evolução das vendas mensais ao longo do ano">
-        </canvas>
-      </div>
-    </div>
+  <!-- Conteúdo das Abas -->
+  <div class="tab-content mt-4">
 
-    <!-- Gráficos Secundários -->
-    <div class="charts-side">
-      <!-- Top Produtos -->
-      <div class="chart-secondary card">
-        <h3 class="chart-title">Top Produtos</h3>
-        <div class="chart-container">
-          <canvas #topProdutosChart 
-                  role="img" 
-                  aria-label="Gráfico de barras horizontais mostrando os produtos mais vendidos">
-          </canvas>
+    <!-- Aba de Estatísticas -->
+    @if (activeTab() === 'stats') {
+      <div class="tab-pane fade show active">
+        
+        <!-- Cards de Métricas Principais -->
+        <section class="summary-cards" aria-label="Métricas principais do dashboard">
+          <div class="card">
+            <div class="card-header">Total de Vendas</div>
+            <div class="card-body">
+              <span class="value">R$ {{ dashboardData().totalVendas.toFixed(2) }}</span>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">Novos Clientes</div>
+            <div class="card-body">
+              <span class="value">{{ dashboardData().novosClientes }}</span>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">Pedidos</div>
+            <div class="card-body">
+              <span class="value">{{ dashboardData().totalPedidos }}</span>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">Ticket Médio</div>
+            <div class="card-body">
+              <span class="value">R$ {{ dashboardData().ticketMedio.toFixed(2) }}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Seção de Gráficos -->
+        <section class="charts-section" aria-label="Gráficos analíticos">
+          <!-- Gráfico Principal - Vendas Mensais -->
+          <div class="chart-main card">
+            <h3 class="chart-title">Vendas Mensais</h3>
+            <div class="chart-container">
+              <canvas #vendasMensaisChart 
+                      role="img" 
+                      aria-label="Gráfico de linhas mostrando a evolução das vendas mensais ao longo do ano">
+              </canvas>
+            </div>
+          </div>
+
+          <!-- Gráficos Secundários -->
+          <div class="charts-side">
+            <!-- Top Produtos -->
+            <div class="chart-secondary card">
+              <h3 class="chart-title">Top Produtos</h3>
+              <div class="chart-container">
+                <canvas #topProdutosChart 
+                        role="img" 
+                        aria-label="Gráfico de barras horizontais mostrando os produtos mais vendidos">
+                </canvas>
+              </div>
+            </div>
+
+            <!-- Categorias Populares -->
+            <div class="chart-secondary card">
+              <h3 class="chart-title">Categorias Populares</h3>
+              <div class="chart-container">
+                <canvas #categoriasPopularesChart 
+                        role="img" 
+                        aria-label="Gráfico de rosca mostrando a distribuição de vendas por categoria">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tabela de Pedidos Recentes -->
+        <section class="recent-orders card" aria-label="Lista de pedidos recentes">
+          <h3 class="chart-title">Pedidos Recentes</h3>
+          <div class="table-container">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Pedido ID</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#00123</td>
+                  <td>Ana Silva</td>
+                  <td>15/03/2024</td>
+                  <td>R$ 189,90</td>
+                  <td><span class="status entregue" aria-label="Status: Entregue">Entregue</span></td>
+                </tr>
+                <tr>
+                  <td>#00122</td>
+                  <td>Carlos Santos</td>
+                  <td>14/03/2024</td>
+                  <td>R$ 245,50</td>
+                  <td><span class="status pendente" aria-label="Status: Pendente">Pendente</span></td>
+                </tr>
+                <tr>
+                  <td>#00121</td>
+                  <td>Marina Oliveira</td>
+                  <td>14/03/2024</td>
+                  <td>R$ 98,75</td>
+                  <td><span class="status entregue" aria-label="Status: Entregue">Entregue</span></td>
+                </tr>
+                <tr>
+                  <td>#00120</td>
+                  <td>João Pereira</td>
+                  <td>13/03/2024</td>
+                  <td>R$ 156,30</td>
+                  <td><span class="status entregue" aria-label="Status: Entregue">Entregue</span></td>
+                </tr>
+                <tr>
+                  <td>#00119</td>
+                  <td>Beatriz Lima</td>
+                  <td>13/03/2024</td>
+                  <td>R$ 312,80</td>
+                  <td><span class="status pendente" aria-label="Status: Pendente">Pendente</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    }
+
+    <!-- Aba de Gerenciamento de Produtos -->
+    @if (activeTab() === 'products') {
+      <div class="tab-pane fade show active">
+        
+        <!-- Formulário de Adicionar/Editar Produto -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4>{{ editingProduct() ? 'Editar Produto' : 'Adicionar Novo Produto' }}</h4>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="editingProduct() ? updateProduct() : addProduct()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Nome do Produto</label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [(ngModel)]="editingProduct() ? editingProduct()!.name : newProduct().name"
+                    name="productName"
+                    required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Preço (R$)</label>
+                  <input 
+                    type="number" 
+                    class="form-control"
+                    [(ngModel)]="editingProduct() ? editingProduct()!.price : newProduct().price"
+                    name="productPrice"
+                    step="0.01"
+                    required>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Categoria</label>
+                  <select 
+                    class="form-select"
+                    [(ngModel)]="editingProduct() ? editingProduct()!.category : newProduct().category"
+                    name="productCategory"
+                    required>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="Rosto">Rosto</option>
+                    <option value="Lábios">Lábios</option>
+                    <option value="Olhos">Olhos</option>
+                    <option value="Pincéis">Pincéis</option>
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Subcategoria</label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [(ngModel)]="editingProduct() ? editingProduct()!.subcategory : newProduct().subcategory"
+                    name="productSubcategory">
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea 
+                  class="form-control"
+                  rows="3"
+                  [(ngModel)]="editingProduct() ? editingProduct()!.description : newProduct().description"
+                  name="productDescription"></textarea>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">URL da Imagem</label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [(ngModel)]="editingProduct() ? editingProduct()!.imageUrl : newProduct().imageUrl"
+                    name="productImageUrl">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Estoque</label>
+                  <input 
+                    type="number" 
+                    class="form-control"
+                    [(ngModel)]="editingProduct() ? editingProduct()!.stock : newProduct().stock"
+                    name="productStock"
+                    min="0">
+                </div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                  {{ editingProduct() ? 'Atualizar' : 'Adicionar' }} Produto
+                </button>
+                @if (editingProduct()) {
+                  <button type="button" class="btn btn-secondary" (click)="cancelEditProduct()">
+                    Cancelar
+                  </button>
+                }
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
 
-      <!-- Categorias Populares -->
-      <div class="chart-secondary card">
-        <h3 class="chart-title">Categorias Populares</h3>
-        <div class="chart-container">
-          <canvas #categoriasPopularesChart 
-                  role="img" 
-                  aria-label="Gráfico de rosca mostrando a distribuição de vendas por categoria">
-          </canvas>
+        <!-- Lista de Produtos -->
+        <div class="card">
+          <div class="card-header">
+            <h4>Lista de Produtos ({{ products().length }})</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Categoria</th>
+                    <th>Estoque</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (product of products(); track product.id) {
+                    <tr>
+                      <td>
+                        <img [src]="product.imageUrl" [alt]="product.name" class="product-thumbnail">
+                      </td>
+                      <td>{{ product.name }}</td>
+                      <td>R$ {{ product.price.toFixed(2) }}</td>
+                      <td>{{ product.category }}</td>
+                      <td>{{ product.stock }}</td>
+                      <td>
+                        <div class="btn-group btn-group-sm">
+                          <button class="btn btn-outline-primary" (click)="editProduct(product)">
+                            Editar
+                          </button>
+                          <button class="btn btn-outline-danger" (click)="deleteProduct(product.id)">
+                            Excluir
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Tabela de Pedidos Recentes -->
-  <section class="recent-orders card" aria-label="Lista de pedidos recentes">
-    <h3 class="chart-title">Pedidos Recentes</h3>
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Pedido ID</th>
-            <th scope="col">Cliente</th>
-            <th scope="col">Data</th>
-            <th scope="col">Valor</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>#00123</td>
-            <td>Ana Silva</td>
-            <td>15/03/2024</td>
-            <td>R$ 189,90</td>
-            <td><span class="status entregue" aria-label="Status: Entregue">Entregue</span></td>
-          </tr>
-          <tr>
-            <td>#00122</td>
-            <td>Carlos Santos</td>
-            <td>14/03/2024</td>
-            <td>R$ 245,50</td>
-            <td><span class="status pendente" aria-label="Status: Pendente">Pendente</span></td>
-          </tr>
-          <tr>
-            <td>#00121</td>
-            <td>Marina Oliveira</td>
-            <td>14/03/2024</td>
-            <td>R$ 98,75</td>
-            <td><span class="status entregue" aria-label="Status: Entregue">Entregue</span></td>
-          </tr>
-          <tr>
-            <td>#00120</td>
-            <td>João Pereira</td>
-            <td>13/03/2024</td>
-            <td>R$ 156,30</td>
-            <td><span class="status entregue" aria-label="Status: Entregue">Entregue</span></td>
-          </tr>
-          <tr>
-            <td>#00119</td>
-            <td>Beatriz Lima</td>
-            <td>13/03/2024</td>
-            <td>R$ 312,80</td>
-            <td><span class="status pendente" aria-label="Status: Pendente">Pendente</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+      </div>
+    }
+
+    <!-- Aba de Gerenciamento do Carrossel -->
+    @if (activeTab() === 'carousel') {
+      <div class="tab-pane fade show active">
+        
+        <!-- Formulário de Adicionar/Editar Slide -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4>{{ editingSlide() ? 'Editar Slide' : 'Adicionar Novo Slide' }}</h4>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="editingSlide() ? updateSlide() : addSlide()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">URL da Imagem</label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [(ngModel)]="editingSlide() ? editingSlide()!.imageUrl : newSlide().imageUrl"
+                    name="slideImageUrl"
+                    required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Texto Alternativo</label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [(ngModel)]="editingSlide() ? editingSlide()!.alt : newSlide().alt"
+                    name="slideAlt"
+                    required>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Título</label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [(ngModel)]="editingSlide() ? editingSlide()!.title : newSlide().title"
+                    name="slideTitle"
+                    required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Texto do Botão</label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [(ngModel)]="editingSlide() ? editingSlide()!.buttonText : newSlide().buttonText"
+                    name="slideButtonText"
+                    required>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea 
+                  class="form-control"
+                  rows="3"
+                  [(ngModel)]="editingSlide() ? editingSlide()!.description : newSlide().description"
+                  name="slideDescription"></textarea>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Data de Início</label>
+                  <input 
+                    type="datetime-local" 
+                    class="form-control"
+                    [value]="formatDateForInput(editingSlide() ? editingSlide()!.startDate : newSlide().startDate!)"
+                    (input)="updateSlideDate('startDate', $event)"
+                    name="slideStartDate"
+                    required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Data de Término</label>
+                  <input 
+                    type="datetime-local" 
+                    class="form-control"
+                    [value]="formatDateForInput(editingSlide() ? editingSlide()!.endDate : newSlide().endDate!)"
+                    (input)="updateSlideDate('endDate', $event)"
+                    name="slideEndDate"
+                    required>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Link do Botão</label>
+                <input 
+                  type="text" 
+                  class="form-control"
+                  [(ngModel)]="editingSlide() ? editingSlide()!.buttonLink : newSlide().buttonLink"
+                  name="slideButtonLink"
+                  required>
+              </div>
+
+              <div class="form-check mb-3">
+                <input 
+                  class="form-check-input"
+                  type="checkbox"
+                  [checked]="editingSlide() ? editingSlide()!.isActive : newSlide().isActive"
+                  (change)="onSlideActiveChange($event)"
+                  name="slideIsActive">
+                <label class="form-check-label">
+                  Slide Ativo
+                </label>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                  {{ editingSlide() ? 'Atualizar' : 'Adicionar' }} Slide
+                </button>
+                @if (editingSlide()) {
+                  <button type="button" class="btn btn-secondary" (click)="cancelEditSlide()">
+                    Cancelar
+                  </button>
+                }
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Lista de Slides -->
+        <div class="card">
+          <div class="card-header">
+            <h4>Slides do Carrossel ({{ carouselSlides().length }})</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              @for (slide of carouselSlides(); track slide.id) {
+                <div class="col-md-6 mb-4">
+                  <div class="card h-100">
+                    <img [src]="slide.imageUrl" [alt]="slide.alt" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ slide.title }}</h5>
+                      <p class="card-text">{{ slide.description }}</p>
+                      <div class="mb-2">
+                        <small class="text-muted">
+                          De: {{ slide.startDate | date:'dd/MM/yyyy HH:mm' }}<br>
+                          Até: {{ slide.endDate | date:'dd/MM/yyyy HH:mm' }}
+                        </small>
+                      </div>
+                      <div class="btn-group w-100">
+                        <button 
+                          class="btn btn-sm" 
+                          [class.btn-success]="slide.isActive"
+                          [class.btn-warning]="!slide.isActive"
+                          (click)="toggleSlideStatus(slide)">
+                          {{ slide.isActive ? 'Ativo' : 'Inativo' }}
+                        </button>
+                        <button class="btn btn-sm btn-outline-primary" (click)="editSlide(slide)">
+                          Editar
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" (click)="deleteSlide(slide.id)">
+                          Excluir
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+      </div>
+    }
+
+  </div>
 </div>
