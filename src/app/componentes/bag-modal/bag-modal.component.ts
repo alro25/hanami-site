@@ -16,8 +16,7 @@ export class BagModalComponent {
   uiService = inject(UiService);
   router = inject(Router);
 
-  navigateToCheckout(): void {
-    // Fecha o modal e navega para o checkout
+  proceedToCheckout(): void {
     this.uiService.closeAllModals();
     this.router.navigate(['/checkout']);
   }
@@ -27,8 +26,19 @@ export class BagModalComponent {
     this.uiService.closeAllModals();
   }
 
-  // Método para formatar preços (opcional)
+  // Método para formatar preços
   formatPrice(price: number): string {
     return price.toFixed(2).replace('.', ',');
+  }
+
+  // Método para atualizar a quantidade de um item
+  updateQuantity(productId: number, newQuantity: number): void {
+    if (newQuantity < 1) return;
+    this.bagService.updateQuantity(productId, newQuantity);
+  }
+
+  // Método para remover um item
+  removeItem(productId: number): void {
+    this.bagService.removeFromBag(productId);
   }
 }

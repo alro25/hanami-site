@@ -183,7 +183,8 @@
                   <input 
                     type="text" 
                     class="form-control"
-                    [(ngModel)]="editingProduct() ? editingProduct()!.name : newProduct().name"
+                    [ngModel]="editingProduct() ? editingProduct()!.name : newProduct().name"
+                    (ngModelChange)="onProductFieldChange('name', $event)"
                     name="productName"
                     required>
                 </div>
@@ -192,7 +193,8 @@
                   <input 
                     type="number" 
                     class="form-control"
-                    [(ngModel)]="editingProduct() ? editingProduct()!.price : newProduct().price"
+                    [ngModel]="editingProduct() ? editingProduct()!.price : newProduct().price"
+                    (ngModelChange)="onProductFieldChange('price', $event)"
                     name="productPrice"
                     step="0.01"
                     required>
@@ -204,7 +206,8 @@
                   <label class="form-label">Categoria</label>
                   <select 
                     class="form-select"
-                    [(ngModel)]="editingProduct() ? editingProduct()!.category : newProduct().category"
+                    [ngModel]="editingProduct() ? editingProduct()!.category : newProduct().category"
+                    (ngModelChange)="onProductFieldChange('category', $event)"
                     name="productCategory"
                     required>
                     <option value="">Selecione uma categoria</option>
@@ -219,7 +222,8 @@
                   <input 
                     type="text" 
                     class="form-control"
-                    [(ngModel)]="editingProduct() ? editingProduct()!.subcategory : newProduct().subcategory"
+                    [ngModel]="editingProduct() ? editingProduct()!.subcategory : newProduct().subcategory"
+                    (ngModelChange)="onProductFieldChange('subcategory', $event)"
                     name="productSubcategory">
                 </div>
               </div>
@@ -229,7 +233,8 @@
                 <textarea 
                   class="form-control"
                   rows="3"
-                  [(ngModel)]="editingProduct() ? editingProduct()!.description : newProduct().description"
+                  [ngModel]="editingProduct() ? editingProduct()!.description : newProduct().description"
+                  (ngModelChange)="onProductFieldChange('description', $event)"
                   name="productDescription"></textarea>
               </div>
 
@@ -239,7 +244,8 @@
                   <input 
                     type="text" 
                     class="form-control"
-                    [(ngModel)]="editingProduct() ? editingProduct()!.imageUrl : newProduct().imageUrl"
+                    [ngModel]="editingProduct() ? editingProduct()!.imageUrl : newProduct().imageUrl"
+                    (ngModelChange)="onProductFieldChange('imageUrl', $event)"
                     name="productImageUrl">
                 </div>
                 <div class="col-md-6 mb-3">
@@ -247,7 +253,8 @@
                   <input 
                     type="number" 
                     class="form-control"
-                    [(ngModel)]="editingProduct() ? editingProduct()!.stock : newProduct().stock"
+                    [ngModel]="editingProduct() ? editingProduct()!.stock : newProduct().stock"
+                    (ngModelChange)="onProductFieldChange('stock', $event)"
                     name="productStock"
                     min="0">
                 </div>
@@ -333,7 +340,8 @@
                   <input 
                     type="text" 
                     class="form-control"
-                    [(ngModel)]="editingSlide() ? editingSlide()!.imageUrl : newSlide().imageUrl"
+                    [ngModel]="editingSlide() ? editingSlide()!.imageUrl : newSlide().imageUrl"
+                    (ngModelChange)="onSlideFieldChange('imageUrl', $event)"
                     name="slideImageUrl"
                     required>
                 </div>
@@ -342,7 +350,8 @@
                   <input 
                     type="text" 
                     class="form-control"
-                    [(ngModel)]="editingSlide() ? editingSlide()!.alt : newSlide().alt"
+                    [ngModel]="editingSlide() ? editingSlide()!.alt : newSlide().alt"
+                    (ngModelChange)="onSlideFieldChange('alt', $event)"
                     name="slideAlt"
                     required>
                 </div>
@@ -354,7 +363,8 @@
                   <input 
                     type="text" 
                     class="form-control"
-                    [(ngModel)]="editingSlide() ? editingSlide()!.title : newSlide().title"
+                    [ngModel]="editingSlide() ? editingSlide()!.title : newSlide().title"
+                    (ngModelChange)="onSlideFieldChange('title', $event)"
                     name="slideTitle"
                     required>
                 </div>
@@ -363,7 +373,8 @@
                   <input 
                     type="text" 
                     class="form-control"
-                    [(ngModel)]="editingSlide() ? editingSlide()!.buttonText : newSlide().buttonText"
+                    [ngModel]="editingSlide() ? editingSlide()!.buttonText : newSlide().buttonText"
+                    (ngModelChange)="onSlideFieldChange('buttonText', $event)"
                     name="slideButtonText"
                     required>
                 </div>
@@ -374,7 +385,8 @@
                 <textarea 
                   class="form-control"
                   rows="3"
-                  [(ngModel)]="editingSlide() ? editingSlide()!.description : newSlide().description"
+                  [ngModel]="editingSlide() ? editingSlide()!.description : newSlide().description"
+                  (ngModelChange)="onSlideFieldChange('description', $event)"
                   name="slideDescription"></textarea>
               </div>
 
@@ -406,7 +418,8 @@
                 <input 
                   type="text" 
                   class="form-control"
-                  [(ngModel)]="editingSlide() ? editingSlide()!.buttonLink : newSlide().buttonLink"
+                  [ngModel]="editingSlide() ? editingSlide()!.buttonLink : newSlide().buttonLink"
+                  (ngModelChange)="onSlideFieldChange('buttonLink', $event)"
                   name="slideButtonLink"
                   required>
               </div>

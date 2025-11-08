@@ -104,7 +104,8 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
 
   // ===== GERENCIAMENTO DE PRODUTOS =====
   loadProducts(): void {
-    this.products.set(this.productService.productsInStock());
+    // Carrega TODOS os produtos do serviço
+    this.products.set(this.productService.getAllProducts());
   }
 
   addProduct(): void {
@@ -287,7 +288,37 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  // NOVO MÉTODO PARA CORRIGIR O TWO-WAY BINDING
+  // MÉTODO PARA CAMPOS DO PRODUTO
+  onProductFieldChange(field: keyof Product, value: any): void {
+    if (this.editingProduct()) {
+      this.editingProduct.set({
+        ...this.editingProduct()!,
+        [field]: field === 'price' || field === 'stock' ? Number(value) : value
+      });
+    } else {
+      this.newProduct.set({
+        ...this.newProduct(),
+        [field]: field === 'price' || field === 'stock' ? Number(value) : value
+      });
+    }
+  }
+
+  // MÉTODO PARA CAMPOS DO SLIDE
+  onSlideFieldChange(field: keyof CarouselSlide, value: any): void {
+    if (this.editingSlide()) {
+      this.editingSlide.set({
+        ...this.editingSlide()!,
+        [field]: value
+      });
+    } else {
+      this.newSlide.set({
+        ...this.newSlide(),
+        [field]: value
+      });
+    }
+  }
+
+  // MÉTODO PARA CHECKBOX DO SLIDE (ESPECÍFICO)
   onSlideActiveChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const isActive = input.checked;

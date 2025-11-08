@@ -57,8 +57,8 @@ export class CheckoutComponent implements OnInit {
 
   // Computed values
   bagItems = this.bagService.bagItems;
-  bagTotal = this.bagService.bagTotal;
-  itemCount = this.bagService.itemCount;
+  bagTotal = this.bagService.totalPrice;
+  itemCount = computed(() => this.bagItems().reduce((acc, item) => acc + item.quantity, 0));
 
   shippingCost = computed(() => {
     const method = this.checkoutForm.get('shippingMethod')?.value;
@@ -235,5 +235,10 @@ export class CheckoutComponent implements OnInit {
 
   get isLoggingInValue(): boolean {
     return this.isLoggingIn();
+  }
+
+  // Método para formatar preços
+  formatPrice(price: number): string {
+    return price.toFixed(2).replace('.', ',');
   }
 }

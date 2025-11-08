@@ -1,126 +1,386 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Product } from '../componentes/models/product.model';
-import { BagItem } from './bag.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private _productsInStock = signal<Product[]>([
+  private products: Product[] = [
     {
-      id: 1,
-      name: 'Base Líquida HD',
-      price: 49.90,
-      category: 'Rosto',
-      subcategory: 'Base',
-      description: 'Base líquida de alta cobertura e acabamento natural',
-      imageUrl: '/img/base-liquida.jpg',
-      stock: 50,
-      tags: ['Lançamentos', 'Populares']
+      id: 101,
+      name: "Kit Essencial Hanami",
+      category: "Kits",
+      price: 299.90,
+      imageUrl: "/img/products/kit-essencial.png",
+      description: "O kit perfeito para o dia a dia, com base, batom e máscara.",
+      tags: ["Kits", "Lançamentos", "Populares", "Recomendado"]
     },
     {
-      id: 2,
-      name: 'Batom Vermelho Intenso',
-      price: 29.90,
-      category: 'Lábios',
-      subcategory: 'Batom',
-      description: 'Batom de longa duração com cor vibrante',
-      imageUrl: '/img/batom-vermelho.jpg',
-      stock: 30,
-      tags: ['Populares', 'Recomendado']
+      id: 102,
+      name: "Kit marcante",
+      category: "Kits",
+      price: 249.90,
+      imageUrl: "/img/products/kit-marcante.png",
+      description: "Blush, sombra e iluminador para um rosto marcante.",
+      tags: ["Kits"]
     },
     {
-      id: 3, 
-      name: 'Paleta de Sombras',
+      id: 103,
+      name: "Kit Lábios de Seda",
+      category: "Kits",
+      price: 189.90,
+      imageUrl: "/img/products/kit-labios.png",
+      description: "Uma combinação de batom cremoso, matte e líquido .",
+      tags: ["Kits", "Edições Limitadas"]
+    },
+    {
+      id: 201,
+      name: "Batom Líquido Matte Sakura",
+      category: "Batom",
+      price: 89.90,
+      imageUrl: "/img/products/batom-sakura.png",
+      description: "Um tom de rosa inspirado na flor de cerejeira, com acabamento aveludado.",
+      tags: ["Lábios", "Lançamentos", "Edições Limitadas", "Populares"]
+    },
+    {
+      id: 202,
+      name: "Batom Hidratante Camélia",
+      category: "Batom",
       price: 79.90,
-      category: 'Olhos',
-      subcategory: 'Sombra',
-      description: 'Paleta com 12 cores neutras e pigmentadas',
-      imageUrl: '/img/paleta-sombras.jpg',
-      stock: 25,
-      tags: ['Lançamentos', 'Recomendado']
+      imageUrl: "/img/products/batom-camelia.png",
+      description: "Cor e hidratação com extrato de camélia. Acabamento acetinado.",
+      tags: ["Lábios", "Recomendado"]
     },
     {
-      id: 4,
-      name: 'Gloss Passionfruit',
-      price: 24.90,
-      category: 'Lábios',
-      subcategory: 'Gloss',
-      description: 'Gloss com brilho intenso e sabor de maracujá',
-      imageUrl: '/img/gloss-passionfruit.jpg',
-      stock: 40,
-      tags: ['Lançamentos']
+      id: 203,
+      name: "Batom Lótus",
+      category: "Batom",
+      price: 75.90,
+      imageUrl: "/img/products/batom-lotus.png",
+      description: "Um nude clássico e elegante para todas as ocasiões.",
+      tags: ["Lábios", "Populares"]
     },
     {
-      id: 5,
-      name: 'Pó Compacto Translúcido',
-      price: 39.90,
-      category: 'Rosto',
-      subcategory: 'Pó',
-      description: 'Pó compacto para fixação da maquiagem',
-      imageUrl: '/img/po-compacto.jpg',
-      stock: 35,
-      tags: ['Populares']
+      id: 301,
+      name: "Gloss Orvalho de Kyoto",
+      category: "Gloss",
+      price: 79.90,
+      imageUrl: "/img/products/gloss-kyoto.png",
+      description: "Efeito espelhado com partículas de brilho dourado.",
+      tags: ["Lábios", "Lançamentos", "Populares"]
+    },
+    {
+      id: 302,
+      name: "Gloss Passion Fruit",
+      category: "Gloss",
+      price: 85.90,
+      imageUrl: "/img/products/gloss-passion-fruit.png",
+      description: "Sensação de frescor e lábios visivelmente mais cheios.",
+      tags: ["Lábios", "Populares", "Recomendado"]
+    },
+    {
+      id: 303,
+      name: "Gloss Tint Amanhecer",
+      category: "Gloss",
+      price: 72.90,
+      imageUrl: "/img/products/gloss-amanhecer.png",
+      description: "Cor suave que mancha os lábios para um efeito natural e duradouro.",
+      tags: ["Lábios"]
+    },
+    {
+      id: 401,
+      name: "Lápis Labial Contorno Imperial",
+      category: "Lapis Labial",
+      price: 49.90,
+      imageUrl: "/img/products/lapis-imperial.png",
+      description: "Define e preenche os lábios com precisão. Fórmula cremosa.",
+      tags: ["Lábios", "Recomendado"]
+    },
+    {
+      id: 402,
+      name: "Lápis Labial Nude Zen",
+      category: "Lapis Labial",
+      price: 49.90,
+      imageUrl: "/img/products/lapis-zen.png",
+      description: "O tom de nude perfeito para combinar com qualquer batom.",
+      tags: ["Lábios", "Populares"]
+    },
+    {
+      id: 403,
+      name: "Lápis Labial Vinho Geisha",
+      category: "Lapis Labial",
+      price: 49.90,
+      imageUrl: "/img/products/lapis-geisha.png",
+      description: "Um tom de vinho profundo para um contorno dramático.",
+      tags: ["Lábios"]
+    },
+    {
+      id: 501,
+      name: "Base Fluida Pele de Porcelana",
+      category: "Base",
+      price: 129.90,
+      imageUrl: "/img/products/base-porcelana.png",
+      description: "Cobertura média e acabamento natural. Disponível em 24 tons.",
+      tags: ["Rosto", "Lançamentos", "Populares"]
+    },
+    {
+      id: 502,
+      name: "Base Matte Veludo",
+      category: "Base",
+      price: 139.90,
+      imageUrl: "/img/products/base-veludo.png",
+      description: "Longa duração e controle de oleosidade para uma pele impecável.",
+      tags: ["Rosto", "Populares"]
+    },
+    {
+      id: 503,
+      name: "Base Hidratante Glow",
+      category: "Base",
+      price: 125.90,
+      imageUrl: "/img/products/base-glow.png",
+      description: "Pele radiante e hidratada com cobertura leve.",
+      tags: ["Rosto", "Recomendado"]
+    },
+    {
+      id: 601,
+      name: "Corretivo Líquido Cobertura Total",
+      category: "Corretivo",
+      price: 69.90,
+      imageUrl: "/img/products/corretivo-total.png",
+      description: "Alta cobertura que não acumula nas linhas finas.",
+      tags: ["Rosto", "Populares"]
+    },
+    {
+      id: 602,
+      name: "Corretivo Iluminador Luz da Manhã",
+      category: "Corretivo",
+      price: 75.90,
+      imageUrl: "/img/products/corretivo-luz.png",
+      description: "Disfarça olheiras e ilumina a área dos olhos.",
+      tags: ["Rosto", "Lançamentos", "Recomendado"]
+    },
+    {
+      id: 603,
+      name: "Corretivo Equilíbrio",
+      category: "Corretivo",
+      price: 65.90,
+      imageUrl: "/img/products/corretivo-equilibrio.png",
+      description: "Disponível em diversos tons para neutralizar imperfeições.",
+      tags: ["Rosto"]
+    },
+    {
+      id: 701,
+      name: "Pó Compacto Translúcido Névoa",
+      category: "Po",
+      price: 99.90,
+      imageUrl: "/img/products/po-nevoa.png",
+      description: "Sela a maquiagem e controla o brilho sem adicionar cor.",
+      tags: ["Rosto", "Populares"]
+    },
+    {
+      id: 702,
+      name: "Pó Solto Finalizador Seda",
+      category: "Po",
+      price: 109.90,
+      imageUrl: "/img/products/po-seda.png",
+      description: "Textura ultrafina para um acabamento profissional.",
+      tags: ["Rosto", "Lançamentos", "Recomendado"]
+    },
+    {
+      id: 703,
+      name: "Pó Bronzeador Sol de Verão",
+      category: "Po",
+      price: 119.90,
+      imageUrl: "/img/products/po-sol.png",
+      description: "Um toque de cor e brilho para um visual bronzeado.",
+      tags: ["Rosto", "Edições Limitadas", "Populares"]
+    },
+    {
+      id: 801,
+      name: "Blush Flor de Pêssego",
+      category: "Blush",
+      price: 85.90,
+      imageUrl: "/img/products/blush-pessego.png",
+      description: "Fácil de fixar para um ar natural.",
+      tags: ["Rosto", "Recomendado"]
+    },
+    {
+      id: 802,
+      name: "Blush em Pó Rosa Hanami",
+      category: "Blush",
+      price: 79.90,
+      imageUrl: "/img/products/blush-hanami.png",
+      description: "O rosa perfeito que combina com todos os tons de pele.",
+      tags: ["Rosto", "Populares"]
+    },
+    {
+      id: 803,
+      name: "Blush Gotas de Rubor",
+      category: "Blush",
+      price: 89.90,
+      imageUrl: "/img/products/blush-gotas.png",
+      description: "Pigmentação intensa e longa duração.",
+      tags: ["Rosto", "Lançamentos", "Populares"]
+    },
+    {
+      id: 901,
+      name: "Paleta de Sombra Mar",
+      category: "Sombra",
+      price: 199.90,
+      imageUrl: "/img/products/sombra-mar.png",
+      description: "12 tons terrosos e cintilantes para looks versáteis.",
+      tags: ["Olhos", "Edições Limitadas", "Populares", "Recomendado"]
+    },
+    {
+      id: 902,
+      name: "Paleta de Sombra Brilho Estelar",
+      category: "Sombra",
+      price: 79.90,
+      imageUrl: "/img/products/sombra-brilho.png",
+      description: "Glitter intenso que não transfere. Perfeito para festas.",
+      tags: ["Olhos"]
+    },
+    {
+      id: 903,
+      name: "Paleta de Sombra solar",
+      category: "Sombra",
+      price: 69.90,
+      imageUrl: "/img/products/sombra-solar.png",
+      description: "Cor e brilho em um só passo.",
+      tags: ["Olhos", "Lançamentos"]
+    },
+    {
+      id: 1001,
+      name: "Máscara de Cílios Gold",
+      category: "Mascara",
+      price: 95.90,
+      imageUrl: "/img/products/mascara-gold.png",
+      description: "Volume e definição para um efeito de cílios postiços.",
+      tags: ["Olhos", "Populares"]
+    },
+    {
+      id: 1002,
+      name: "Máscara de Cílios Alongamento Infinito",
+      category: "Mascara",
+      price: 92.90,
+      imageUrl: "/img/products/mascara-infinito.png",
+      description: "Fibras extensoras que deixam seus cílios visivelmente mais longos.",
+      tags: ["Olhos", "Populares"]
+    },
+    {
+      id: 1003,
+      name: "Máscara de Cílios À Prova D'Água",
+      category: "Mascara",
+      price: 99.90,
+      imageUrl: "/img/products/mascara-prova-dagua.png",
+      description: "Sua máscara favorita, agora resistente a tudo.",
+      tags: ["Olhos", "Recomendado"]
+    },
+    {
+      id: 1101,
+      name: "Delineador Samurai",
+      category: "Delineador",
+      price: 88.90,
+      imageUrl: "/img/products/delineador-samurai.png",
+      description: "Ponta ultrafina para um delineado gatinho preciso e sem esforço.",
+      tags: ["Olhos", "Lançamentos", "Populares"]
+    },
+    {
+      id: 1102,
+      name: "Delineador em Gel Nanquim",
+      category: "Delineador",
+      price: 92.90,
+      imageUrl: "/img/products/delineador-nanquim.png",
+      description: "Preto intenso e à prova d'água. Acompanha pincel de aplicação.",
+      tags: ["Olhos", "Recomendado"]
+    },
+    {
+      id: 1103,
+      name: "Delineador Líquido Origami",
+      category: "Delineador",
+      price: 85.90,
+      imageUrl: "/img/products/delineador-origami.png",
+      description: "Para looks gráficos e criativos. Cor branca super pigmentada.",
+      tags: ["Olhos", "Edições Limitadas"]
+    },
+    {
+      id: 1201,
+      name: "Pincel Kabuki Toque de Pétala",
+      category: "Pincel de Rosto",
+      price: 129.90,
+      imageUrl: "/img/products/pincel-petala.png",
+      description: "Cerdas ultra macias e densas, ideal para aplicação de base e pó. Garante um acabamento aveludado e uniforme.",
+      tags: ["Pincéis", "Edições Limitadas", "Lançamentos", "Populares"]
+    },
+    {
+      id: 1301,
+      name: "Pincel de Esfumar Névoa Suave",
+      category: "Pincel de Olhos",
+      price: 69.90,
+      imageUrl: "/img/products/pincel-nevoa.png",
+      description: "Formato cônico perfeito para esfumar sombras com precisão. Cerdas macias que permitem uma transição de cores impecável.",
+      tags: ["Pincéis", "Recomendado", "Populares"]
     }
-  ]);
+  ];
 
-  public productsInStock = computed(() => this._productsInStock());
+  constructor() { }
 
-  // MÉTODOS DE GERENCIAMENTO
-  addProduct(product: Product): void {
-    this._productsInStock.update(products => [...products, product]);
+  getAllProducts(): Product[] {
+    return this.products;
   }
 
-  updateProduct(updatedProduct: Product): void {
-    this._productsInStock.update(products => 
-      products.map(product => 
-        product.id === updatedProduct.id ? updatedProduct : product
-      )
-    );
-  }
-
-  removeProduct(productId: number): void {
-    this._productsInStock.update(products => 
-      products.filter(product => product.id !== productId)
-    );
-  }
-
-  updateProductStock(productId: number, newStock: number): void {
-    this._productsInStock.update(products =>
-      products.map(p =>
-        p.id === productId ? { ...p, stock: newStock } : p
-      )
-    );
-  }
-
-  getProductsFromBagItems(items: BagItem[]): Product[] {
-    return this.productsInStock().filter(product =>
-      items.some(i => i.product.id === product.id)
-    );
-  }
-
-  getProductById(productId: number): Product | undefined {
-    return this.productsInStock().find(product => product.id === productId);
+  getProductById(id: number): Product | undefined {
+    return this.products.find(product => product.id === id);
   }
 
   getProductsByCategory(category: string): Product[] {
-    return this.productsInStock().filter(product => 
+    return this.products.filter(product => 
       product.category.toLowerCase() === category.toLowerCase()
     );
   }
 
   getProductsByTag(tag: string): Product[] {
-    return this.productsInStock().filter(product => 
-      product.tags.includes(tag)
+    return this.products.filter(product => 
+      product.tags.some((productTag: string) => 
+        productTag.toLowerCase() === tag.toLowerCase()
+      )
     );
   }
 
-  searchProducts(term: string): Product[] {
+  getProductsBySearchTerm(term: string): Product[] {
     const lowerTerm = term.toLowerCase();
-    return this.productsInStock().filter(product =>
+    return this.products.filter(product =>
       product.name.toLowerCase().includes(lowerTerm) ||
-      product.category.toLowerCase().includes(lowerTerm) ||
-      product.description.toLowerCase().includes(lowerTerm)
+      product.description.toLowerCase().includes(lowerTerm) ||
+      product.tags.some((tag: string) => tag.toLowerCase().includes(lowerTerm))
     );
+  }
+
+  getFeaturedProducts(): Product[] {
+    return this.products.filter(product => 
+      product.tags.includes('Recomendado') || 
+      product.tags.includes('Populares')
+    );
+  }
+
+  getNewArrivals(): Product[] {
+    return this.products.filter(product => 
+      product.tags.includes('Lançamentos')
+    );
+  }
+
+  getLimitedEditions(): Product[] {
+    return this.products.filter(product => 
+      product.tags.includes('Edições Limitadas')
+    );
+  }
+
+  getCategories(): string[] {
+    return [...new Set(this.products.map(product => product.category))];
+  }
+
+  getTags(): string[] {
+    const allTags = this.products.flatMap(product => product.tags);
+    return [...new Set(allTags)];
   }
 }
