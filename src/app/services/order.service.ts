@@ -13,6 +13,11 @@ export interface Order {
   status: OrderStatus;
 }
 
+// Interface extendida para produtos com estoque
+interface ProductWithStock extends Product {
+  stock: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +26,7 @@ export class OrderService {
   
   // Signals para pedidos e estoque
   private _orders = signal<Order[]>(this.getStoredOrders());
-  private _currentStock = signal<Product[]>([]);
+  private _currentStock = signal<ProductWithStock[]>(this.initializeStock());
 
   public orders = computed(() => this._orders());
   public currentStock = computed(() => this._currentStock());
@@ -49,6 +54,12 @@ export class OrderService {
     }
   }
 
+  private initializeStock(): ProductWithStock[] {
+    // Aqui você pode inicializar o estoque com valores padrão
+    // Por enquanto, retornamos um array vazio
+    return [];
+  }
+
   addOrder(newOrder: Order): void {
     this._orders.update(orders => {
       const updatedOrders = [newOrder, ...orders];
@@ -57,7 +68,7 @@ export class OrderService {
     });
   }
 
-  updateStock(products: Product[]): void {
+  updateStock(products: ProductWithStock[]): void {
     this._currentStock.set(products);
   }
 
@@ -132,5 +143,22 @@ export class OrderService {
     });
 
     return monthlySales;
+  }
+
+  // Método auxiliar para verificar estoque
+  checkStock(productId: number): number {
+    const product = this.currentStock().find(p => p.id === productId);
+    return product ? product.stock : 0;
+  }
+
+  // Método para adicionar estoque
+  addStock(productId: number, quantity: number): void {
+    this._currentStock.update(currentStock => 
+      currentStock.map(product => 
+        product.id === productId 
+          ? { ...product, stock: product.stock + quantity }
+          : product
+      )
+    );
   }
 }

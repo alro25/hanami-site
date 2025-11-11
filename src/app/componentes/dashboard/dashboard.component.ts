@@ -148,7 +148,7 @@ export class DashboardComponent implements AfterViewInit, OnDestroy {
 
   deleteProduct(productId: number): void {
     if (confirm('Tem certeza que deseja excluir este produto?')) {
-      this.productService.removeProduct(productId);
+      this.productService.deleteProduct(productId);
       this.loadProducts();
     }
   }

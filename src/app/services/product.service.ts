@@ -383,4 +383,25 @@ export class ProductService {
     const allTags = this.products.flatMap(product => product.tags);
     return [...new Set(allTags)];
   }
+
+  addProduct(product: Product): void {
+    // Gerar um ID único para o novo produto
+    const maxId = Math.max(...this.products.map(p => p.id));
+    product.id = maxId + 1;
+    this.products.push(product);
+  }
+
+  updateProduct(updatedProduct: Product): void {
+    const index = this.products.findIndex(p => p.id === updatedProduct.id);
+    if (index !== -1) {
+      this.products[index] = updatedProduct;
+    }
+  }
+
+  deleteProduct(id: number): void {
+    const index = this.products.findIndex(p => p.id === id);
+    if (index !== -1) {
+      this.products.splice(index, 1);
+    }
+  }
 }

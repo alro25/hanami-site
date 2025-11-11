@@ -1,6 +1,6 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router'; // Adicione ActivatedRoute
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../models/product.model';
 import { ProductService } from '../../services/product.service';
@@ -11,7 +11,6 @@ import { FooterComponent } from '../footer/footer.component';
 interface Category {
   name: string;
   subcategories: string[];
-  tags?: string[];
 }
 
 @Component({
@@ -21,14 +20,14 @@ interface Category {
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent implements OnInit { // Adicione OnInit
+export class ProductsComponent implements OnInit {
   private productService = inject(ProductService);
   private bagService = inject(BagService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
-  // Products and filtering
-  allProducts = this.productService.productsInStock;
+  // CORREÇÃO: Usar getAllProducts() em vez de productsInStock
+  allProducts = this.productService.getAllProducts();
   
   // Sorting
   sortOption = signal<'name-asc' | 'name-desc' | 'price-asc' | 'price-desc'>('name-asc');
@@ -42,30 +41,65 @@ export class ProductsComponent implements OnInit { // Adicione OnInit
   categories = signal<Category[]>([
     { 
       name: 'Rosto', 
-      subcategories: ['Base', 'Corretivo', 'Pó', 'Blush', 'Iluminador'] 
+      subcategories: ['Base', 'Corretivo', 'Pó', 'Blush'] 
     },
     { 
       name: 'Lábios', 
-      subcategories: ['Batom', 'Gloss', 'Lápis Labial'] 
+      subcategories: ['Batom', 'Gloss', 'Lapis Labial'] 
     },
     { 
       name: 'Olhos', 
-      subcategories: ['Sombra', 'Máscara', 'Delineador', 'Lápis de Olho'] 
+      subcategories: ['Sombra', 'Mascara', 'Delineador'] 
     },
     { 
       name: 'Pincéis', 
-      subcategories: ['Pincéis para os Olhos', 'Pincéis para o rosto'] 
+      subcategories: ['Pincel de Rosto', 'Pincel de Olhos'] 
+    },
+    { 
+      name: 'Kits', 
+      subcategories: [] 
     }
   ]);
 
+  // CORREÇÃO: Computed para produtos filtrados
+  filteredProducts = computed(() => {
+    let products = this.allProducts;
+    
+    // Filter by categories
+    if (this.selectedCategories().length > 0) {
+      products = products.filter(product => 
+        this.selectedCategories().some(category => 
+          this.getCategoryMapping(category).includes(product.category)
+        )
+      );
+    }
+    
+    // Filter by subcategories
+    if (this.selectedSubcategories().length > 0) {
+      products = products.filter(product => 
+        this.selectedSubcategories().some(subcategory => 
+          this.getSubcategoryMapping(subcategory).includes(product.category)
+        )
+      );
+    }
+    
+    // Filter by tags
+    if (this.selectedTags().length > 0) {
+      products = products.filter(product => 
+        this.selectedTags().some(tag => product.tags.includes(tag))
+      );
+    }
+    
+    // Sort products
+    return this.sortProducts(products);
+  });
+
   ngOnInit() {
-    // Ler parâmetros da URL ao inicializar o componente
     this.route.queryParams.subscribe((params: any) => {
       const categories: string[] = [];
       const subcategories: string[] = [];
       const tags: string[] = [];
 
-      // Só aplicar um tipo de filtro por vez
       if (params['category']) {
         categories.push(params['category']);
       }
@@ -84,46 +118,12 @@ export class ProductsComponent implements OnInit { // Adicione OnInit
     });
   }
 
-
-  // Computed sorted and filtered products
-  filteredProducts = computed(() => {
-    let products = this.allProducts();
-    
-    // Filter by categories (main categories like Rosto, Lábios, etc.)
-    if (this.selectedCategories().length > 0) {
-      products = products.filter(product => 
-        this.selectedCategories().some(category => 
-          this.getCategoryMapping(category).includes(product.category)
-        )
-      );
-    }
-    
-    // Filter by subcategories (specific product types)
-    if (this.selectedSubcategories().length > 0) {
-      products = products.filter(product => 
-        this.selectedSubcategories().some(subcategory => 
-          this.getSubcategoryMapping(subcategory).includes(product.category)
-        )
-      );
-    }
-    
-    // Filter by tags (Lançamentos, Novidades, Kits, etc.)
-    if (this.selectedTags().length > 0) {
-      products = products.filter(product => 
-        this.selectedTags().some(tag => product.tags.includes(tag))
-      );
-    }
-    
-    // Sort products
-    return this.sortProducts(products);
-  });
-
   // Mapeamento de categorias principais para categorias reais
   private getCategoryMapping(category: string): string[] {
     const mapping: { [key: string]: string[] } = {
-      'Rosto': ['Base', 'Corretivo', 'Po', 'Blush', 'Iluminador'],
+      'Rosto': ['Base', 'Corretivo', 'Po', 'Blush'],
       'Lábios': ['Batom', 'Gloss', 'Lapis Labial'],
-      'Olhos': ['Sombra', 'Mascara', 'Delineador', 'Lapis de Olho'],
+      'Olhos': ['Sombra', 'Mascara', 'Delineador'],
       'Pincéis': ['Pincel de Rosto', 'Pincel de Olhos'],
       'Kits': ['Kits']
     };
@@ -139,18 +139,16 @@ export class ProductsComponent implements OnInit { // Adicione OnInit
       'Corretivo': ['Corretivo'],
       'Pó': ['Po'],
       'Blush': ['Blush'],
-      'Iluminador': ['Iluminador'],
       
       // Lábios
       'Batom': ['Batom'],
       'Gloss': ['Gloss'],
-      'Lápis Labial': ['Lapis Labial'],
+      'Lapis Labial': ['Lapis Labial'],
       
       // Olhos
       'Sombra': ['Sombra'],
       'Máscara': ['Mascara'],
       'Delineador': ['Delineador'],
-      'Lápis de Olho': ['Lapis de Olho'],
       
       // Pincéis
       'Pincéis para os Olhos': ['Pincel de Olhos'],
@@ -245,7 +243,6 @@ export class ProductsComponent implements OnInit { // Adicione OnInit
     this.selectedCategories.set([]);
     this.selectedSubcategories.set([]);
     this.selectedTags.set([]);
-    // Navegar para a URL sem parâmetros
     this.router.navigate(['/products']);
   }
 

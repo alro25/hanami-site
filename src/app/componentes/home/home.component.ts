@@ -52,23 +52,24 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private carouselInterval: any;
   isCarouselHovered = signal(false);
 
-  // Products with computed values based on tags
-  allProducts = this.productService.productsInStock;
+  // CORREÇÃO: Usar getAllProducts() em vez de productsInStock
+  allProducts = computed(() => this.productService.getAllProducts());
   
+  // CORREÇÃO: Adicionar tipo Product aos parâmetros
   newReleases = computed(() => 
-    this.allProducts().filter(product => 
+    this.allProducts().filter((product: Product) => 
       product.tags.includes('Lançamentos')
     )
   );
 
   popularProducts = computed(() => 
-    this.allProducts().filter(product => 
+    this.allProducts().filter((product: Product) => 
       product.tags.includes('Populares')
     )
   );
 
   recommendedProducts = computed(() => 
-    this.allProducts().filter(product => 
+    this.allProducts().filter((product: Product) => 
       product.tags.includes('Recomendado')
     )
   );
@@ -272,7 +273,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
           this.showCheckoutAlert.set(false);
         }, 5000);
       },
-      error: (error: any) => { // CORREÇÃO: Adicionado tipo 'any'
+      error: (error: any) => {
         console.error('Checkout error:', error);
       }
     });

@@ -6,12 +6,12 @@ import { ContactComponent } from './componentes/contact/contact.component';
 import { RegisterComponent } from './componentes/register/register.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { FooterComponent } from './componentes/footer/footer.component';
-import { ProductsComponent } from './componentes/products/products.component';
+
 import { AboutUsComponent } from './componentes/about-us/about-us.component';
 import { BagModalComponent } from './componentes/bag-modal/bag-modal.component';
 import { UserModalComponent } from './componentes/user-modal/user-modal.component';
 import { CheckoutComponent } from './componentes/checkout/checkout.component';
-
+import { ProductsComponent } from './componentes/products/products.component';
 export const routes: Routes = [
     {path: "", pathMatch: 'full', redirectTo: 'home'},
     {path:'login', component: LoginComponent},
