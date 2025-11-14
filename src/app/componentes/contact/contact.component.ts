@@ -30,7 +30,7 @@ export class ContactComponent {
 
   // Computed property para verificar se o formulário pode ser enviado
   podeEnviar = computed(() => {
-    return this.contactForm.valid && !this.contactForm.pending;
+    return this.contactForm.valid;
   });
 
   // Validador customizado para telefone
@@ -96,14 +96,17 @@ export class ContactComponent {
   }
 
   private resetarFormulario(): void {
-    this.contactForm.reset();
-    this.formSubmetido.set(false);
-    
-    // Restaura valores padrão
-    this.contactForm.patchValue({
+    this.contactForm.reset({
       tipo: 'Elogio',
       termos: false,
       newsletter: false
+    });
+    this.formSubmetido.set(false);
+
+    // Remove o estado touched de todos os controles
+    Object.keys(this.contactForm.controls).forEach(key => {
+      const control = this.contactForm.get(key);
+      control?.markAsUntouched();
     });
   }
 
