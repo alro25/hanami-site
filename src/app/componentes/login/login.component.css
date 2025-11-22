@@ -19,7 +19,8 @@
   box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.15);
   border-radius: 15px;
   overflow: hidden;
-  background: white;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
 }
 
 .imagem-container {
@@ -48,8 +49,6 @@
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background-color: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(8px);
 }
 
 .auth-card {
